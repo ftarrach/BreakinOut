@@ -2,6 +2,8 @@ package com.fabiantarrach.breakinout.game
 
 import com.badlogic.gdx.graphics.OrthographicCamera
 import com.badlogic.gdx.utils.Array
+import com.fabiantarrach.breakinout.game.system.rendering.LineRenderer
+import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 
@@ -36,7 +38,7 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		systems.add(MoveEntities({ entities.moveableEntities() }))
 //		systems.add(OuterBounds({ entities.moveableEntities() }))
 //		systems.add(BallPaddleCollision({ Pair(entities.paddles(), entities.balls()) }))
-//		systems.add(RenderingSystem(camera, entities.all()))
+		systems.add(RenderingSystem(camera))
 	}
 
 	private fun buildGame() {
