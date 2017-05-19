@@ -2,6 +2,15 @@ package com.fabiantarrach.breakinout.util.engine
 
 import com.badlogic.gdx.utils.Disposable
 
-interface LogicSystem : Disposable {
-	fun update(delta: Milliseconds)
+abstract class LogicSystem : Disposable {
+
+	private lateinit var engine: Engine
+
+	abstract fun update(delta: Milliseconds)
+
+	fun selectAll() = engine.selectAllEntities()
+
+	fun addedToEngine(engine: Engine) {
+		this.engine = engine
+	}
 }

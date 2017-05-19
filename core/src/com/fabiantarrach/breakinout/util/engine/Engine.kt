@@ -5,20 +5,21 @@ import com.fabiantarrach.breakinout.game.entity.Entity
 import ktx.collections.gdxArrayOf
 import com.badlogic.gdx.utils.Array as GdxArray
 
-// TODO: reimplement the EntityManager
 abstract class Engine : Disposable {
 
+	// TODO: wrap this collection (Systems?)
 	private val systems = gdxArrayOf<LogicSystem>()
-//	protected val entities = EntityManager()
+	private val entities = EntityDatabase()
 
-	open fun run() {
-		registerSystems(systems)
+	abstract fun buildGame()
+
+	fun addSystem(system: LogicSystem) {
+		systems.add(system)
+		system.addedToEngine(this)
 	}
 
-	protected abstract fun registerSystems(systems: GdxArray<LogicSystem>)
-
 	fun addEntity(entity: Entity) {
-//		entities.addEntity(entity)
+		entities.add(entity)
 	}
 
 	fun update(delta: Milliseconds) {
@@ -29,8 +30,6 @@ abstract class Engine : Disposable {
 		systems.forEach { it.dispose() }
 	}
 
-	fun removeAllEntities() {
-//		entities.clear()
-	}
+	fun selectAllEntities() = entities.selectAll()
 
 }

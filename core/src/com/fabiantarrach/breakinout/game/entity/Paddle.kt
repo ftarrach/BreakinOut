@@ -6,9 +6,9 @@ import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.euclid.RectangularHitbox
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 
-class Paddle(x: Float, y: Float) : BasicEntity() {
+class Paddle(position: Position) : HardEntity() {
 
-	override val hitbox = RectangularHitbox(Position(x, y), Dimension(200f, 20f))
+	override val hitbox = RectangularHitbox(position, Dimension(100f, 10f))
 
 	override fun render(brush: Brush) {
 		brush.paintWith(Color.WHITE)

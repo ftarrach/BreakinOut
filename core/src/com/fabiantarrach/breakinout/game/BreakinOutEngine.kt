@@ -1,11 +1,11 @@
 package com.fabiantarrach.breakinout.game
 
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.utils.Array
-import com.fabiantarrach.breakinout.game.system.rendering.LineRenderer
+import com.fabiantarrach.breakinout.game.component.euclid.Position
+import com.fabiantarrach.breakinout.game.entity.Ball
+import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
-import com.fabiantarrach.breakinout.util.engine.LogicSystem
 
 class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 
@@ -13,14 +13,10 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		camera.area.set(0f, 280f, 0f)
 		camera.position.set(0f, 0f, 0f)
 		camera.zoom = 0.25f
+
 	}
 
-	override fun run() {
-		super.run()
-		buildGame()
-	}
-
-	override fun registerSystems(systems: Array<LogicSystem>) {
+//	override fun registerSystems(systems: Array<LogicSystem>) {
 //		systems.add(object : LogicSystem {
 //			var t = 0f
 //			override fun update(delta: Milliseconds) {
@@ -38,13 +34,12 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		systems.add(MoveEntities({ entities.moveableEntities() }))
 //		systems.add(OuterBounds({ entities.moveableEntities() }))
 //		systems.add(BallPaddleCollision({ Pair(entities.paddles(), entities.balls()) }))
-		systems.add(RenderingSystem(camera))
-	}
+//	}
 
-	private fun buildGame() {
+	override fun buildGame() {
 //		removeAllEntities()
-//		val paddle = Paddle(Position(0f, 0f))
-//		addEntity(paddle)
+		val paddle = Paddle(Position(0f, 0f))
+		addEntity(paddle)
 
 		// left
 //		createBall(-60, 0) { moveWithAngle(Angle(0f))}
@@ -56,10 +51,10 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		createBall(70, 5) { moveWithAngle(Angle(180f) )}
 //		createBall(70, -5) { moveWithAngle(Angle(180f)) }
 //
-//		// top
-//		createBall(-50, 20) { moveWithAngle(Angle(270f)) }
-//		createBall(0, 20) { moveWithAngle(Angle(270f)) }
-//		createBall(50, 20) { moveWithAngle(Angle(270f)) }
+		// top
+		createBall(-50, 20)  { /*moveWithAngle(Angle(270f))*/ }
+		createBall(0, 20)    { /*moveWithAngle(Angle(270f))*/ }
+		createBall(50, 20)   { /*moveWithAngle(Angle(270f))*/ }
 
 //		// bottom
 //		createBall(0, -20) { moveWithAngle(Angle(90f)) }
@@ -75,12 +70,14 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		createBall(0, 15) { moveWithAngle(Angle(315f)) }
 //		createBall(25, 15) { moveWithAngle(Angle(315f)) }
 //		createBall(50, 15) { moveWithAngle(Angle(315f)) }
+
+		addSystem(RenderingSystem(camera))
 	}
 
-//	private fun createBall(x: Int, y: Int, block: Ball.() -> Unit = {}) {
-//		val ball = Ball(Position(x.toFloat(), y.toFloat()))
-//		block.invoke(ball)
-//		addEntity(ball)
-//	}
+	private fun createBall(x: Int, y: Int, block: Ball.() -> Unit = {}) {
+		val ball = Ball(Position(x.toFloat(), y.toFloat()))
+		block.invoke(ball)
+		addEntity(ball)
+	}
 
 }

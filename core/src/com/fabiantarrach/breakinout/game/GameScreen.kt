@@ -8,7 +8,7 @@ class GameScreen : FitScreen() {
 	private val engine = BreakinOutEngine(camera)
 
 	override fun show() {
-		engine.run()
+		engine.buildGame()
 	}
 
 	override fun render(delta: Float) {
