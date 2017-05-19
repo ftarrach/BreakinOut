@@ -1,10 +1,12 @@
-package com.fabiantarrach.breakinout.game.entity_v2.system.rendering
+package com.fabiantarrach.breakinout.game.system.rendering
 
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-class RenderingToolbox(private val renderer: com.badlogic.gdx.graphics.glutils.ShapeRenderer) {
+class RenderingToolbox(private val renderer: ShapeRenderer) {
 
-	fun paintWith(color: com.badlogic.gdx.graphics.Color) {
+	fun paintWith(color: Color) {
 		renderer.color = color
 	}
 

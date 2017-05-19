@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game.entity_v2.component.euclid
+package com.fabiantarrach.breakinout.game.component.euclid
 
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
