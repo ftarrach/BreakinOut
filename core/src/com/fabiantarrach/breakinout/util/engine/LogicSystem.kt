@@ -1,4 +1,7 @@
 package com.fabiantarrach.breakinout.util.engine
 
-interface LogicSystem {
+import com.badlogic.gdx.utils.Disposable
+
+interface LogicSystem : Disposable {
+	fun update(delta: Milliseconds)
 }

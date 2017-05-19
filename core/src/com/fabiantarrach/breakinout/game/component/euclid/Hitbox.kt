@@ -1,19 +1,19 @@
 package com.fabiantarrach.breakinout.game.component.euclid
 
-import com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Circle
-import com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Rectangle
-import com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Shape
+import com.fabiantarrach.breakinout.game.component.gdx.Circle
+import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
+import com.fabiantarrach.breakinout.game.component.gdx.Shape
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingToolbox
 
 interface Hitbox {
 	fun render(tools: RenderingToolbox)
 }
 
-abstract class BaseHitbox(protected val area: com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Shape) : Hitbox
+abstract class BaseHitbox(protected val area: Shape) : Hitbox
 
-class RectangularHitbox(position: com.fabiantarrach.breakinout.game.entity_v2.component.euclid.Position, size: com.fabiantarrach.breakinout.game.entity_v2.component.euclid.Dimension) : Hitbox {
+class RectangularHitbox(position: Position, size: Dimension) : Hitbox {
 
-	private val rectangle = com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Rectangle(position, size)
+	private val rectangle = Rectangle(position, size)
 
 //  TODO: remove comments if this function is needed
 //	fun overlapsCircle(other: CircularHitbox, ifCollision: (Collision) -> Unit) {
@@ -27,9 +27,9 @@ class RectangularHitbox(position: com.fabiantarrach.breakinout.game.entity_v2.co
 
 }
 
-class CircularHitbox(position: com.fabiantarrach.breakinout.game.entity_v2.component.euclid.Position, size: com.fabiantarrach.breakinout.game.entity_v2.component.euclid.CircleSize) : Hitbox {
+class CircularHitbox(position: Position, size: CircleSize) : Hitbox {
 
-	private val circle = com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Circle(position, size)
+	private val circle = Circle(position, size)
 
 	fun overlapsRectangle(other: RectangularHitbox, ifCollision: (Collision) -> Unit) {
 		val otherShape = other.toShape()

@@ -8,7 +8,7 @@ import com.fabiantarrach.breakinout.game.system.rendering.RenderingToolbox
 import com.badlogic.gdx.math.Circle as GdxCircle
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Shape {
+class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinout.game.component.gdx.Shape {
 	private val circle: com.badlogic.gdx.math.Circle
 
 	init {
@@ -17,11 +17,11 @@ class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinou
 		val yCoordinate = position.yCoordinate()
 		val y = yCoordinate.floatValue()
 		val radius = size.radius()
-		circle = com.badlogic.gdx.math.Circle(x, y, radius)
+		circle = GdxCircle(x, y, radius)
 	}
 
-	fun intersect(other: com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Rectangle): Intersection {
-		val intersection = com.badlogic.gdx.math.Rectangle()
+	fun intersect(other: Rectangle): Intersection {
+		val intersection = GdxRectangle()
 		val otherBox = other.toGdxRectangle()
 		val box = boundingBox()
 		Intersector.intersectRectangles(box, otherBox, intersection)
@@ -32,15 +32,15 @@ class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinou
 		return intersection.toIntersection()
 	}
 
-	private fun boundingBox() : com.badlogic.gdx.math.Rectangle {
+	private fun boundingBox() : GdxRectangle {
 		val diameter = circle.radius * 2
 		val leftEdge = circle.x - circle.radius
 		val bottomEdge = circle.y - circle.radius
-		return com.badlogic.gdx.math.Rectangle(leftEdge, bottomEdge, diameter, diameter)
+		return GdxRectangle(leftEdge, bottomEdge, diameter, diameter)
 	}
 
 	fun intersect(other: Circle): Intersection {
-		val intersection = com.badlogic.gdx.math.Rectangle()
+		val intersection = GdxRectangle()
 		val otherBox = other.boundingBox()
 		val box = boundingBox()
 		Intersector.intersectRectangles(box, otherBox, intersection)

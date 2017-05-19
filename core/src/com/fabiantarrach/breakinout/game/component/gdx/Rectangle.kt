@@ -7,9 +7,9 @@ import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingToolbox
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-class Rectangle(position: Position, size: Dimension): com.fabiantarrach.breakinout.game.entity_v2.component.gdx.Shape {
+class Rectangle(position: Position, size: Dimension): Shape {
 
-	private val rectangle: com.badlogic.gdx.math.Rectangle
+	private val rectangle: GdxRectangle
 
 	init {
 		val xCoordinate = position.xCoordinate()
@@ -22,22 +22,22 @@ class Rectangle(position: Position, size: Dimension): com.fabiantarrach.breakino
 		val entityY = y - halfHeight
 		val w = size.width()
 		val h = size.height()
-		rectangle = com.badlogic.gdx.math.Rectangle(entityX, entityY, w, h)
+		rectangle = GdxRectangle(entityX, entityY, w, h)
 	}
 
 	fun intersect(other: Rectangle): Intersection {
-		val intersection = com.badlogic.gdx.math.Rectangle()
+		val intersection = GdxRectangle()
 		Intersector.intersectRectangles(rectangle, other.rectangle, intersection)
 		return intersection.toIntersection()
 	}
 
-	override fun render(renderer: RenderingToolbox) {
-		renderer.drawRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+	override fun render(tools: RenderingToolbox) {
+		tools.drawRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
 	}
 
 	@Deprecated("getter")
-	fun toGdxRectangle(): com.badlogic.gdx.math.Rectangle = rectangle.clone()
+	fun toGdxRectangle(): GdxRectangle = rectangle.clone()
 
-	private fun com.badlogic.gdx.math.Rectangle.clone() = com.badlogic.gdx.math.Rectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+	private fun GdxRectangle.clone() = GdxRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
 
 }

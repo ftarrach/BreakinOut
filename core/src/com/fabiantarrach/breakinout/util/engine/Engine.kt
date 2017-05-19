@@ -1,15 +1,14 @@
-package com.fabiantarrach.breakinout.util
+package com.fabiantarrach.breakinout.util.engine
 
 import com.badlogic.gdx.utils.Disposable
 import com.fabiantarrach.breakinout.game.entity.Entity
-import com.fabiantarrach.breakinout.game.systems.LogicSystem
 import ktx.collections.gdxArrayOf
 import com.badlogic.gdx.utils.Array as GdxArray
 
 abstract class Engine : Disposable {
 
 	private val systems = gdxArrayOf<LogicSystem>()
-	protected val entities = EntityManager()
+//	protected val entities = EntityManager()
 
 	open fun run() {
 		registerSystems(systems)
@@ -18,7 +17,7 @@ abstract class Engine : Disposable {
 	protected abstract fun registerSystems(systems: GdxArray<LogicSystem>)
 
 	fun addEntity(entity: Entity) {
-		entities.addEntity(entity)
+//		entities.addEntity(entity)
 	}
 
 	fun update(delta: Milliseconds) {
@@ -30,7 +29,7 @@ abstract class Engine : Disposable {
 	}
 
 	fun removeAllEntities() {
-		entities.clear()
+//		entities.clear()
 	}
 
 }
