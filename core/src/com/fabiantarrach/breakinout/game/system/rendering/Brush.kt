@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-class RenderingToolbox(private val renderer: ShapeRenderer) {
+class Brush(private val renderer: ShapeRenderer) {
 
 	fun paintWith(color: Color) {
 		renderer.color = color

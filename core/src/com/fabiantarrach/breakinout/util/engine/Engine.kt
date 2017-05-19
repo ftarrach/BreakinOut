@@ -5,6 +5,7 @@ import com.fabiantarrach.breakinout.game.entity.Entity
 import ktx.collections.gdxArrayOf
 import com.badlogic.gdx.utils.Array as GdxArray
 
+// TODO: reimplement the EntityManager
 abstract class Engine : Disposable {
 
 	private val systems = gdxArrayOf<LogicSystem>()

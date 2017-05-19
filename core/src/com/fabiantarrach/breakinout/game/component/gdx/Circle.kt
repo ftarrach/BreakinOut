@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
 import com.fabiantarrach.breakinout.game.component.euclid.Intersection
 import com.fabiantarrach.breakinout.game.component.euclid.Position
-import com.fabiantarrach.breakinout.game.system.rendering.RenderingToolbox
+import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.badlogic.gdx.math.Circle as GdxCircle
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
@@ -47,8 +47,8 @@ class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinou
 		return intersection.toIntersection()
 	}
 
-	override fun render(tools: RenderingToolbox) {
-		tools.drawCircle(circle.x, circle.y, circle.radius)
+	override fun render(brush: Brush) {
+		brush.drawCircle(circle.x, circle.y, circle.radius)
 	}
 
 }

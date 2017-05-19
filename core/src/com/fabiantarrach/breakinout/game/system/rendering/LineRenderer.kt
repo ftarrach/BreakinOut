@@ -6,7 +6,7 @@ import com.fabiantarrach.breakinout.game.entity.Entity
 class LineRenderer : Renderer {
 
 	private val renderer = ShapeRenderer()
-	private val toolbox = RenderingToolbox(renderer)
+	private val toolbox = Brush(renderer)
 
 	// TODO: wrap up List<Entity>
 	override fun render(entities: List<Entity>) {

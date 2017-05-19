@@ -1,9 +1,9 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.fabiantarrach.breakinout.game.system.rendering.RenderingToolbox
+import com.fabiantarrach.breakinout.game.system.rendering.Brush
 
 interface Entity {
 
-	fun render(renderingTools: RenderingToolbox)
+	fun render(brush: Brush)
 
 }
