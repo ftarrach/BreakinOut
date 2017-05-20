@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.util.engine
 
-class Milliseconds(private val millis: Float) {
+class Timespan(private val millis: Float) {
+
 	operator fun times(value: Float) = millis * value
-	@Deprecated("Getter?") fun floatValue() = millis
 }

@@ -4,12 +4,13 @@ import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
 import com.fabiantarrach.breakinout.game.component.euclid.Intersection
 import com.fabiantarrach.breakinout.game.component.euclid.Position
+import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.badlogic.gdx.math.Circle as GdxCircle
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinout.game.component.gdx.Shape {
-	private val circle: com.badlogic.gdx.math.Circle
+class Circle(position: Position, size: CircleSize) : Shape {
+	private val circle: GdxCircle
 
 	init {
 		val xCoordinate = position.xCoordinate()
@@ -23,7 +24,7 @@ class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinou
 	fun intersect(other: Rectangle): Intersection {
 		val intersection = GdxRectangle()
 		val otherBox = other.toGdxRectangle()
-		val box = boundingBox()
+		val box = boundingBox() // this is the unclean part
 		Intersector.intersectRectangles(box, otherBox, intersection)
 		// TODO: this isn't an optimal implementation, if a circle collides with the rectangle on an edge one of the dimensions will be off.
 		// TODO: actually, if the collision is really sharp, it will be a lot off.
@@ -32,7 +33,7 @@ class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinou
 		return intersection.toIntersection()
 	}
 
-	private fun boundingBox() : GdxRectangle {
+	private fun boundingBox(): GdxRectangle {
 		val diameter = circle.radius * 2
 		val leftEdge = circle.x - circle.radius
 		val bottomEdge = circle.y - circle.radius
@@ -49,6 +50,11 @@ class Circle(position: Position, size: CircleSize) : com.fabiantarrach.breakinou
 
 	override fun render(brush: Brush) {
 		brush.drawCircle(circle.x, circle.y, circle.radius)
+	}
+
+	override fun move(velocity: Velocity) {
+		circle.x += velocity.xValueAsFloat()
+		circle.y += velocity.yValueAsFloat()
 	}
 
 }

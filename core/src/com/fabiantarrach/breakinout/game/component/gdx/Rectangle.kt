@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.Dimension
 import com.fabiantarrach.breakinout.game.component.euclid.Intersection
 import com.fabiantarrach.breakinout.game.component.euclid.Position
+import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
@@ -40,4 +41,8 @@ class Rectangle(position: Position, size: Dimension): Shape {
 
 	private fun GdxRectangle.clone() = GdxRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
 
+	override fun move(velocity: Velocity) {
+		rectangle.x += velocity.xValueAsFloat()
+		rectangle.y += velocity.yValueAsFloat()
+	}
 }

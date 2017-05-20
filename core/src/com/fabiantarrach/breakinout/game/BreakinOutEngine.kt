@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
+import com.fabiantarrach.breakinout.game.system.EntityUpdate
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 
@@ -19,7 +20,7 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //	override fun registerSystems(systems: Array<LogicSystem>) {
 //		systems.add(object : LogicSystem {
 //			var t = 0f
-//			override fun update(delta: Milliseconds) {
+//			override fun update(delta: Timespan) {
 //				t += delta.floatValue()
 //				if (t > 3) {
 //					t = 0f
@@ -71,6 +72,7 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		createBall(25, 15) { moveWithAngle(Angle(315f)) }
 //		createBall(50, 15) { moveWithAngle(Angle(315f)) }
 
+		addSystem(EntityUpdate())
 		addSystem(RenderingSystem(camera))
 	}
 

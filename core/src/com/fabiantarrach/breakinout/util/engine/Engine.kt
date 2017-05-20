@@ -22,7 +22,7 @@ abstract class Engine : Disposable {
 		entities.add(entity)
 	}
 
-	fun update(delta: Milliseconds) {
+	fun update(delta: Timespan) {
 		systems.forEach { it.update(delta) }
 	}
 

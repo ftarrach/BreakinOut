@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game
 
 import com.fabiantarrach.breakinout.util.FitScreen
-import com.fabiantarrach.breakinout.util.engine.Milliseconds
+import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class GameScreen : FitScreen() {
 
@@ -12,7 +12,7 @@ class GameScreen : FitScreen() {
 	}
 
 	override fun render(delta: Float) {
-		engine.update(Milliseconds(delta))
+		engine.update(Timespan(delta))
 	}
 
 	override fun dispose() {

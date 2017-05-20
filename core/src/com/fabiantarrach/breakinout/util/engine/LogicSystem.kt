@@ -6,7 +6,7 @@ abstract class LogicSystem : Disposable {
 
 	private lateinit var engine: Engine
 
-	abstract fun update(delta: Milliseconds)
+	abstract fun update(delta: Timespan)
 
 	fun selectAll() = engine.selectAllEntities()
 
