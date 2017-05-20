@@ -5,4 +5,4 @@ import com.fabiantarrach.breakinout.game.component.euclid.Intersection
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-fun com.badlogic.gdx.math.Rectangle.toIntersection() = Intersection(com.fabiantarrach.breakinout.game.component.euclid.Position(x, y), Dimension(x, y))
+fun GdxRectangle.toIntersection() = Intersection(Position(x, y), Dimension(width, height))

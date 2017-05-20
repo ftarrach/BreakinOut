@@ -18,4 +18,8 @@ class Vector(len: Float, angle: Angle) {
 	@Deprecated("returns primitive")
 	fun yValue() = gdxVector.y
 
+	fun invertHorizontal() {
+		gdxVector.y = -gdxVector.y
+	}
+
 }

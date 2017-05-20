@@ -4,13 +4,12 @@ import com.badlogic.gdx.utils.Disposable
 
 abstract class LogicSystem : Disposable {
 
-	private lateinit var engine: Engine
+	protected lateinit var database: EntityDatabase
 
 	abstract fun update(delta: Timespan)
 
-	fun selectAll() = engine.selectAllEntities()
-
-	fun addedToEngine(engine: Engine) {
-		this.engine = engine
+	fun useEntityDatabase(database: EntityDatabase) {
+		this.database = database
 	}
+
 }

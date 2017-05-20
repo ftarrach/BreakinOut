@@ -15,7 +15,7 @@ abstract class Engine : Disposable {
 
 	fun addSystem(system: LogicSystem) {
 		systems.add(system)
-		system.addedToEngine(this)
+		system.useEntityDatabase(entities)
 	}
 
 	fun addEntity(entity: Entity) {

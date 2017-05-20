@@ -13,10 +13,8 @@ class Circle(position: Position, size: CircleSize) : Shape {
 	private val circle: GdxCircle
 
 	init {
-		val xCoordinate = position.xCoordinate()
-		val x = xCoordinate.floatValue()
-		val yCoordinate = position.yCoordinate()
-		val y = yCoordinate.floatValue()
+		val x = position.xCoordinate()
+		val y = position.yCoordinate()
 		val radius = size.radius()
 		circle = GdxCircle(x, y, radius)
 	}
@@ -33,10 +31,13 @@ class Circle(position: Position, size: CircleSize) : Shape {
 		return intersection.toIntersection()
 	}
 
-	private fun boundingBox(): GdxRectangle {
-		val diameter = circle.radius * 2
-		val leftEdge = circle.x - circle.radius
-		val bottomEdge = circle.y - circle.radius
+	private fun boundingBox() : GdxRectangle {
+		val x = circle.x
+		val y = circle.y
+		val radius = circle.radius
+		val diameter = radius * 2
+		val leftEdge = x - radius
+		val bottomEdge = y - radius
 		return GdxRectangle(leftEdge, bottomEdge, diameter, diameter)
 	}
 

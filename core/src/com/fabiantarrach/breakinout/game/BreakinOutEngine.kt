@@ -5,6 +5,7 @@ import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.game.system.EntityUpdate
+import com.fabiantarrach.breakinout.game.system.PaddleBallCollision
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 
@@ -53,9 +54,18 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		createBall(70, -5) { moveWithAngle(Angle(180f)) }
 //
 		// top
-		createBall(-50, 20)  { /*moveWithAngle(Angle(270f))*/ }
-		createBall(0, 20)    { /*moveWithAngle(Angle(270f))*/ }
-		createBall(50, 20)   { /*moveWithAngle(Angle(270f))*/ }
+		(-200..200 step 20).forEach {
+			createBall(it, 20)
+		}
+//		createBall(-200, 20)  { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(-150, 20)  { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(-100, 20)  { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(-50, 20)  { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(0, 20)    { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(50, 20)   { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(100, 20)   { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(150, 20)   { /*moveWithAngle(Angle(270f))*/ }
+//		createBall(200, 20)   { /*moveWithAngle(Angle(270f))*/ }
 
 //		// bottom
 //		createBall(0, -20) { moveWithAngle(Angle(90f)) }
@@ -73,6 +83,7 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //		createBall(50, 15) { moveWithAngle(Angle(315f)) }
 
 		addSystem(EntityUpdate())
+		addSystem(PaddleBallCollision())
 		addSystem(RenderingSystem(camera))
 	}
 

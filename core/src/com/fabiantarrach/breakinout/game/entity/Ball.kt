@@ -3,6 +3,7 @@ package com.fabiantarrach.breakinout.game.entity
 import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
 import com.fabiantarrach.breakinout.game.component.euclid.CircularHitbox
+import com.fabiantarrach.breakinout.game.component.euclid.Intersection
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.moving.Angle
 import com.fabiantarrach.breakinout.game.component.moving.Speed
@@ -10,7 +11,7 @@ import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class Ball(position: Position) : HardEntity() {
+class Ball(position: Position) : SolidEntity() {
 
 	override val hitbox = CircularHitbox(position, CircleSize(5f))
 	private val velocity = Velocity(Speed(10f), Angle(270f))
@@ -22,6 +23,15 @@ class Ball(position: Position) : HardEntity() {
 	override fun render(brush: Brush) {
 		brush.paintWith(Color.RED)
 		hitbox.render(brush)
+	}
+
+	fun bounceOff() {
+		velocity.invertHorizontal()
+	}
+
+	fun resolveCollision(intersection: Intersection) {
+		// TODO: this is a VERY stupid solution
+		hitbox.move(Velocity(Speed(intersection.height()), Angle(90f)))
 	}
 
 }

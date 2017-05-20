@@ -13,13 +13,11 @@ class Rectangle(position: Position, size: Dimension): Shape {
 	private val rectangle: GdxRectangle
 
 	init {
-		val xCoordinate = position.xCoordinate()
+		val x = position.xCoordinate()
 		val halfWidth = size.halfWidth()
-		val x = xCoordinate.floatValue()
 		val entityX = x - halfWidth
-		val yCoordinate = position.yCoordinate()
+		val y = position.yCoordinate()
 		val halfHeight = size.halfHeight()
-		val y = yCoordinate.floatValue()
 		val entityY = y - halfHeight
 		val w = size.width()
 		val h = size.height()
@@ -45,4 +43,5 @@ class Rectangle(position: Position, size: Dimension): Shape {
 		rectangle.x += velocity.xValueAsFloat()
 		rectangle.y += velocity.yValueAsFloat()
 	}
+
 }

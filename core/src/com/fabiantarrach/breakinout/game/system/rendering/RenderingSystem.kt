@@ -9,7 +9,7 @@ class RenderingSystem(camera: OrthographicCamera) : LogicSystem() {
 	private val renderer = LineRenderer(camera)
 
 	override fun update(delta: Timespan) {
-		val entities = selectAll()
+		val entities = database.selectAll()
 		renderer.render(entities)
 	}
 

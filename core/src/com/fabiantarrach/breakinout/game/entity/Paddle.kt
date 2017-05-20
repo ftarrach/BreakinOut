@@ -7,7 +7,7 @@ import com.fabiantarrach.breakinout.game.component.euclid.RectangularHitbox
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class Paddle(position: Position) : HardEntity() {
+class Paddle(position: Position) : SolidEntity() {
 
 	override val hitbox = RectangularHitbox(position, Dimension(100f, 10f))
 

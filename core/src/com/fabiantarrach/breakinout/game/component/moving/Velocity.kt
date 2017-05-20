@@ -17,6 +17,10 @@ class Velocity(speed: Speed, angle: Angle) {
 	@Deprecated("returns primitive")
 	fun yValueAsFloat() = vector.yValue()
 
+	fun invertHorizontal() {
+		vector.invertHorizontal()
+	}
+
 }
 
 class Angle(degrees: Float) {

@@ -3,9 +3,11 @@ package com.fabiantarrach.breakinout.util.engine
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.badlogic.gdx.utils.Array as GdxArray
 
-class SelectedEntities(private val list: GdxArray<Entity>) {
+class SelectedEntities<T : Entity>(private val list: List<T>) {
 
-	operator fun iterator(): Iterator<Entity> = list.iterator()
+	constructor(array: GdxArray<T>) : this(array.toList())
+
+	operator fun iterator(): Iterator<T> = list.iterator()
 
 	override fun toString(): String = list.toString()
 }
