@@ -3,9 +3,10 @@ package com.fabiantarrach.breakinout.game.component.gdx
 import com.fabiantarrach.breakinout.game.component.moving.Angle
 import com.badlogic.gdx.math.Vector2 as GdxVector
 
-class Vector(len: Float, angle: Angle) {
+class Vector private constructor(private val gdxVector: GdxVector){
 
-	private val gdxVector = GdxVector(len, 0f).rotate(angle.toVector().angle())
+	constructor(len: Float, angle: Angle) : this(GdxVector(len, 0f).rotate(angle.toVector().angle()))
+	constructor(x: Float, y: Float) : this(GdxVector(x,y))
 
 	fun angle() = Angle(gdxVector.angle())
 

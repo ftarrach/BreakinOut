@@ -4,12 +4,14 @@ import com.fabiantarrach.breakinout.game.component.gdx.Vector
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.badlogic.gdx.math.Vector2 as GdxVector
 
-class Velocity(speed: Speed, angle: Angle) {
+class Velocity private constructor(private val vector: Vector) {
 
-	private val vector = Vector(speed.toFloat(), angle)
+	constructor(speed: Speed, angle: Angle) : this(Vector(speed.toFloat(), angle))
+
+	constructor(x: Float, y: Float) : this(Vector(x, y))
 
 	operator fun times(delta: Timespan): Velocity =
-		Velocity(Speed(delta * vector.length()), vector.angle())
+			Velocity(Speed(delta * vector.length()), vector.angle())
 
 	@Deprecated("returns primitive")
 	fun xValueAsFloat() = vector.xValue()
