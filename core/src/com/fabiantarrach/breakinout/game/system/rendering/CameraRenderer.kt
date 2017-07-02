@@ -1,8 +1,8 @@
-package com.fabiantarrach.breakinout.util.engine
+package com.fabiantarrach.breakinout.game.system.rendering
 
 import com.fabiantarrach.breakinout.game.entity.Entity
-import com.fabiantarrach.breakinout.game.system.rendering.Renderer
-import com.fabiantarrach.breakinout.game.system.rendering.Camera
+import com.fabiantarrach.breakinout.util.engine.ProjectableRenderer
+import com.fabiantarrach.breakinout.util.engine.SelectedEntities
 
 class CameraRenderer(private val camera: Camera, private val renderer: ProjectableRenderer) : Renderer {
 

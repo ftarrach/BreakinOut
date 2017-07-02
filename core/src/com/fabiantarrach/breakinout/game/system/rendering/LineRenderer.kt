@@ -1,16 +1,19 @@
 package com.fabiantarrach.breakinout.game.system.rendering
 
-import com.badlogic.gdx.graphics.OrthographicCamera
+import com.fabiantarrach.breakinout.game.entity.Entity
+import com.fabiantarrach.breakinout.util.engine.SelectedEntities
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer as GdxShapeRenderer
 
-// TODO: wrapper class for OrthographicCamera
-class LineRenderer(private val camera: OrthographicCamera) : ShapeRenderer() {
+class LineRenderer(camera: Camera) : Renderer {
 
-	override fun type(): GdxShapeRenderer.ShapeType = GdxShapeRenderer.ShapeType.Line
+	private val renderer = CameraRenderer(camera, ShapeRenderer(GdxShapeRenderer.ShapeType.Line))
 
-	override fun prepareRenderStep(renderer: GdxShapeRenderer) {
-		super.prepareRenderStep(renderer)
-		renderer.projectionMatrix = camera.combined
+	override fun render(entities: SelectedEntities<Entity>) {
+		renderer.render(entities)
+	}
+
+	override fun dispose() {
+		renderer.dispose()
 	}
 
 }

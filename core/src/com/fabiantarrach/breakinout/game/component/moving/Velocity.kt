@@ -19,9 +19,7 @@ class Velocity private constructor(private val vector: Vector) {
 	@Deprecated("returns primitive")
 	fun yValueAsFloat() = vector.yValue()
 
-	fun invertHorizontal() {
-		vector.invertHorizontal()
-	}
+	fun invertHorizontal() = vector.invertHorizontal()
 
 }
 

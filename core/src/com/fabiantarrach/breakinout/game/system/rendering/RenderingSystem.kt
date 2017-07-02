@@ -1,12 +1,12 @@
 package com.fabiantarrach.breakinout.game.system.rendering
 
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class RenderingSystem(camera: OrthographicCamera) : LogicSystem() {
+class RenderingSystem(camera: Camera) : LogicSystem() {
 
-	private val renderer = LineRenderer(camera)
+//	private val renderer = LineRenderer(camera)
+	private val renderer = FillRenderer(camera)
 
 	override fun update(delta: Timespan) {
 		val entities = database.selectAll()

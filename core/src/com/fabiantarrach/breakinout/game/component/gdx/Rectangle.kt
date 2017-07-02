@@ -12,6 +12,8 @@ class Rectangle(position: Position, size: Dimension): Shape {
 
 	private val rectangle: GdxRectangle
 
+	// TODO: redesign this whole part here. Its just getters beeing called
+	// IDEA: A builder witch uses the Methods usePosition and useDimension Methods to create a GdxRectangle
 	init {
 		val x = position.xCoordinate()
 		val halfWidth = size.halfWidth()

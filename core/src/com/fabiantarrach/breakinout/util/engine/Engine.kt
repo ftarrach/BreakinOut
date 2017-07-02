@@ -2,19 +2,17 @@ package com.fabiantarrach.breakinout.util.engine
 
 import com.badlogic.gdx.utils.Disposable
 import com.fabiantarrach.breakinout.game.entity.Entity
-import ktx.collections.gdxArrayOf
 import com.badlogic.gdx.utils.Array as GdxArray
 
 abstract class Engine : Disposable {
 
-	// TODO: wrap this collection (Systems?)
-	private val systems = gdxArrayOf<LogicSystem>()
+	private val systems = SystemDatabase()
 	private val entities = EntityDatabase()
 
 	abstract fun buildGame()
 
 	fun addSystem(system: LogicSystem) {
-		systems.add(system)
+		systems.addSystem(system)
 		system.useEntityDatabase(entities)
 	}
 
@@ -23,13 +21,15 @@ abstract class Engine : Disposable {
 	}
 
 	fun update(delta: Timespan) {
-		systems.forEach { it.update(delta) }
+		for (system in systems) {
+			system.update(delta)
+		}
 	}
 
 	override fun dispose() {
-		systems.forEach { it.dispose() }
+		for (system in systems) {
+			system.dispose()
+		}
 	}
-
-	fun selectAllEntities() = entities.selectAll()
 
 }

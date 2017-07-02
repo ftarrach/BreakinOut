@@ -6,6 +6,7 @@ import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.game.system.EntityUpdate
 import com.fabiantarrach.breakinout.game.system.PaddleBallCollision
+import com.fabiantarrach.breakinout.game.system.rendering.Camera
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 
@@ -57,6 +58,9 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 		(-200..200 step 20).forEach {
 			createBall(it, 20)
 		}
+		(-190..190 step 20).forEach {
+			createBall(it, 25)
+		}
 //		createBall(-200, 20)  { /*moveWithAngle(Angle(270f))*/ }
 //		createBall(-150, 20)  { /*moveWithAngle(Angle(270f))*/ }
 //		createBall(-100, 20)  { /*moveWithAngle(Angle(270f))*/ }
@@ -84,7 +88,7 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 
 		addSystem(EntityUpdate())
 		addSystem(PaddleBallCollision())
-		addSystem(RenderingSystem(camera))
+		addSystem(RenderingSystem(Camera(camera)))
 	}
 
 	private fun createBall(x: Int, y: Int, block: Ball.() -> Unit = {}) {

@@ -2,12 +2,12 @@ package com.fabiantarrach.breakinout.util.engine
 
 import com.badlogic.gdx.utils.Array as GdxArray
 
-class Systems {
+class SystemDatabase {
 	private val systems = GdxArray<LogicSystem>()
 
 	fun addSystem(system: LogicSystem) {
 		systems.add(system)
 	}
 
-	fun iterator() = systems.iterator()
+	operator fun iterator() = systems.iterator()
 }
