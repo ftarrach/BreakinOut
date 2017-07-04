@@ -10,7 +10,9 @@ class EntityDatabase {
 
 	private val entities = gdxArrayOf<Entity>()
 
-	fun add(entity: Entity) = entities.add(entity)
+	fun add(entity: Entity) {
+		entities.add(entity)
+	}
 
 	fun selectAll() = SelectedEntities(entities.clone())
 

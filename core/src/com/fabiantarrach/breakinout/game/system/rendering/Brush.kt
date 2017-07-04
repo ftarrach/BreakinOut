@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
 class Brush(private val renderer: GdxShapeRenderer) {
 
-	fun paintWith(color: Color) {
+	fun useColor(color: Color) {
 		renderer.color = color
 	}
 

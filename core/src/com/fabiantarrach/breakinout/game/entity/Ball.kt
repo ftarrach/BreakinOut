@@ -21,7 +21,7 @@ class Ball(position: Position) : SolidEntity() {
 	}
 
 	override fun render(brush: Brush) {
-		brush.paintWith(Color.RED)
+		brush.useColor(Color.RED)
 		hitbox.render(brush)
 	}
 

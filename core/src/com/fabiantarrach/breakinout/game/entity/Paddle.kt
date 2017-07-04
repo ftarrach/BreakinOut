@@ -16,7 +16,7 @@ class Paddle(position: Position) : SolidEntity() {
 	}
 
 	override fun render(brush: Brush) {
-		brush.paintWith(Color.WHITE)
+		brush.useColor(Color.WHITE)
 		hitbox.render(brush)
 	}
 

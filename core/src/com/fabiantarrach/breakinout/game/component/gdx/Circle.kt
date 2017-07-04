@@ -31,6 +31,7 @@ class Circle(position: Position, size: CircleSize) : Shape {
 		return intersection.toIntersection()
 	}
 
+	@Deprecated("this is just horrible, see above")
 	private fun boundingBox() : GdxRectangle {
 		val x = circle.x
 		val y = circle.y
