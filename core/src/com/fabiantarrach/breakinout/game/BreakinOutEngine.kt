@@ -37,7 +37,7 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 
 	override fun buildGame() {
 //		removeAllEntities()
-		val paddle = Paddle(Position(0f, 0f))
+		val paddle = Paddle(Position(0f, -0.8f))
 		addEntity(paddle)
 
 		// left
@@ -49,14 +49,9 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 //		createBall(60, 0) { moveWithAngle(Angle(180f) )}
 //		createBall(70, 5) { moveWithAngle(Angle(180f) )}
 //		createBall(70, -5) { moveWithAngle(Angle(180f)) }
-//
+
 		// top
-		(-200..200 step 20).forEach {
-			createBall(it, 0.8f)
-		}
-		(-190..190 step 20).forEach {
-			createBall(it, 0.9f)
-		}
+		createBall(0f, 0f)
 //		createBall(-200, 20)  { /*moveWithAngle(Angle(270f))*/ }
 //		createBall(-150, 20)  { /*moveWithAngle(Angle(270f))*/ }
 //		createBall(-100, 20)  { /*moveWithAngle(Angle(270f))*/ }
@@ -87,8 +82,8 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 		addSystem(RenderingSystem(camera))
 	}
 
-	private fun createBall(x: Int, y: Float, block: Ball.() -> Unit = {}) {
-		val ball = Ball(Position(x.toFloat(), y))
+	private fun createBall(x: Float, y: Float, block: Ball.() -> Unit = {}) {
+		val ball = Ball(Position(x, y))
 		block.invoke(ball)
 		addEntity(ball)
 	}
