@@ -1,6 +1,5 @@
-package com.fabiantarrach.breakinout.util.engine
+package com.fabiantarrach.breakinout.game.system.rendering
 
-import com.fabiantarrach.breakinout.game.system.rendering.Renderer
 import com.fabiantarrach.breakinout.util.screen.Camera
 
 interface ProjectableRenderer : Renderer {

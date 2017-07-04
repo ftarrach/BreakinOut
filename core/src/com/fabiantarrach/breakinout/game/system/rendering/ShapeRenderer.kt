@@ -3,7 +3,6 @@ package com.fabiantarrach.breakinout.game.system.rendering
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.GdxShapeType
-import com.fabiantarrach.breakinout.util.engine.ProjectableRenderer
 import com.fabiantarrach.breakinout.util.screen.Camera
 
 class ShapeRenderer(private val type: GdxShapeType) : ProjectableRenderer {
