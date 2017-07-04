@@ -8,7 +8,7 @@ import com.fabiantarrach.breakinout.game.system.rendering.Brush
 interface Hitbox {
 	fun render(brush: Brush)
 	fun move(velocity: Velocity)
-	fun overlaps(other: Hitbox, ifCollision: (Collision) -> Unit)
+	fun ifOverlaps(other: Hitbox, ifCollision: (Collision) -> Unit)
 }
 
 class RectangularHitbox(position: Position, size: Dimension) : Hitbox {
@@ -21,9 +21,9 @@ class RectangularHitbox(position: Position, size: Dimension) : Hitbox {
 
 	override fun move(velocity: Velocity) = rectangle.move(velocity)
 
-	override fun overlaps(other: Hitbox, ifCollision: (Collision) -> Unit) {
+	override fun ifOverlaps(other: Hitbox, ifCollision: (Collision) -> Unit) {
 		if (other is CircularHitbox) {
-			return other.overlaps(this, ifCollision)
+			return other.ifOverlaps(this, ifCollision)
 		}
 		if (other is RectangularHitbox) {
 			val otherShape = other.rectangle
@@ -53,7 +53,7 @@ class CircularHitbox(position: Position, size: CircleSize) : Hitbox {
 		collision.acceptIfCollision { ifCollision(collision) }
 	}
 
-	override fun overlaps(other: Hitbox, ifCollision: (Collision) -> Unit) {
+	override fun ifOverlaps(other: Hitbox, ifCollision: (Collision) -> Unit) {
 		if (other is RectangularHitbox) {
 			return overlapsRectangle(other, ifCollision)
 		}

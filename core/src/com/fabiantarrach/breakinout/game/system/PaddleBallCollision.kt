@@ -26,5 +26,4 @@ class PaddleBallCollision : LogicSystem() {
 		}
 	}
 
-	override fun dispose() {}
 }

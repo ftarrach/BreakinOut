@@ -1,6 +1,7 @@
 package com.fabiantarrach.breakinout.util.engine
 
 import com.fabiantarrach.breakinout.game.entity.Ball
+import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import ktx.collections.gdxArrayOf
@@ -25,6 +26,16 @@ class EntityDatabase {
 		entities.filter { it is Paddle }
 				.map { it as Paddle }
 				.forEach(action)
+	}
+
+	fun eachBrick(action: (Brick) -> Unit) {
+		entities.filter { it is Brick }
+				.map { it as Brick }
+				.forEach(action)
+	}
+
+	fun remove(entity: Entity) {
+		entities.removeValue(entity, true)
 	}
 
 }

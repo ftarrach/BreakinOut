@@ -2,9 +2,12 @@ package com.fabiantarrach.breakinout.game
 
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.entity.Ball
+import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.entity.Paddle
+import com.fabiantarrach.breakinout.game.system.BallBrickCollision
 import com.fabiantarrach.breakinout.game.system.EntityUpdate
 import com.fabiantarrach.breakinout.game.system.PaddleBallCollision
+import com.fabiantarrach.breakinout.game.system.RemoveDead
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 import com.fabiantarrach.breakinout.util.screen.Camera
@@ -77,15 +80,32 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 //		createBall(25, 15) { moveWithAngle(Angle(315f)) }
 //		createBall(50, 15) { moveWithAngle(Angle(315f)) }
 
+		(-80..80 step 20).forEach {
+			val x = it.toFloat() / 100
+			createBrick(x, 0.85f)
+			createBrick(x, 0.65f)
+		}
+		(-70..70 step 20).forEach {
+			val x = it.toFloat() / 100
+			createBrick(x, 0.75f)
+		}
+
 		addSystem(EntityUpdate())
 		addSystem(PaddleBallCollision())
+		addSystem(BallBrickCollision())
+		addSystem(RemoveDead())
 		addSystem(RenderingSystem(camera))
 	}
 
-	private fun createBall(x: Float, y: Float, block: Ball.() -> Unit = {}) {
+	private fun createBall(x: Float, y: Float, block: (Ball) -> Unit = {}) {
 		val ball = Ball(Position(x, y))
 		block.invoke(ball)
 		addEntity(ball)
+	}
+
+	private fun createBrick(x: Float, y: Float) {
+		val brick = Brick(Position(x, y))
+		addEntity(brick)
 	}
 
 }

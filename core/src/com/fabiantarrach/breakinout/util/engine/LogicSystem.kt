@@ -12,4 +12,6 @@ abstract class LogicSystem : Disposable {
 		this.database = database
 	}
 
+	override fun dispose() {}
+
 }

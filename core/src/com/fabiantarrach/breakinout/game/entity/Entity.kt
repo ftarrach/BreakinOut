@@ -7,5 +7,6 @@ interface Entity {
 
 	fun update(delta: Timespan)
 	fun render(brush: Brush)
+	fun ifDead(action: () -> Unit)
 
 }
