@@ -5,9 +5,8 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class EntityUpdate : LogicSystem() {
 	override fun update(delta: Timespan) {
-		val entities = database.selectAll()
-		for (entity in entities) {
-			entity.update(delta)
+		database.eachEntity {
+			it.update(delta)
 		}
 	}
 

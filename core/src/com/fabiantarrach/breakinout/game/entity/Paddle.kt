@@ -9,7 +9,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class Paddle(position: Position) : SolidEntity() {
 
-	override val hitbox = RectangularHitbox(position, Dimension(100f, 10f))
+	override val hitbox = RectangularHitbox(position, Dimension(0.2f, 0.05f))
 
 	override fun update(delta: Timespan) {
 		// TODO: add velocity to move the paddle.

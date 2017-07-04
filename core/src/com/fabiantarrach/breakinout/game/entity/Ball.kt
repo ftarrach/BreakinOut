@@ -13,8 +13,8 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class Ball(position: Position) : SolidEntity() {
 
-	override val hitbox = CircularHitbox(position, CircleSize(5f))
-	private val velocity = Velocity(Speed(10f), Angle(270f))
+	override val hitbox = CircularHitbox(position, CircleSize(radius = 0.025f))
+	private val velocity = Velocity(Speed(0.2f), Angle(270f))
 
 	override fun update(delta: Timespan) {
 		hitbox.move(velocity * delta)

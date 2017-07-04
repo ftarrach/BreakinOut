@@ -1,15 +1,28 @@
 package com.fabiantarrach.breakinout.game.system.rendering
 
 import com.fabiantarrach.breakinout.game.entity.Entity
-import com.fabiantarrach.breakinout.util.engine.SelectedEntities
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer as GdxShapeRenderer
+import com.fabiantarrach.breakinout.util.GdxShapeType
+import com.fabiantarrach.breakinout.util.screen.Camera
 
-class FillRenderer(camera: Camera = Camera()) : Renderer {
+class FillRenderer(camera: Camera) : Renderer {
 
-	private val renderer = CameraRenderer(camera, ShapeRenderer(GdxShapeRenderer.ShapeType.Filled))
+	private val renderer : Renderer
 
-	override fun render(entities: SelectedEntities<Entity>) {
-		renderer.render(entities)
+	init {
+		val filledShapeRenderer = ShapeRenderer(GdxShapeType.Filled)
+		renderer = CameraRenderer(camera, filledShapeRenderer)
+	}
+
+	override fun prepareRendering() {
+		renderer.prepareRendering()
+	}
+
+	override fun endRendering() {
+		renderer.endRendering()
+	}
+
+	override fun render(entity: Entity) {
+		renderer.render(entity)
 	}
 
 	override fun dispose() {

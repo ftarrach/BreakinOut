@@ -1,24 +1,29 @@
 package com.fabiantarrach.breakinout.game.system.rendering
 
 import com.fabiantarrach.breakinout.game.entity.Entity
+import com.fabiantarrach.breakinout.util.GdxShapeRenderer
+import com.fabiantarrach.breakinout.util.GdxShapeType
 import com.fabiantarrach.breakinout.util.engine.ProjectableRenderer
-import com.fabiantarrach.breakinout.util.engine.SelectedEntities
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer as GdxShapeRenderer
+import com.fabiantarrach.breakinout.util.screen.Camera
 
-class ShapeRenderer(private val type: GdxShapeRenderer.ShapeType) : ProjectableRenderer {
+class ShapeRenderer(private val type: GdxShapeType) : ProjectableRenderer {
 
 	private val renderer = GdxShapeRenderer()
 	private val toolbox = Brush(renderer)
 
 	override fun project(camera: Camera) {
-		renderer.projectionMatrix = camera.projection()
+		camera.projectOn(renderer)
 	}
 
-	override fun render(entities: SelectedEntities<Entity>) {
+	override fun prepareRendering() {
 		renderer.begin(type)
-		for (e in entities) {
-			e.render(toolbox)
-		}
+	}
+
+	override fun render(entity: Entity) {
+		entity.render(toolbox)
+	}
+
+	override fun endRendering() {
 		renderer.end()
 	}
 

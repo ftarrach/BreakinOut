@@ -3,7 +3,6 @@ package com.fabiantarrach.breakinout.util.engine
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.entity.Paddle
-import com.fabiantarrach.breakinout.util.clone
 import ktx.collections.gdxArrayOf
 
 class EntityDatabase {
@@ -14,18 +13,18 @@ class EntityDatabase {
 		entities.add(entity)
 	}
 
-	fun selectAll() = SelectedEntities(entities.clone())
+	fun eachEntity(action: (Entity) -> Unit) = entities.forEach(action)
 
-	fun selectBalls(): SelectedEntities<Ball> {
-		val filteredBalls = entities.filter { it is Ball }
-		val balls = filteredBalls.map { it as Ball }
-		return SelectedEntities(balls)
+	fun eachBall(action: (Ball) -> Unit) {
+		entities.filter { it is Ball }
+				.map { it as Ball }
+				.forEach(action)
 	}
 
-	fun selectPaddles(): SelectedEntities<Paddle> {
-		val filteredPaddles = entities.filter { it is Paddle }
-		val paddles = filteredPaddles.map { it as Paddle }
-		return SelectedEntities(paddles)
+	fun eachPaddle(action: (Paddle) -> Unit) {
+		entities.filter { it is Paddle }
+				.map { it as Paddle }
+				.forEach(action)
 	}
 
 }

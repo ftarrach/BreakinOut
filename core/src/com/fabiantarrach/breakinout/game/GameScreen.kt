@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game
 
-import com.fabiantarrach.breakinout.util.FitScreen
 import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.screen.FitScreen
 
 class GameScreen : FitScreen() {
 

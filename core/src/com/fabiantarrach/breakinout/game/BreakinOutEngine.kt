@@ -1,22 +1,18 @@
 package com.fabiantarrach.breakinout.game
 
-import com.badlogic.gdx.graphics.OrthographicCamera
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.game.system.EntityUpdate
 import com.fabiantarrach.breakinout.game.system.PaddleBallCollision
-import com.fabiantarrach.breakinout.game.system.rendering.Camera
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
+import com.fabiantarrach.breakinout.util.screen.Camera
 
-class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
+class BreakinOutEngine(private val camera: Camera) : Engine() {
 
 	init {
 //		camera.area.set(0f, 280f, 0f)
-		camera.position.set(0f, 0f, 0f)
-		camera.zoom = 0.25f
-
 	}
 
 //	override fun registerSystems(systems: Array<LogicSystem>) {
@@ -56,10 +52,10 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 //
 		// top
 		(-200..200 step 20).forEach {
-			createBall(it, 20)
+			createBall(it, 0.8f)
 		}
 		(-190..190 step 20).forEach {
-			createBall(it, 25)
+			createBall(it, 0.9f)
 		}
 //		createBall(-200, 20)  { /*moveWithAngle(Angle(270f))*/ }
 //		createBall(-150, 20)  { /*moveWithAngle(Angle(270f))*/ }
@@ -88,11 +84,11 @@ class BreakinOutEngine(private val camera: OrthographicCamera) : Engine() {
 
 		addSystem(EntityUpdate())
 		addSystem(PaddleBallCollision())
-		addSystem(RenderingSystem(Camera(camera)))
+		addSystem(RenderingSystem(camera))
 	}
 
-	private fun createBall(x: Int, y: Int, block: Ball.() -> Unit = {}) {
-		val ball = Ball(Position(x.toFloat(), y.toFloat()))
+	private fun createBall(x: Int, y: Float, block: Ball.() -> Unit = {}) {
+		val ball = Ball(Position(x.toFloat(), y))
 		block.invoke(ball)
 		addEntity(ball)
 	}
