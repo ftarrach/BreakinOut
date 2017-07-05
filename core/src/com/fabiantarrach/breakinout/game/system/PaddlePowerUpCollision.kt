@@ -1,11 +1,11 @@
 package com.fabiantarrach.breakinout.game.system
 
-import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
+import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class PaddleBallCollision : LogicSystem() {
+class PaddlePowerUpCollision : LogicSystem() {
 
 	override fun update(delta: Timespan) {
 		database.each(Paddle::class.java) {
@@ -14,15 +14,15 @@ class PaddleBallCollision : LogicSystem() {
 	}
 
 	private fun checkPaddle(paddle: Paddle) {
-		database.each(Ball::class.java) {
+		database.eachPowerUp {
 			checkCollision(paddle, it)
 		}
 	}
 
-	private fun checkCollision(paddle: Paddle, ball: Ball) {
-		ball.overlaps(paddle) {
-			ball.resolveCollision(it)
-			ball.bounceOff()
+	private fun checkCollision(paddle: Paddle, powerup: PowerUp) {
+		paddle.overlaps(powerup) {
+			powerup.activate(database)
+			powerup.die()
 		}
 	}
 

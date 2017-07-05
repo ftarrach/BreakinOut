@@ -4,10 +4,7 @@ import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.entity.Paddle
-import com.fabiantarrach.breakinout.game.system.BallBrickCollision
-import com.fabiantarrach.breakinout.game.system.EntityUpdate
-import com.fabiantarrach.breakinout.game.system.PaddleBallCollision
-import com.fabiantarrach.breakinout.game.system.RemoveDead
+import com.fabiantarrach.breakinout.game.system.*
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 import com.fabiantarrach.breakinout.util.screen.Camera
@@ -40,7 +37,7 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 
 	override fun buildGame() {
 //		removeAllEntities()
-		val paddle = Paddle(Position(0f, -0.8f))
+		val paddle = Paddle(0f, -0.8f)
 		addEntity(paddle)
 
 		// left
@@ -90,9 +87,11 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 			createBrick(x, 0.75f)
 		}
 
+		addSystem(PlayerInput(camera))
 		addSystem(EntityUpdate())
 		addSystem(PaddleBallCollision())
 		addSystem(BallBrickCollision())
+		addSystem(PaddlePowerUpCollision())
 		addSystem(RemoveDead())
 		addSystem(RenderingSystem(camera))
 	}
@@ -104,7 +103,7 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 	}
 
 	private fun createBrick(x: Float, y: Float) {
-		val brick = Brick(Position(x, y))
+		val brick = Brick(x, y)
 		addEntity(brick)
 	}
 

@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.fabiantarrach.breakinout.game.component.euclid.Hitbox
-import com.fabiantarrach.breakinout.game.component.euclid.Intersection
+import com.fabiantarrach.breakinout.game.component.euclid.collision.Intersection
+import com.fabiantarrach.breakinout.game.component.euclid.hitbox.Hitbox
 
 abstract class SolidEntity : Entity {
 
@@ -24,7 +24,7 @@ abstract class SolidEntity : Entity {
 			action()
 	}
 
-	fun die() {
+	open fun die() {
 		dead = true
 	}
 

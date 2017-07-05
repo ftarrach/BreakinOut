@@ -6,12 +6,9 @@ import com.fabiantarrach.breakinout.util.screen.Camera
 
 class RenderingSystem(camera: Camera) : LogicSystem() {
 
-//	private val renderer = LineRenderer(camera)
 	private val renderer = FillRenderer(camera)
 
 	override fun update(delta: Timespan) {
-//		val entities = database.eachEntity()
-//		renderer.render(entities)
 		renderer.prepareRendering()
 		database.eachEntity {
 			renderer.render(it)

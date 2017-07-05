@@ -1,41 +1,41 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.fabiantarrach.breakinout.game.entity.Ball
-import com.fabiantarrach.breakinout.game.entity.Brick
+import com.badlogic.gdx.utils.ObjectMap
 import com.fabiantarrach.breakinout.game.entity.Entity
-import com.fabiantarrach.breakinout.game.entity.Paddle
+import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
+import com.fabiantarrach.breakinout.util.getOrPutIfAbscent
+import ktx.collections.GdxArray
 import ktx.collections.gdxArrayOf
 
 class EntityDatabase {
 
-	private val entities = gdxArrayOf<Entity>()
+	private val entities = ObjectMap<Class<out Entity>, GdxArray<Entity>>()
 
 	fun add(entity: Entity) {
-		entities.add(entity)
+		entities.getOrPutIfAbscent(entity.javaClass, gdxArrayOf())
+				.add(entity)
 	}
 
-	fun eachEntity(action: (Entity) -> Unit) = entities.forEach(action)
+	fun eachEntity(action: (Entity) -> Unit) =
+			entities.values()
+					.flatMap { it }
+					.forEach(action)
 
-	fun eachBall(action: (Ball) -> Unit) {
-		entities.filter { it is Ball }
-				.map { it as Ball }
-				.forEach(action)
-	}
+	fun eachPowerUp(action: (PowerUp) -> Unit) =
+			entities.values()
+					.flatMap { it }
+					.filter { it is PowerUp }
+					.map { it as PowerUp }
+					.forEach(action)
 
-	fun eachPaddle(action: (Paddle) -> Unit) {
-		entities.filter { it is Paddle }
-				.map { it as Paddle }
-				.forEach(action)
-	}
-
-	fun eachBrick(action: (Brick) -> Unit) {
-		entities.filter { it is Brick }
-				.map { it as Brick }
-				.forEach(action)
-	}
+	fun <T : Entity> each(clazz: Class<T>, block: (T) -> Unit) =
+			entities.get(clazz)
+					.map { clazz.cast(it) }
+					.forEach(block)
 
 	fun remove(entity: Entity) {
-		entities.removeValue(entity, true)
+		entities.get(entity.javaClass)
+				.removeValue(entity, true)
 	}
 
 }

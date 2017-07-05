@@ -2,7 +2,7 @@ package com.fabiantarrach.breakinout.game.component.gdx
 
 import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
-import com.fabiantarrach.breakinout.game.component.euclid.Intersection
+import com.fabiantarrach.breakinout.game.component.euclid.collision.Intersection
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush

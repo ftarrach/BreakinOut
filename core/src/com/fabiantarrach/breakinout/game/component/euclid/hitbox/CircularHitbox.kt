@@ -1,39 +1,12 @@
-package com.fabiantarrach.breakinout.game.component.euclid
+package com.fabiantarrach.breakinout.game.component.euclid.hitbox
 
+import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
+import com.fabiantarrach.breakinout.game.component.euclid.collision.Collision
+import com.fabiantarrach.breakinout.game.component.euclid.Position
+import com.fabiantarrach.breakinout.game.component.euclid.collision.NoCollisionAlgorithm
 import com.fabiantarrach.breakinout.game.component.gdx.Circle
-import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
 import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
-
-interface Hitbox {
-	fun render(brush: Brush)
-	fun move(velocity: Velocity)
-	fun ifOverlaps(other: Hitbox, ifCollision: (Collision) -> Unit)
-}
-
-class RectangularHitbox(position: Position, size: Dimension) : Hitbox {
-
-	private val rectangle = Rectangle(position, size)
-
-	fun toRectangle() = rectangle
-
-	override fun render(brush: Brush) = rectangle.render(brush)
-
-	override fun move(velocity: Velocity) = rectangle.move(velocity)
-
-	override fun ifOverlaps(other: Hitbox, ifCollision: (Collision) -> Unit) {
-		if (other is CircularHitbox) {
-			return other.ifOverlaps(this, ifCollision)
-		}
-		if (other is RectangularHitbox) {
-			val otherShape = other.rectangle
-			val intersection = rectangle.intersect(otherShape)
-			val collision = intersection.createCollision()
-			return collision.acceptIfCollision { ifCollision(collision) }
-		}
-		throw NoCollisionAlgorithm(this, other)
-	}
-}
 
 class CircularHitbox(position: Position, size: CircleSize) : Hitbox {
 
@@ -71,5 +44,3 @@ class CircularHitbox(position: Position, size: CircleSize) : Hitbox {
 		circle.move(velocity)
 	}
 }
-
-class NoCollisionAlgorithm(a: Hitbox, b: Hitbox) : RuntimeException("no collision algorithm in ${a::class} for ${b::class}")
