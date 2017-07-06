@@ -8,7 +8,7 @@ abstract class SolidEntity : Entity {
 	protected abstract val hitbox: Hitbox
 	private var dead = false
 
-	fun overlaps(other: SolidEntity, ifCollision: (Intersection) -> Unit) {
+	fun ifOverlaps(other: SolidEntity, ifCollision: (Intersection) -> Unit) {
 		hitbox.ifOverlaps(other.hitbox) {
 			collision -> collision.acceptIfCollision(ifCollision)
 		}

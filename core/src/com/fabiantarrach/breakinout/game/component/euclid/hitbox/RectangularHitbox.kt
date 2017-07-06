@@ -8,6 +8,7 @@ import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 
+@Deprecated("we don't need hitboxes, move everything in Rectangle/Circle")
 class RectangularHitbox(x: Float, y: Float, width: Float, height: Float) : Hitbox {
 
 	private val rectangle = Rectangle(x, y, width, height)
@@ -32,6 +33,7 @@ class RectangularHitbox(x: Float, y: Float, width: Float, height: Float) : Hitbo
 		throw NoCollisionAlgorithm(this, other)
 	}
 
+	@Deprecated("using primitives")
 	fun drop(block: (Float, Float) -> Entity): Entity {
 		return rectangle.drop(block)
 	}

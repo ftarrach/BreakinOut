@@ -23,7 +23,7 @@ class BallBrickCollision : LogicSystem() {
 	}
 
 	private fun checkCollision(ball: Ball, brick: Brick, collisionOccurred: () -> Unit) {
-		ball.overlaps(brick) {
+		ball.ifOverlaps(brick) {
 			brick.die()
 			collisionOccurred()
 			val powerUp = brick.createPowerUp()
