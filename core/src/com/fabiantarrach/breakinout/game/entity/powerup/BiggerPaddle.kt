@@ -9,7 +9,7 @@ class BiggerPaddle(x: Float, y: Float) : PowerUp(x, y) {
 
 	override fun render(brush: Brush) {
 		brush.useColor(Color.CYAN)
-		hitbox.render(brush)
+		shape.render(brush)
 	}
 
 	override fun activate(database: EntityDatabase) {

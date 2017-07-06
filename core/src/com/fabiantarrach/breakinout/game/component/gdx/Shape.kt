@@ -6,4 +6,5 @@ import com.fabiantarrach.breakinout.game.system.rendering.Brush
 interface Shape {
 	fun render(brush: Brush)
 	fun move(velocity: Velocity)
+	fun ifOverlaps(other: Shape, action: () -> Unit)
 }

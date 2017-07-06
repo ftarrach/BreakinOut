@@ -1,17 +1,14 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.fabiantarrach.breakinout.game.component.euclid.collision.Intersection
-import com.fabiantarrach.breakinout.game.component.euclid.hitbox.Hitbox
+import com.fabiantarrach.breakinout.game.component.gdx.Shape
 
 abstract class SolidEntity : Entity {
 
-	protected abstract val hitbox: Hitbox
+	protected abstract val shape: Shape
 	private var dead = false
 
-	fun ifOverlaps(other: SolidEntity, ifCollision: (Intersection) -> Unit) {
-		hitbox.ifOverlaps(other.hitbox) {
-			collision -> collision.acceptIfCollision(ifCollision)
-		}
+	fun ifOverlaps(other: SolidEntity, action: () -> Unit) {
+		shape.ifOverlaps(other.shape, action)
 	}
 
 	override fun ifDead(action: () -> Unit) {

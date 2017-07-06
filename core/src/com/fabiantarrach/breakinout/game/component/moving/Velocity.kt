@@ -1,24 +1,27 @@
 package com.fabiantarrach.breakinout.game.component.moving
 
-import com.fabiantarrach.breakinout.game.component.gdx.Vector
+import com.fabiantarrach.breakinout.util.GdxCircle
+import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.badlogic.gdx.math.Vector2 as GdxVector
 
-class Velocity private constructor(private val vector: Vector) {
-
-	constructor(speed: Speed, angle: Angle) : this(Vector(speed.toFloat(), angle))
-
-	constructor(x: Float, y: Float) : this(Vector(x, y))
+class Velocity(private var x: Float, private var y: Float) {
 
 	operator fun times(delta: Timespan): Velocity =
-			Velocity(Speed(delta * vector.length()), vector.angle())
+			Velocity(delta * x, delta * y)
 
-	@Deprecated("returns primitive")
-	fun xValueAsFloat() = vector.xValue()
+	fun invertHorizontal() {
+		this.y = -y
+	}
 
-	@Deprecated("returns primitive")
-	fun yValueAsFloat() = vector.yValue()
+	fun move(rectangle: GdxRectangle) {
+		rectangle.x += x
+		rectangle.y += y
+	}
 
-	fun invertHorizontal() = vector.invertHorizontal()
+	fun move(circle: GdxCircle) {
+		circle.x += x
+		circle.y += y
+	}
 
 }
