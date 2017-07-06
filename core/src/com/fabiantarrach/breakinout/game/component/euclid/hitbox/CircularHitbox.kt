@@ -1,16 +1,14 @@
 package com.fabiantarrach.breakinout.game.component.euclid.hitbox
 
-import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
 import com.fabiantarrach.breakinout.game.component.euclid.collision.Collision
-import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.euclid.collision.NoCollisionAlgorithm
 import com.fabiantarrach.breakinout.game.component.gdx.Circle
 import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 
-class CircularHitbox(position: Position, size: CircleSize) : Hitbox {
+class CircularHitbox(x: Float, y: Float, radius: Float) : Hitbox {
 
-	private val circle = Circle(position, size)
+	private val circle = Circle(x, y, radius)
 
 	private fun overlapsRectangle(other: RectangularHitbox, ifCollision: (Collision) -> Unit) {
 		val otherShape = other.toRectangle()

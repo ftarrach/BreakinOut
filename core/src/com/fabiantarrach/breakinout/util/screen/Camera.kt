@@ -1,10 +1,10 @@
 package com.fabiantarrach.breakinout.util.screen
 
 import com.badlogic.gdx.graphics.OrthographicCamera
-import com.badlogic.gdx.math.Vector3
 import com.badlogic.gdx.utils.viewport.FitViewport
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
+import com.fabiantarrach.breakinout.util.GdxVector3
 
 class Camera {
 	private val camera: OrthographicCamera = OrthographicCamera()
@@ -23,10 +23,10 @@ class Camera {
 		viewport.update(width, height)
 	}
 
-	fun getMousePosition(x: Float, y: Float): Position {
-		val sceenPosition = Vector3(x, y, 0f)
-		val position = camera.unproject(sceenPosition)
-		return Position(position.x, position.y)
+	fun unprojectMouse(screenPosition: GdxVector3, block: (Position) -> Unit) {
+		val gamePosition = camera.unproject(screenPosition)
+		val position = Position(gamePosition.x, gamePosition.y)
+		block(position)
 	}
 
 }

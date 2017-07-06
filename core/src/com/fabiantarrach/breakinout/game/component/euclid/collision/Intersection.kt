@@ -1,4 +1,7 @@
-package com.fabiantarrach.breakinout.game.component.euclid
+package com.fabiantarrach.breakinout.game.component.euclid.collision
+
+import com.fabiantarrach.breakinout.game.component.euclid.Dimension
+import com.fabiantarrach.breakinout.game.component.euclid.Position
 
 class Intersection(private val position: Position, private val size: Dimension) {
 

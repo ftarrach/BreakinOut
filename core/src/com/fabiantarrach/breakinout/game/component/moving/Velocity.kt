@@ -22,19 +22,3 @@ class Velocity private constructor(private val vector: Vector) {
 	fun invertHorizontal() = vector.invertHorizontal()
 
 }
-
-class Angle(degrees: Float) {
-
-	private var degrees = degrees
-		set(value) {
-			if (value > 360)
-				field = value - 360
-			if (value < 0)
-				field = value + 360
-		}
-
-	fun toVector(): GdxVector {
-		return GdxVector(1f, 0f).rotate(degrees)
-	}
-
-}

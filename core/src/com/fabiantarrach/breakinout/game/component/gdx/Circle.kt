@@ -1,23 +1,15 @@
 package com.fabiantarrach.breakinout.game.component.gdx
 
 import com.badlogic.gdx.math.Intersector
-import com.fabiantarrach.breakinout.game.component.euclid.CircleSize
 import com.fabiantarrach.breakinout.game.component.euclid.collision.Intersection
-import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.badlogic.gdx.math.Circle as GdxCircle
 import com.badlogic.gdx.math.Rectangle as GdxRectangle
 
-class Circle(position: Position, size: CircleSize) : Shape {
-	private val circle: GdxCircle
+class Circle(x: Float, y: Float, radius: Float) : Shape {
 
-	init {
-		val x = position.xCoordinate()
-		val y = position.yCoordinate()
-		val radius = size.radius()
-		circle = GdxCircle(x, y, radius)
-	}
+	private val circle = GdxCircle(x, y, radius)
 
 	fun intersect(other: Rectangle): Intersection {
 		val intersection = GdxRectangle()
