@@ -1,8 +1,8 @@
 package com.fabiantarrach.breakinout.game.entity
 
 import com.badlogic.gdx.graphics.Color
+import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Circle
-import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
@@ -16,8 +16,7 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 	}
 
 	override fun render(brush: Brush) {
-		brush.useColor(Color.RED)
-		shape.render(brush)
+		shape.render(brush, Color.RED)
 	}
 
 	fun bounceOff() {

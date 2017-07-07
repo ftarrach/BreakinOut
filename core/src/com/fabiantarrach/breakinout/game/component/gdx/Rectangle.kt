@@ -1,8 +1,9 @@
 package com.fabiantarrach.breakinout.game.component.gdx
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.Position
-import com.fabiantarrach.breakinout.game.component.moving.Velocity
+import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.GdxCircle
@@ -12,17 +13,19 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 
 	private val rectangle = GdxRectangle(x - width / 2, y - height / 2, width, height)
 
-	override fun render(brush: Brush) {
-		brush.drawRectangle(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
-	}
+	override fun render(brush: Brush, color: Color) =
+			brush.drawRectangle(rectangle, color)
 
-	override fun move(velocity: Velocity) {
-		velocity.move(rectangle)
-	}
+	override fun move(velocity: Velocity) =
+			velocity.move(rectangle)
 
-	@Deprecated("using primitives")
 	fun drop(block: (Float, Float) -> Entity): Entity =
 			block(rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2)
+
+	fun shorten() {
+		rectangle.width -= 0.05f
+		rectangle.x += 0.025f
+	}
 
 	fun widen() {
 		rectangle.width += 0.05f
@@ -41,32 +44,25 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 		throw NoCollisionAlgorithmFound(this, other)
 	}
 
-	private fun ifOverlapsCircle(other: Circle, action: () -> Unit) {
-		other.giveCircle {
-			ifOverlapsGdxCircle(it, action)
-		}
-	}
+	private fun ifOverlapsCircle(other: Circle, action: () -> Unit) =
+			other.giveCircle {
+				ifOverlapsGdxCircle(it, action)
+			}
 
 	private fun ifOverlapsGdxCircle(it: GdxCircle, action: () -> Unit) {
-		if (Intersector.overlaps(it, rectangle)) {
+		if (Intersector.overlaps(it, rectangle))
 			action()
-		}
 	}
 
 	private fun ifOverlapsRectangle(other: Rectangle, action: () -> Unit) {
-		if (Intersector.overlaps(rectangle, other.rectangle)) {
+		if (Intersector.overlaps(rectangle, other.rectangle))
 			action()
-		}
-	}
-
-	private fun toPosition(): Position {
-		val x = rectangle.x + rectangle.width / 2
-		val y = rectangle.y + rectangle.height / 2
-		return Position(x, y)
 	}
 
 	fun differenceTo(mouse: Position): Velocity {
-		val myPosition = toPosition()
+		val x = rectangle.x + rectangle.width / 2
+		val y = rectangle.y + rectangle.height / 2
+		val myPosition = Position(x, y)
 		return myPosition.moveVelocity(mouse)
 	}
 }

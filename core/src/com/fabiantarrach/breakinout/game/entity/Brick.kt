@@ -2,8 +2,8 @@ package com.fabiantarrach.breakinout.game.entity
 
 import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
-import com.fabiantarrach.breakinout.game.entity.powerup.BiggerPaddle
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
+import com.fabiantarrach.breakinout.game.util.PowerUpFactory
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class Brick(x: Float, y: Float) : SolidEntity() {
@@ -14,16 +14,14 @@ class Brick(x: Float, y: Float) : SolidEntity() {
 
 	override fun render(brush: Brush) {
 		ifAlive {
-			brush.useColor(Color.GRAY)
-			shape.render(brush)
+			shape.render(brush, Color.GRAY)
 		}
 	}
 
 	fun createPowerUp(): Entity {
-		// TODO: different powerups
 		return shape.drop { x, y ->
-			BiggerPaddle(x, y)
+			PowerUpFactory(x, y)
+					.createRandom()
 		}
 	}
-
 }

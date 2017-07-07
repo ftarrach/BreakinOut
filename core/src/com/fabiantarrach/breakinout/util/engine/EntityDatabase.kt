@@ -29,7 +29,7 @@ class EntityDatabase {
 					.forEach(action)
 
 	fun <T : Entity> each(clazz: Class<T>, block: (T) -> Unit) =
-			entities.get(clazz)
+			entities.get(clazz, gdxArrayOf())
 					.map { clazz.cast(it) }
 					.forEach(block)
 

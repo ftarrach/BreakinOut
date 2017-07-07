@@ -1,14 +1,16 @@
-package com.fabiantarrach.breakinout.game.component.moving
+package com.fabiantarrach.breakinout.game.component.euclid
 
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.badlogic.gdx.math.Vector2 as GdxVector
 
-class Velocity(private var x: Float, private var y: Float) {
+class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 
 	operator fun times(delta: Timespan): Velocity =
-			Velocity(delta * x, delta * y)
+			delta.normalize(x, y) { newX, newY ->
+				Velocity(newX, newY)
+			}
 
 	fun invertHorizontal() {
 		this.y = -y

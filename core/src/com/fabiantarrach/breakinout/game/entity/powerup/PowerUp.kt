@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game.entity.powerup
 
+import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
-import com.fabiantarrach.breakinout.game.component.moving.Velocity
 import com.fabiantarrach.breakinout.game.entity.SolidEntity
 import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 import com.fabiantarrach.breakinout.util.engine.Timespan

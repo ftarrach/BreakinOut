@@ -1,7 +1,8 @@
 package com.fabiantarrach.breakinout.game.component.gdx
 
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.math.Intersector
-import com.fabiantarrach.breakinout.game.component.moving.Velocity
+import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.GdxCircle
 
@@ -9,8 +10,8 @@ class Circle(x: Float, y: Float, radius: Float) : Shape {
 
 	private val circle = GdxCircle(x, y, radius)
 
-	override fun render(brush: Brush) {
-		brush.drawCircle(circle.x, circle.y, circle.radius)
+	override fun render(brush: Brush, color: Color) {
+		brush.drawCircle(circle, color)
 	}
 
 	override fun ifOverlaps(other: Shape, action: () -> Unit) {

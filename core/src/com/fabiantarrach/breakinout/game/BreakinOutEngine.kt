@@ -14,6 +14,17 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 		val paddle = Paddle(0f, -0.8f)
 		addEntity(paddle)
 		createBall(0f, 0f)
+		createBricks()
+		addSystem(PlayerInput(camera))
+		addSystem(EntityUpdate())
+		addSystem(PaddleBallCollision())
+		addSystem(BallBrickCollision())
+		addSystem(PaddlePowerUpCollision())
+		addSystem(RemoveDead())
+		addSystem(RenderingSystem(camera))
+	}
+
+	private fun createBricks() {
 		(-80..80 step 20).forEach {
 			val x = it.toFloat() / 100
 			createBrick(x, 0.85f)
@@ -23,13 +34,6 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 			val x = it.toFloat() / 100
 			createBrick(x, 0.75f)
 		}
-		addSystem(PlayerInput(camera))
-		addSystem(EntityUpdate())
-		addSystem(PaddleBallCollision())
-		addSystem(BallBrickCollision())
-		addSystem(PaddlePowerUpCollision())
-		addSystem(RemoveDead())
-		addSystem(RenderingSystem(camera))
 	}
 
 	private fun createBall(x: Float, y: Float) {

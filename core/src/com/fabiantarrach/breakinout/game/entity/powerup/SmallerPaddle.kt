@@ -5,15 +5,15 @@ import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 
-class BiggerPaddle(x: Float, y: Float) : PowerUp(x, y) {
+class SmallerPaddle(x: Float, y: Float) : PowerUp(x, y) {
 
 	override fun render(brush: Brush) {
-		shape.render(brush, Color.CYAN)
+		shape.render(brush, Color.BLUE)
 	}
 
 	override fun activate(database: EntityDatabase) {
 		database.each(Paddle::class.java) {
-			it.grow()
+			it.shrink()
 		}
 	}
 
