@@ -7,7 +7,7 @@ import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.GdxCircle
-import com.badlogic.gdx.math.Rectangle as GdxRectangle
+import com.fabiantarrach.breakinout.util.GdxRectangle
 
 class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 

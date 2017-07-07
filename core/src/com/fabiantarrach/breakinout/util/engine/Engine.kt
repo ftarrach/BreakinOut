@@ -2,7 +2,6 @@ package com.fabiantarrach.breakinout.util.engine
 
 import com.badlogic.gdx.utils.Disposable
 import com.fabiantarrach.breakinout.game.entity.Entity
-import com.badlogic.gdx.utils.Array as GdxArray
 
 abstract class Engine : Disposable {
 

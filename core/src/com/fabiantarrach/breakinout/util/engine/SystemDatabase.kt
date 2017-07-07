@@ -1,6 +1,7 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.badlogic.gdx.utils.Array as GdxArray
+import com.fabiantarrach.breakinout.util.GdxArray
+
 
 class SystemDatabase {
 	private val systems = GdxArray<LogicSystem>()

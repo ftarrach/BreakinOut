@@ -23,9 +23,8 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 		velocity.invertHorizontal()
 	}
 
-//	fun resolveCollision(intersection: Intersection) {
-		// TODO: this is a VERY stupid solution
-//		shape.move(Velocity(Speed(intersection.height()), Angle(90f)))
-//	}
+	fun ifMovingDown(movingDown: () -> Unit) {
+		velocity.ifMovingDown(movingDown, {})
+	}
 
 }
