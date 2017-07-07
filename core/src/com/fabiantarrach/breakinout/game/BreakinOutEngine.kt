@@ -11,10 +11,11 @@ import com.fabiantarrach.breakinout.util.screen.Camera
 class BreakinOutEngine(private val camera: Camera) : Engine() {
 
 	override fun buildGame() {
-		val paddle = Paddle(0f, -0.8f)
-		addEntity(paddle)
-		createBall(0f, 0f)
-		createBricks()
+		createEntities()
+		createSystems()
+	}
+
+	private fun createSystems() {
 		addSystem(PlayerInput(camera))
 		addSystem(EntityUpdate())
 		addSystem(BallPaddleCollision())
@@ -24,7 +25,9 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 		addSystem(RenderingSystem(camera))
 	}
 
-	private fun createBricks() {
+	private fun createEntities() {
+		createBall(0f, 0f)
+		createPaddle()
 		(-80..80 step 20).forEach {
 			val x = it.toFloat() / 100
 			createBrick(x, 0.85f)
@@ -34,6 +37,11 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 			val x = it.toFloat() / 100
 			createBrick(x, 0.75f)
 		}
+	}
+
+	private fun createPaddle() {
+		val paddle = Paddle(0f, -0.8f)
+		addEntity(paddle)
 	}
 
 	private fun createBall(x: Float, y: Float) {

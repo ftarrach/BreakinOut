@@ -6,16 +6,14 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class RemoveDead : LogicSystem() {
 
-	override fun update(delta: Timespan) {
-		database.eachEntity {
-			it.removeIfDead()
-		}
-	}
+	override fun update(delta: Timespan) =
+			database.eachEntity {
+				it.removeIfDead()
+			}
 
-	private fun Entity.removeIfDead() {
-		ifDead {
-			database.remove(this)
-		}
-	}
+	private fun Entity.removeIfDead() =
+			ifDead {
+				database.remove(this)
+			}
 
 }

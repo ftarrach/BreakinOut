@@ -7,11 +7,10 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class BallBrickCollision : LogicSystem() {
 
-	override fun update(delta: Timespan) {
-		database.each(Ball::class.java) {
-			checkBrick(it)
-		}
-	}
+	override fun update(delta: Timespan) =
+			database.each(Ball::class.java) {
+				checkBrick(it)
+			}
 
 	private fun checkBrick(ball: Ball) {
 		var overlapped = false
