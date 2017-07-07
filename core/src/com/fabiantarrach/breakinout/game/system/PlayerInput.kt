@@ -23,5 +23,4 @@ class PlayerInput(private val camera: Camera) : LogicSystem() {
 		database.each(Paddle::class.java) {
 			it.moveTo(mouseGame)
 		}
-
 }

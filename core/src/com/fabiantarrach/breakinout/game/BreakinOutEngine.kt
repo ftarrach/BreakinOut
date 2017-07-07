@@ -17,7 +17,7 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 		createBricks()
 		addSystem(PlayerInput(camera))
 		addSystem(EntityUpdate())
-		addSystem(PaddleBallCollision())
+		addSystem(BallPaddleCollision())
 		addSystem(BallBrickCollision())
 		addSystem(PaddlePowerUpCollision())
 		addSystem(RemoveDead())

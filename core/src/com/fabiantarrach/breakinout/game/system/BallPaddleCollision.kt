@@ -5,7 +5,7 @@ import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class PaddleBallCollision : LogicSystem() {
+class BallPaddleCollision : LogicSystem() {
 
 	override fun update(delta: Timespan) {
 		database.each(Paddle::class.java) {
