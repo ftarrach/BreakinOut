@@ -13,14 +13,21 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 
 	override fun update(delta: Timespan) {
 		shape.move(velocity * delta)
+		shape.ifOutsideGame(
+				left = velocity::invertHorizontal,
+				right = velocity::invertHorizontal,
+				top = velocity::invertVertical,
+				bottom = this::die
+		)
 	}
 
 	override fun render(brush: Brush) {
 		shape.render(brush, Color.RED)
 	}
 
+	// TODO: think about, how the collision happend, left/right side? top? bottom?
 	fun bounceOff() {
-		velocity.invertHorizontal()
+		velocity.invertVertical()
 	}
 
 	fun ifMovingDown(movingDown: () -> Unit) {

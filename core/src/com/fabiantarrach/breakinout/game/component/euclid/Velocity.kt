@@ -15,6 +15,10 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 			}
 
 	fun invertHorizontal() {
+		x = -x
+	}
+
+	fun invertVertical() {
 		ifMovingDown({
 			val velocityVector = GdxVector(x, y)
 			val minAngle = Angle(45f)

@@ -1,11 +1,13 @@
 package com.fabiantarrach.breakinout.util.engine
 
 import com.badlogic.gdx.utils.ObjectMap
+import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.util.getOrPutIfAbscent
 import ktx.collections.GdxArray
 import ktx.collections.gdxArrayOf
+import ktx.collections.isEmpty
 
 class EntityDatabase {
 
@@ -36,6 +38,15 @@ class EntityDatabase {
 	fun remove(entity: Entity) {
 		entities.get(entity.javaClass)
 				.removeValue(entity, true)
+	}
+
+	fun ifNoBalls(action: () -> Unit) {
+		if (entities.get(Ball::class.java).isEmpty())
+			action()
+	}
+
+	fun clear() {
+		entities.clear()
 	}
 
 }

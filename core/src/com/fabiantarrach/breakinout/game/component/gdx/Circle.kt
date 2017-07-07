@@ -10,9 +10,8 @@ class Circle(x: Float, y: Float, radius: Float) : Shape {
 
 	private val circle = GdxCircle(x, y, radius)
 
-	override fun render(brush: Brush, color: Color) {
-		brush.drawCircle(circle, color)
-	}
+	override fun render(brush: Brush, color: Color) =
+			brush.drawCircle(circle, color)
 
 	override fun ifOverlaps(other: Shape, action: () -> Unit) {
 		if (other is Circle) {
@@ -31,12 +30,24 @@ class Circle(x: Float, y: Float, radius: Float) : Shape {
 			action()
 	}
 
-	fun giveCircle(block: (GdxCircle) -> Unit) {
-		block(circle)
-	}
+	fun giveCircle(block: (GdxCircle) -> Unit) =
+			block(circle)
 
-	override fun move(velocity: Velocity) {
-		velocity.move(circle)
-	}
+	override fun move(velocity: Velocity) =
+			velocity.move(circle)
 
+	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
+		val outerLeft = circle.x - circle.radius
+		val outerRight = circle.x + circle.radius
+		val outerTop = circle.y + circle.radius
+		val outerBottom = circle.y + circle.radius
+		if (outerLeft < -1)
+			left()
+		if (outerRight > 1)
+			right()
+		if (outerTop > 1)
+			top()
+		if (outerBottom < -1)
+			bottom()
+	}
 }
