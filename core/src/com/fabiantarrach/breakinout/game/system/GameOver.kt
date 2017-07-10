@@ -8,7 +8,7 @@ class GameOver : LogicSystem() {
 	override fun update(delta: Timespan) {
 		database.ifNoBalls {
 			database.clear()
-			// TODO: switch to a state "press key to start" or sth like that
+			// TODO: show mainmenu
 		}
 	}
 

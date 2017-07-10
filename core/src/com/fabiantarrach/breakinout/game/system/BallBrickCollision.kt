@@ -8,26 +8,36 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class BallBrickCollision : LogicSystem() {
 
+	private var overlapped = false
+
 	override fun update(delta: Timespan) =
 			database.each(Ball::class.java) {
 				checkBrick(it)
 			}
 
 	private fun checkBrick(ball: Ball) {
-		var overlapped = false
+		overlapped = false
 		database.each(Brick::class.java) {
-			checkCollision(ball, it) { overlapped = true } // TODO: (hidden) against indentation rule
+			checkCollision(ball, it)
 		}
 		if (overlapped)
 			ball.bounceOff(NoPositionDifference)
 	}
 
-	private fun checkCollision(ball: Ball, brick: Brick, collisionOccurred: () -> Unit) {
-		ball.ifOverlaps(brick) {
-			brick.hit()
-			collisionOccurred()
-			val powerUp = brick.createPowerUp()
-			database.add(powerUp)
-		}
+	private fun checkCollision(ball: Ball, brick: Brick) =
+			ball.ifOverlaps(brick) {
+				overlapped = true
+				hitBrick(brick)
+			}
+
+	private fun hitBrick(brick: Brick) =
+			brick.hit {
+				createPowerUp(brick)
+			}
+
+	private fun createPowerUp(brick: Brick) {
+		if (Math.random() < 0.2f)
+			database.add(
+					brick.createPowerUp())
 	}
 }

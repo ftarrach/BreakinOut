@@ -3,32 +3,37 @@ package com.fabiantarrach.breakinout.game.entity
 import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Shape
+import com.fabiantarrach.breakinout.util.engine.Timespan
 
-abstract class SolidEntity(private var livepoints: Int = 1) : Entity {
+abstract class SolidEntity(protected var lifepoints: Int = 1) : Entity {
 
 	protected abstract val shape: Shape
 	protected abstract var velocity: Velocity
+
+	override fun update(delta: Timespan) {}
 
 	fun ifOverlaps(other: SolidEntity, action: (PositionDifference) -> Unit) {
 		shape.ifOverlaps(other.shape, action)
 	}
 
 	override fun ifDead(action: () -> Unit) {
-		if (livepoints == 0)
+		if (lifepoints == 0)
 			action()
 	}
 
 	fun ifAlive(action: () -> Unit) {
-		if (livepoints != 0)
+		if (lifepoints != 0)
 			action()
 	}
 
-	fun hit() {
-		livepoints--
+	fun hit(died: () -> Unit = {}) {
+		lifepoints--
+		if (lifepoints == 0)
+			died()
 	}
 
 	fun die() {
-		livepoints = 0
+		lifepoints = 0
 	}
 
 }

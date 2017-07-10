@@ -20,15 +20,12 @@ abstract class Engine : Disposable {
 	}
 
 	fun update(delta: Timespan) {
-		for (system in systems) {
+		for (system in systems)
 			system.update(delta)
-		}
 	}
 
 	override fun dispose() {
-		for (system in systems) {
+		for (system in systems)
 			system.dispose()
-		}
 	}
-
 }

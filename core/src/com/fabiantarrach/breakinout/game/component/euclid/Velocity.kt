@@ -54,7 +54,7 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 		val min = Angle(-45f)
 		val max = Angle(45f)
 		// TODO: think about it how i can do it: Depending on hit position use other angle
-		}
+	}
 
 	operator fun plus(other: Velocity) =
 			Velocity(x + other.x, y + other.y)

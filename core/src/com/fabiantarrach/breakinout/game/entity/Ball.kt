@@ -38,5 +38,4 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 	fun scrub(other: Velocity) {
 		velocity += other
 	}
-
 }

@@ -12,10 +12,17 @@ class GameScreen : FitScreen() {
 	}
 
 	override fun render(delta: Float) {
-		engine.update(Timespan(delta))
+		engine.update(
+				Timespan(delta))
 	}
 
 	override fun dispose() {
 		engine.dispose()
 	}
+
+	override fun hide() {}
+
+	override fun pause() {} // TODO: pause game if focus lost?
+
+	override fun resume() {} // TODO: ... and resume it
 }

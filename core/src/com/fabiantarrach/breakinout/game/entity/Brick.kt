@@ -7,7 +7,7 @@ import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.game.util.PowerUpFactory
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class Brick(x: Float, y: Float) : SolidEntity() {
+class Brick(x: Float, y: Float, lifepoints: Int) : SolidEntity(lifepoints) {
 
 	override val shape = Rectangle(x, y, 0.2f, 0.1f)
 	override var velocity = Velocity(0f, 0f)
@@ -20,10 +20,9 @@ class Brick(x: Float, y: Float) : SolidEntity() {
 		}
 	}
 
-	fun createPowerUp(): Entity {
-		return shape.drop { x, y ->
-			PowerUpFactory(x, y)
-					.createRandom()
-		}
-	}
+	fun createPowerUp(): Entity =
+			shape.drop { x, y ->
+				PowerUpFactory(x, y)
+						.createRandom()
+			}
 }

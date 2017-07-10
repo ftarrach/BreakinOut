@@ -1,8 +1,8 @@
 package com.fabiantarrach.breakinout.util.screen
 
-import com.badlogic.gdx.ScreenAdapter
+import com.badlogic.gdx.Screen
 
-open class FitScreen : ScreenAdapter() {
+abstract class FitScreen : Screen {
 
 	protected val camera = Camera()
 
