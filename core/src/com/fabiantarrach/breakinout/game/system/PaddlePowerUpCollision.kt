@@ -20,7 +20,7 @@ class PaddlePowerUpCollision : LogicSystem() {
 	private fun checkCollision(paddle: Paddle, powerup: PowerUp) {
 		paddle.ifOverlaps(powerup) {
 			powerup.activate(database)
-			powerup.die()
+			powerup.hit()
 		}
 	}
 

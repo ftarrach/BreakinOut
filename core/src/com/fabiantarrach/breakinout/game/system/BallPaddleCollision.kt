@@ -24,7 +24,8 @@ class BallPaddleCollision : LogicSystem() {
 
 	private fun checkOverlap(paddle: Paddle, ball: Ball) {
 		ball.ifOverlaps(paddle) {
-			ball.bounceOff()
+			ball.bounceOff(it)
+			paddle.scrub(ball)
 		}
 	}
 

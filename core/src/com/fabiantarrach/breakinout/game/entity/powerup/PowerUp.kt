@@ -9,10 +9,13 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 abstract class PowerUp(x: Float, y: Float) : SolidEntity() {
 
 	override val shape = Rectangle(x, y, 0.05f, 0.025f)
-	private val velocity = Velocity(0f, -0.01f)
+	override var velocity = Velocity(0f, -0.01f)
 
 	override fun update(delta: Timespan) {
 		shape.move(velocity)
+		shape.ifOutsideGame(
+				bottom = this::die
+		)
 	}
 
 	abstract fun activate(database: EntityDatabase)
