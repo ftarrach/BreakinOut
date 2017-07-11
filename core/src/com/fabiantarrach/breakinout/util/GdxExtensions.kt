@@ -1,5 +1,7 @@
 package com.fabiantarrach.breakinout.util
 
+
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.math.Circle
 import com.badlogic.gdx.math.Rectangle
@@ -21,3 +23,4 @@ typealias GdxVector3 = Vector3
 typealias GdxCircle = Circle
 typealias GdxRectangle  = Rectangle
 typealias GdxArray<T> = Array<T>
+typealias GdxColor = Color

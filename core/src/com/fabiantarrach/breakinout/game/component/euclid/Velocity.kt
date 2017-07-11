@@ -3,7 +3,9 @@ package com.fabiantarrach.breakinout.game.component.euclid
 import com.fabiantarrach.breakinout.game.util.Angle
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.engine.Timespan
+import java.util.*
 
 class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 
@@ -25,7 +27,7 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 //		val velocityVector = GdxVector(x, y)
 //		val minAngle = Angle(45f)
 //		val maxAngle = Angle(135f)
-//		// TODO: currently it is random. It should use the relative position to the paddle/brick and it's speed
+//		// TODO: currently it is randomize. It should use the relative position to the paddle/brick and it's speed
 //		RandomVector(minAngle, maxAngle)
 //				.randomize(velocityVector)
 //		x = velocityVector.x
@@ -56,9 +58,21 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 		// TODO: think about it how i can do it: Depending on hit position use other angle
 	}
 
-	operator fun plus(other: Velocity) =
-			Velocity(x + other.x, y + other.y)
+	fun add(other: Velocity) {
+		x += other.x
+		y += other.y
+	}
 
+	@Deprecated("using primitive", ReplaceWith("wrapper type"))
 	operator fun times(other: Float) =
 			Velocity(x * other, y * other)
+
+	fun randomize() {
+		val vector = GdxVector(x, y)
+		val angle = Random()
+				.nextFloat() * 360f
+		vector.rotate(angle)
+		this.x = vector.x
+		this.y = vector.y
+	}
 }

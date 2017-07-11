@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.game.component.gdx
 
-import com.badlogic.gdx.graphics.Color
+
 import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
@@ -8,6 +8,7 @@ import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.GdxCircle
+import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxRectangle
 
 class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
@@ -16,7 +17,7 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 
 	private fun centeredX() = rectangle.x + rectangle.width / 2
 
-	override fun render(brush: Brush, color: Color) =
+	override fun render(brush: Brush, color: GdxColor) =
 			brush.drawRectangle(rectangle, color)
 
 	override fun move(velocity: Velocity) =

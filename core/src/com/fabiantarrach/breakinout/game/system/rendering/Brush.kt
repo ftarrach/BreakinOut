@@ -1,18 +1,18 @@
 package com.fabiantarrach.breakinout.game.system.rendering
 
-import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.util.GdxCircle
+import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 
 class Brush(private val renderer: GdxShapeRenderer) {
 
-	fun drawRectangle(rectangle: GdxRectangle, color: Color) {
+	fun drawRectangle(rectangle: GdxRectangle, color: GdxColor) {
 		renderer.color = color
 		rectangle.draw()
 	}
 
-	fun drawCircle(circle: GdxCircle, color: Color) {
+	fun drawCircle(circle: GdxCircle, color: GdxColor) {
 		renderer.color = color
 		circle.draw()
 	}

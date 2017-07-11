@@ -1,10 +1,11 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.badlogic.gdx.graphics.Color
+
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
+import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class Paddle(x: Float, y: Float) : SolidEntity() {
@@ -14,7 +15,7 @@ class Paddle(x: Float, y: Float) : SolidEntity() {
 
 	override fun update(delta: Timespan) = shape.move(velocity * delta)
 
-	override fun render(brush: Brush) = shape.render(brush, Color.WHITE)
+	override fun render(brush: Brush) = shape.render(brush, GdxColor.WHITE)
 
 	fun shrink() = shape.shorten()
 

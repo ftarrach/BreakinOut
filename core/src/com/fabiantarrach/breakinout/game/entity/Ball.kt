@@ -1,10 +1,10 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Circle
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
+import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class Ball(x: Float, y: Float) : SolidEntity() {
@@ -24,7 +24,7 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 	}
 
 	override fun render(brush: Brush) =
-			shape.render(brush, Color.RED)
+			shape.render(brush, GdxColor.RED)
 
 	fun bounceOff(difference: PositionDifference) {
 		velocity.invertVertical()
@@ -36,6 +36,10 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 			velocity.ifMovingDown(movingDown)
 
 	fun scrub(other: Velocity) {
-		velocity += other
+		velocity.add(other)
+	}
+
+	fun moveToRandom() {
+		velocity.randomize()
 	}
 }

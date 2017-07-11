@@ -16,6 +16,7 @@ class PowerUpFactory(private val x: Float,
 			1 -> return SmallerPaddle(x, y)
 			2 -> return ExtraBall(x, y)
 		}
+// return ExtraBall(x, y)
 		throw RuntimeException("error during power up generation")
 	}
 
