@@ -15,7 +15,7 @@ class Level1(private val engine: Engine) {
 		(-80..80 step 20)
 				.map { Brick(it / 100f, 0.85f, 3) }
 				.forEach { engine.addEntity(it) }
-		(-70..70 step 20)
+		(-80..80 step 20)
 				.map { Brick(it / 100f, 0.75f, 2) }
 				.forEach { engine.addEntity(it) }
 		(-80..80 step 20)

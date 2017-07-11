@@ -10,22 +10,18 @@ import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.GdxVector
 
 class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 
 	private val rectangle = GdxRectangle(x - width / 2, y - height / 2, width, height)
 
-	private fun centeredX() = rectangle.x + rectangle.width / 2
-
-	override fun render(brush: Brush, color: GdxColor) =
-			brush.drawRectangle(rectangle, color)
-
-	override fun move(velocity: Velocity) =
-			velocity.move(rectangle)
+	override fun render(brush: Brush, color: GdxColor) = brush.drawRectangle(rectangle, color)
+	override fun move(velocity: Velocity) = velocity.move(rectangle)
 
 	fun drop(block: (Float, Float) -> Entity): Entity {
-		val centeredX = centeredX()
-		return block(centeredX, rectangle.y + rectangle.height / 2)
+		val center = center()
+		return block(center.x, center.y)
 	}
 
 	fun shorten() {
@@ -58,33 +54,37 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 	private fun ifOverlapsGdxCircle(other: GdxCircle, action: (PositionDifference) -> Unit) {
 		if (Intersector.overlaps(other, rectangle)) {
 			val deltaX = relativeX(other.x)
-			val deltaY = rectangle.y - other.y
-			val difference = PositionDifference(deltaX, deltaY)
+			val sideCollision =
+					(rectangle.y..rectangle.y + rectangle.height)
+							.contains(other.y)
+			val difference = PositionDifference(deltaX, sideCollision)
 			action(difference)
 		}
 	}
 
-	private fun relativeX(x: Float): Float {
-		return -(centeredX() - x) / (rectangle.width / 2)
-	}
+	private fun relativeX(x: Float): Float = -(center().x - x) / (rectangle.width / 2)
 
 	private fun ifOverlapsRectangle(other: Rectangle, action: (PositionDifference) -> Unit) {
 		val otherRectangle = other.rectangle
 		if (Intersector.overlaps(rectangle, otherRectangle)) {
 			val deltaX = relativeX(otherRectangle.x)
-			val deltaY = rectangle.y - otherRectangle.y
-			val difference = PositionDifference(deltaX, deltaY)
+			val sideCollision =
+					(rectangle.y..rectangle.y + rectangle.height)
+							.contains(
+									other.center().y)
+			val difference = PositionDifference(deltaX, sideCollision)
 			action(difference)
 		}
 	}
 
 	fun calculateVelocityTo(mouse: Position): Velocity {
-		val x = centeredX()
-		val y = rectangle.y + rectangle.height / 2
-		val position = Position(x, y)
-		val velocity = position.moveVelocity(mouse)
-		return velocity
+		val center = center()
+		return Position(center.x, center.y)
+				.moveVelocity(mouse)
 	}
+
+	private fun center() = rectangle.getCenter(
+			GdxVector())
 
 	override fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		if (rectangle.x < -1) left()

@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.game.component.euclid
 
-import com.fabiantarrach.breakinout.game.util.Angle
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxVector
@@ -52,15 +51,14 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 		circle.y += y
 	}
 
-	fun spin(difference: PositionDifference) {
-		val min = Angle(-45f)
-		val max = Angle(45f)
-		// TODO: think about it how i can do it: Depending on hit position use other angle
-	}
-
-	fun add(other: Velocity) {
-		x += other.x
-		y += other.y
+	fun push(other: Velocity) {
+		val vector = GdxVector(x, y)
+		val otherVector = GdxVector(other.x, other.y)
+		val len = vector.len()
+		vector.add(otherVector)
+		vector.setLength(len)
+		x = vector.x
+		y = vector.y
 	}
 
 	@Deprecated("using primitive", ReplaceWith("wrapper type"))

@@ -1,5 +1,15 @@
 package com.fabiantarrach.breakinout.game.component.euclid
 
-class PositionDifference(deltaX: Float, deltaY: Float): Vectorial(deltaX, deltaY)
+class PositionDifference(private val relativeX: Float, private val sideCollision: Boolean) {
 
-val NoPositionDifference = PositionDifference(0f, 0f)
+	fun ifSideCollision(sideCollision: () -> Unit, normalCollision: () -> Unit = {}) {
+		if (this.sideCollision) {
+			sideCollision()
+			return
+		}
+		normalCollision()
+	}
+
+}
+
+val NoPositionDifference = PositionDifference(0f, false)

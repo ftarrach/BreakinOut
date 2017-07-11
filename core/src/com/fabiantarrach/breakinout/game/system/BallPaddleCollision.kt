@@ -22,11 +22,10 @@ class BallPaddleCollision : LogicSystem() {
 				checkOverlap(paddle, ball)
 			}
 
-	private fun checkOverlap(paddle: Paddle, ball: Ball) {
-		ball.ifOverlaps(paddle) {
-			ball.bounceOff(it)
-			paddle.scrub(ball)
-		}
-	}
+	private fun checkOverlap(paddle: Paddle, ball: Ball) =
+			ball.ifOverlaps(paddle) {
+				ball.bounceOff(it)
+				paddle.scrub(ball)
+			}
 
 }

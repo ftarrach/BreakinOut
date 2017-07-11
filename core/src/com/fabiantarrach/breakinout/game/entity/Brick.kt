@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.entity
 
+import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
@@ -17,10 +18,15 @@ class Brick(x: Float, y: Float, lifepoints: Int) : SolidEntity(lifepoints) {
 
 	override fun render(brush: Brush) =
 			ifAlive {
-				val color = (0..lifepoints)
-						.fold(GdxColor.GRAY) { color, _ -> color.darker() }
+				val color = createColor()
 				shape.render(brush, color)
 			}
+
+	private fun createColor(): Color =
+			(0..lifepoints)
+					.fold(GdxColor.GRAY) { color, _ ->
+						color.darker()
+					}
 
 	fun createPowerUp(): Entity =
 			shape.drop { x, y ->

@@ -29,7 +29,7 @@ class Circle(x: Float, y: Float, radius: Float) : Shape {
 
 	private fun ifOverlapsCircle(other: Circle, action: (PositionDifference) -> Unit) {
 		if (Intersector.overlaps(circle, other.circle))
-			action(NoPositionDifference) // TODO: calculate difference
+			action(NoPositionDifference)
 	}
 
 	fun giveCircle(block: (GdxCircle) -> Unit) =

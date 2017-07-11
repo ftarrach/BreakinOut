@@ -10,7 +10,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 class Ball(x: Float, y: Float) : SolidEntity() {
 
 	override val shape = Circle(x, y, radius = 0.025f)
-	override var velocity = Velocity(0f, -0.5f)
+	override var velocity = Velocity(0f, -1f)
 
 	override fun update(delta: Timespan) {
 		shape.move(velocity * delta)
@@ -23,23 +23,18 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 		shape.keepInsideGame()
 	}
 
-	override fun render(brush: Brush) =
-			shape.render(brush, GdxColor.RED)
+	override fun render(brush: Brush) = shape.render(brush, GdxColor.RED)
 
 	fun bounceOff(difference: PositionDifference) {
-		velocity.invertVertical()
-		velocity.spin(difference)
-		// TODO: also use velocity of paddle
+		difference.ifSideCollision(
+				sideCollision = velocity::invertHorizontal,
+				normalCollision = velocity::invertVertical)
+		// TODO: depending on hit position
 	}
 
-	fun ifMovingDown(movingDown: () -> Unit) =
-			velocity.ifMovingDown(movingDown)
+	fun ifMovingDown(movingDown: () -> Unit) = velocity.ifMovingDown(movingDown)
 
-	fun scrub(other: Velocity) {
-		velocity.add(other)
-	}
+	fun scrub(other: Velocity) = velocity.push(other)
 
-	fun moveToRandom() {
-		velocity.randomize()
-	}
+	fun moveToRandom() = velocity.randomize()
 }
