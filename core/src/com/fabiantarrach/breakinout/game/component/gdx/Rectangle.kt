@@ -80,11 +80,10 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 	fun calculateVelocityTo(mouse: Position): Velocity {
 		val center = center()
 		return Position(center.x, center.y)
-				.moveVelocity(mouse)
+				.createMoveVelocity(mouse)
 	}
 
-	private fun center() = rectangle.getCenter(
-			GdxVector())
+	private fun center() = rectangle.getCenter()
 
 	override fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		if (rectangle.x < -1) left()
@@ -92,5 +91,7 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 		if (rectangle.y + rectangle.height > 1) top()
 		if (rectangle.y < -1) bottom()
 	}
+
+	private fun GdxRectangle.getCenter() = getCenter(GdxVector())
 
 }

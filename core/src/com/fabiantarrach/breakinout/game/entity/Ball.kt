@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.entity
 
+import com.fabiantarrach.breakinout.game.component.euclid.Friction
 import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Circle
@@ -34,7 +35,7 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 
 	fun ifMovingDown(movingDown: () -> Unit) = velocity.ifMovingDown(movingDown)
 
-	fun scrub(other: Velocity) = velocity.push(other)
+	fun scrub(other: Friction) = velocity.push(other)
 
 	fun moveToRandom() = velocity.randomize()
 }

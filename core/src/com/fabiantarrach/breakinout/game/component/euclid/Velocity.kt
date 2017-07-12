@@ -26,7 +26,7 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 //		val velocityVector = GdxVector(x, y)
 //		val minAngle = Angle(45f)
 //		val maxAngle = Angle(135f)
-//		// TODO: currently it is randomize. It should use the relative position to the paddle/brick and it's speed
+//		// currently it is randomize. It should use the relative position to the paddle/brick and it's speed
 //		RandomVector(minAngle, maxAngle)
 //				.randomize(velocityVector)
 //		x = velocityVector.x
@@ -51,19 +51,9 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 		circle.y += y
 	}
 
-	fun push(other: Velocity) {
-		val vector = GdxVector(x, y)
-		val otherVector = GdxVector(other.x, other.y)
-		val len = vector.len()
-		vector.add(otherVector)
-		vector.setLength(len)
-		x = vector.x
-		y = vector.y
+	fun push(other: Friction) {
+		applyFriction(other)
 	}
-
-	@Deprecated("using primitive", ReplaceWith("wrapper type"))
-	operator fun times(other: Float) =
-			Velocity(x * other, y * other)
 
 	fun randomize() {
 		val vector = GdxVector(x, y)
@@ -73,4 +63,6 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 		this.x = vector.x
 		this.y = vector.y
 	}
+
+	fun createFriction() = Friction(x * 0.5f, y * 0.5f)
 }
