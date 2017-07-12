@@ -1,11 +1,13 @@
 package com.fabiantarrach.breakinout.util.engine
 
-class Timespan(private val millis: Float) {
+import com.fabiantarrach.breakinout.game.component.numeric.Numerical
+
+class Timespan(millis: Float): Numerical(millis) {
 
 	@Deprecated("using primitives", ReplaceWith("think about it..."))
 	fun <T> normalize(x: Float, y: Float, block: (Float, Float) -> T): T {
-		val newX = x * millis
-		val newY = y * millis
+		val newX = x * value
+		val newY = y * value
 		return block(newX, newY)
 	}
 

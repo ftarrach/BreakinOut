@@ -1,24 +1,23 @@
 package com.fabiantarrach.breakinout.game.component.euclid
 
-import com.fabiantarrach.breakinout.util.GdxCircle
-import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.game.component.numeric.ScaleFactor
 import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.engine.Timespan
-import java.util.*
 
 class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 
-	operator fun times(delta: Timespan): Velocity =
-			delta.normalize(x, y) { x, y ->
-				Velocity(x, y)
-			}
+	private constructor(vector: GdxVector) : this(vector.x, vector.y)
 
-	fun invertHorizontal() {
-		x = -x
+	operator fun times(delta: Timespan): Velocity =
+			Velocity(
+				scale(delta))
+
+	fun mirrorHorizontal() {
+		super.invertX()
 	}
 
-	fun invertVertical() {
-		y = -y
+	fun mirrorVertical() {
+		super.invertY()
 	}
 
 	// TODO: reuse this
@@ -33,36 +32,17 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 //		y = velocityVector.y
 //	}
 
-	fun ifMovingDown(movingDown: () -> Unit, movingUp: () -> Unit = {}) {
-		if (y < 0) {
-			movingDown()
-			return
-		}
-		movingUp()
-	}
-
-	fun move(rectangle: GdxRectangle) {
-		rectangle.x += x
-		rectangle.y += y
-	}
-
-	fun move(circle: GdxCircle) {
-		circle.x += x
-		circle.y += y
-	}
+	fun ifMovingDown(movingDown: () -> Unit, movingUp: () -> Unit = {}) =
+			ifDownwards(movingDown, movingUp)
 
 	fun push(other: Friction) {
-		applyFriction(other)
+		addKeepLength(other)
 	}
 
-	fun randomize() {
-		val vector = GdxVector(x, y)
-		val angle = Random()
-				.nextFloat() * 360f
-		vector.rotate(angle)
-		this.x = vector.x
-		this.y = vector.y
+	fun createFriction(): Friction {
+		// TODO: this uses GdxVector
+		val friction = scale(
+				ScaleFactor(0.5f))
+		return Friction(friction.x, friction.y)
 	}
-
-	fun createFriction() = Friction(x * 0.5f, y * 0.5f)
 }

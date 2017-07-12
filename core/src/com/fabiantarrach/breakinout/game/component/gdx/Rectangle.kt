@@ -17,7 +17,7 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 	private val rectangle = GdxRectangle(x - width / 2, y - height / 2, width, height)
 
 	override fun render(brush: Brush, color: GdxColor) = brush.drawRectangle(rectangle, color)
-	override fun move(velocity: Velocity) = velocity.move(rectangle)
+	override fun move(velocity: Velocity) = velocity.addOn(rectangle)
 
 	fun drop(block: (Float, Float) -> Entity): Entity {
 		val center = center()

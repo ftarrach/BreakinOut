@@ -16,9 +16,9 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 	override fun update(delta: Timespan) {
 		shape.move(velocity * delta)
 		shape.ifOutsideGame(
-				left = velocity::invertHorizontal,
-				right = velocity::invertHorizontal,
-				top = velocity::invertVertical,
+				left = velocity::mirrorHorizontal,
+				right = velocity::mirrorHorizontal,
+				top = velocity::mirrorVertical,
 				bottom = this::die
 		)
 		shape.keepInsideGame()
@@ -28,8 +28,8 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 
 	fun bounceOff(difference: PositionDifference) {
 		difference.ifSideCollision(
-				sideCollision = velocity::invertHorizontal,
-				normalCollision = velocity::invertVertical)
+				sideCollision = velocity::mirrorHorizontal,
+				normalCollision = velocity::mirrorVertical)
 		// TODO: depending on hit position
 	}
 

@@ -36,7 +36,7 @@ class Circle(x: Float, y: Float, radius: Float) : Shape {
 			block(circle)
 
 	override fun move(velocity: Velocity) =
-			velocity.move(circle)
+			velocity.addOn(circle)
 
 	override fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		if (circle.x - circle.radius < -1) left()
