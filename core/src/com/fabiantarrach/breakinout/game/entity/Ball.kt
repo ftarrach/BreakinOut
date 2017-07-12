@@ -37,5 +37,5 @@ class Ball(x: Float, y: Float) : SolidEntity() {
 
 	fun scrub(other: Friction) = velocity.push(other)
 
-	fun moveToRandom() = velocity.randomize()
+	fun moveRandom() = velocity.randomize()
 }

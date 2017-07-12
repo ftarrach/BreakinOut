@@ -1,9 +1,9 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.badlogic.gdx.utils.Disposable
 import com.fabiantarrach.breakinout.game.entity.Entity
+import com.fabiantarrach.breakinout.util.GdxDisposable
 
-abstract class Engine : Disposable {
+abstract class Engine : GdxDisposable {
 
 	private val systems = SystemDatabase()
 	private val entities = EntityDatabase()

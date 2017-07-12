@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.system
 
+import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
@@ -17,15 +18,23 @@ class BallPaddleCollision : LogicSystem() {
 				checkCollision(paddle, it)
 			}
 
-	private fun checkCollision(paddle: Paddle, ball: Ball) =
-			ball.ifMovingDown {
-				checkOverlap(paddle, ball)
-			}
+	private fun checkCollision(paddle: Paddle, ball: Ball) {
+		ball.ifMovingDown {
+			checkOverlap(paddle, ball)
+		}
+	}
 
 	private fun checkOverlap(paddle: Paddle, ball: Ball) =
 			ball.ifOverlaps(paddle) {
-				ball.bounceOff(it)
-				paddle.scrub(ball)
+				ball.ifUnder(paddle,
+						then = {
+							ball.bounceOff(PositionDifference(0f, true))
+						},
+						ifNot = {
+							ball.bounceOff(it)
+							paddle.scrub(ball)
+						})
+
 			}
 
 }

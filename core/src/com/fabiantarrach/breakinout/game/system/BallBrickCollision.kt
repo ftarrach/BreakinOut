@@ -8,6 +8,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class BallBrickCollision : LogicSystem() {
 
+	// TODO: wrap booleans
 	private var overlapped = false
 	private var sideCollision = false
 

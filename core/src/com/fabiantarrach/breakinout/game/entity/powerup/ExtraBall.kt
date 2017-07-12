@@ -9,7 +9,7 @@ class ExtraBall(x: Float, y: Float) : PowerUp(x, y) {
 
 	override fun activate(database: EntityDatabase) {
 		val newBall = Ball(0f, 0f)
-		newBall.moveToRandom()
+		newBall.moveRandom()
 		database.add(newBall)
 	}
 

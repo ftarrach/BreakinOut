@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.component.euclid
 
+import com.fabiantarrach.breakinout.game.component.gdx.Vectorial
 import com.fabiantarrach.breakinout.game.component.numeric.ScaleFactor
 import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.engine.Timespan
@@ -12,13 +13,8 @@ class Velocity(x: Float, y: Float) : Vectorial(x, y) {
 			Velocity(
 				scale(delta))
 
-	fun mirrorHorizontal() {
-		super.invertX()
-	}
-
-	fun mirrorVertical() {
-		super.invertY()
-	}
+	fun mirrorHorizontal() = invertX()
+	fun mirrorVertical() = invertY()
 
 	// TODO: reuse this
 //	private fun movingDown() {

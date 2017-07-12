@@ -5,6 +5,7 @@ import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.util.engine.Engine
 
+// TODO: make a second level and a "LevelManager"
 class Level1(private val engine: Engine) {
 
 	fun build() {

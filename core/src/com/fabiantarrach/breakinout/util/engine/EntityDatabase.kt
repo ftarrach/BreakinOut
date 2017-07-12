@@ -1,9 +1,9 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.badlogic.gdx.utils.ObjectMap
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
+import com.fabiantarrach.breakinout.util.GdxObjectMap
 import com.fabiantarrach.breakinout.util.getOrPutIfAbscent
 import ktx.collections.GdxArray
 import ktx.collections.gdxArrayOf
@@ -11,7 +11,7 @@ import ktx.collections.isEmpty
 
 class EntityDatabase {
 
-	private val entities = ObjectMap<Class<out Entity>, GdxArray<Entity>>()
+	private val entities = GdxObjectMap<Class<out Entity>, GdxArray<Entity>>()
 
 	fun add(entity: Entity) {
 		entities.getOrPutIfAbscent(entity.javaClass, gdxArrayOf())

@@ -1,16 +1,11 @@
 package com.fabiantarrach.breakinout.game.component.gdx
 
-
-import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.Position
 import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.entity.Entity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
-import com.fabiantarrach.breakinout.util.GdxCircle
-import com.fabiantarrach.breakinout.util.GdxColor
-import com.fabiantarrach.breakinout.util.GdxRectangle
-import com.fabiantarrach.breakinout.util.GdxVector
+import com.fabiantarrach.breakinout.util.*
 
 class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 
@@ -18,6 +13,27 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 
 	override fun render(brush: Brush, color: GdxColor) = brush.drawRectangle(rectangle, color)
 	override fun move(velocity: Velocity) = velocity.addOn(rectangle)
+
+	private fun center() = rectangle.getCenter()
+
+	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Circle)
+			ifUnderCircle(other, then, ifNot)
+	}
+
+	private fun ifUnderCircle(other: Circle, then: () -> Unit, ifNot: () -> Unit) {
+		other.giveCircle {
+			ifUnderGdxCircle(it, then, ifNot)
+		}
+	}
+
+	private fun ifUnderGdxCircle(circle: GdxCircle, then: () -> Unit, ifNot: () -> Unit) {
+		if (circle.y < rectangle.y + rectangle.height){
+			then()
+			return
+		}
+		ifNot()
+	}
 
 	fun drop(block: (Float, Float) -> Entity): Entity {
 		val center = center()
@@ -52,7 +68,7 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 			}
 
 	private fun ifOverlapsGdxCircle(other: GdxCircle, action: (PositionDifference) -> Unit) {
-		if (Intersector.overlaps(other, rectangle)) {
+		if (GdxIntersector.overlaps(other, rectangle)) {
 			val deltaX = relativeX(other.x)
 			val sideCollision =
 					(rectangle.y..rectangle.y + rectangle.height)
@@ -66,7 +82,7 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 
 	private fun ifOverlapsRectangle(other: Rectangle, action: (PositionDifference) -> Unit) {
 		val otherRectangle = other.rectangle
-		if (Intersector.overlaps(rectangle, otherRectangle)) {
+		if (GdxIntersector.overlaps(rectangle, otherRectangle)) {
 			val deltaX = relativeX(otherRectangle.x)
 			val sideCollision =
 					(rectangle.y..rectangle.y + rectangle.height)
@@ -83,8 +99,6 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 				.createMoveVelocity(mouse)
 	}
 
-	private fun center() = rectangle.getCenter()
-
 	override fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		if (rectangle.x < -1) left()
 		if (rectangle.x + rectangle.width > 1) right()
@@ -92,6 +106,8 @@ class Rectangle(x: Float, y: Float, width: Float, height: Float) : Shape {
 		if (rectangle.y < -1) bottom()
 	}
 
-	private fun GdxRectangle.getCenter() = getCenter(GdxVector())
+	private fun GdxRectangle.getCenter() =
+			getCenter(
+					GdxVector())
 
 }

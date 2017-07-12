@@ -1,11 +1,13 @@
-package com.fabiantarrach.breakinout.game
+package com.fabiantarrach.breakinout.screens
 
+import com.fabiantarrach.breakinout.game.BreakinOutEngine
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.screen.FitScreen
+import com.fabiantarrach.breakinout.util.screen.ScreenState
 
-class GameScreen : FitScreen() {
+class GameScreen(screenState: ScreenState) : FitScreen(1f) {
 
-	private val engine = BreakinOutEngine(camera)
+	private val engine = BreakinOutEngine(screenState, camera)
 
 	override fun show() {
 		engine.buildGame()
@@ -22,7 +24,7 @@ class GameScreen : FitScreen() {
 
 	override fun hide() {}
 
-	override fun pause() {} // TODO: pause game if focus lost?
+	override fun pause() {} // TODO: pause screenState if focus lost?
 
 	override fun resume() {} // TODO: ... and resume it
 }

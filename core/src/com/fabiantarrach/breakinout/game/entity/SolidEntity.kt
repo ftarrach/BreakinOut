@@ -15,6 +15,9 @@ abstract class SolidEntity(protected var lifepoints: Int = 1) : Entity {
 	fun ifOverlaps(other: SolidEntity, action: (PositionDifference) -> Unit) =
 			shape.ifOverlaps(other.shape, action)
 
+	fun ifUnder(paddle: SolidEntity, then: () -> Unit, ifNot: () -> Unit) =
+		shape.ifUnder(paddle.shape, then, ifNot)
+
 	override fun ifDead(action: () -> Unit) {
 		if (lifepoints == 0)
 			action()

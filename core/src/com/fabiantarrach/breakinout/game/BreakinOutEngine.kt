@@ -5,8 +5,10 @@ import com.fabiantarrach.breakinout.game.system.*
 import com.fabiantarrach.breakinout.game.system.rendering.RenderingSystem
 import com.fabiantarrach.breakinout.util.engine.Engine
 import com.fabiantarrach.breakinout.util.screen.Camera
+import com.fabiantarrach.breakinout.util.screen.ScreenState
 
-class BreakinOutEngine(private val camera: Camera) : Engine() {
+class BreakinOutEngine(private val screenState: ScreenState,
+                       private val camera: Camera) : Engine() {
 
 	override fun buildGame() {
 		Level1(this)
@@ -24,7 +26,7 @@ class BreakinOutEngine(private val camera: Camera) : Engine() {
 		addSystem(
 				RemoveDead())
 		addSystem(
-				GameOver())
+				GameOver(screenState))
 		addSystem(
 				RenderingSystem(camera))
 	}

@@ -1,8 +1,8 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.badlogic.gdx.utils.Disposable
+import com.fabiantarrach.breakinout.util.GdxDisposable
 
-abstract class LogicSystem : Disposable {
+abstract class LogicSystem : GdxDisposable {
 
 	protected lateinit var database: EntityDatabase
 

@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game.component.euclid
+package com.fabiantarrach.breakinout.game.component.gdx
 
 import com.fabiantarrach.breakinout.game.component.numeric.Numerical
 import com.fabiantarrach.breakinout.util.GdxCircle
@@ -17,9 +17,7 @@ abstract class Vectorial(x: Float, y: Float) {
 	}
 
 	protected fun invertX() { vector.x = -vector.x }
-
 	protected fun invertY() { vector.y = -vector.y }
-
 	protected fun scale(scalar: Numerical) = scalar * vector
 
 	protected fun ifDownwards(downwards: () -> Unit, upwards: () -> Unit) {
@@ -52,7 +50,4 @@ abstract class Vectorial(x: Float, y: Float) {
 				.nextFloat() * 360f
 		vector.rotate(newAngle)
 	}
-
-
-
 }

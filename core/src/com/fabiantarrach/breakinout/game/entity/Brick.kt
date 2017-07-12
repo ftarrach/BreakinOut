@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.component.gdx.Rectangle
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
@@ -22,7 +21,7 @@ class Brick(x: Float, y: Float, lifepoints: Int) : SolidEntity(lifepoints) {
 				shape.render(brush, color)
 			}
 
-	private fun createColor(): Color =
+	private fun createColor() =
 			(0..lifepoints)
 					.fold(GdxColor.GRAY) { color, _ ->
 						color.darker()

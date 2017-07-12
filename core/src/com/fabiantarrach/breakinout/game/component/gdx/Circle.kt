@@ -1,16 +1,24 @@
 package com.fabiantarrach.breakinout.game.component.gdx
 
-import com.badlogic.gdx.math.Intersector
 import com.fabiantarrach.breakinout.game.component.euclid.NoPositionDifference
 import com.fabiantarrach.breakinout.game.component.euclid.PositionDifference
 import com.fabiantarrach.breakinout.game.component.euclid.Velocity
 import com.fabiantarrach.breakinout.game.system.rendering.Brush
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxColor
+import com.fabiantarrach.breakinout.util.GdxIntersector
 
 class Circle(x: Float, y: Float, radius: Float) : Shape {
 
 	private val circle = GdxCircle(x, y, radius)
+
+	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Rectangle)
+			ifUnderRectangle(other, then, ifNot)
+	}
+
+	private fun ifUnderRectangle(other: Rectangle, then: () -> Unit, ifNot: () -> Unit)
+		= other.ifUnder(this, then, ifNot)
 
 	override fun render(brush: Brush, color: GdxColor) =
 			brush.drawCircle(circle, color)
@@ -28,7 +36,7 @@ class Circle(x: Float, y: Float, radius: Float) : Shape {
 	}
 
 	private fun ifOverlapsCircle(other: Circle, action: (PositionDifference) -> Unit) {
-		if (Intersector.overlaps(circle, other.circle))
+		if (GdxIntersector.overlaps(circle, other.circle))
 			action(NoPositionDifference)
 	}
 

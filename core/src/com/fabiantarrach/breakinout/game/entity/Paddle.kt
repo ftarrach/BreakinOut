@@ -17,7 +17,6 @@ class Paddle(x: Float, y: Float) : SolidEntity() {
 	override fun render(brush: Brush) = shape.render(brush, GdxColor.WHITE)
 
 	fun shrink() = shape.shorten()
-
 	fun grow() = shape.widen()
 
 	fun scrub(ball: Ball) {

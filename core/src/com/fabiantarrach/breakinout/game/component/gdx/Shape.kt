@@ -10,4 +10,5 @@ interface Shape {
 	fun move(velocity: Velocity)
 	fun ifOverlaps(other: Shape, action: (PositionDifference) -> Unit)
 	fun ifOutsideGame(left: () -> Unit = {}, right: () -> Unit = {}, top: () -> Unit = {}, bottom: () -> Unit = {})
+	fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit)
 }
