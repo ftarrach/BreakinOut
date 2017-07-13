@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.util
 
-import com.fabiantarrach.breakinout.game_neu.component.Lifepoints
+import com.fabiantarrach.breakinout.game.component.Lifepoints
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 abstract class Entity(life: Int = 1) {

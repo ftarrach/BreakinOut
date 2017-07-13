@@ -1,8 +1,8 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.fabiantarrach.breakinout.game_neu.entity.Ball
+import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.util.Entity
-import com.fabiantarrach.breakinout.game_neu.entity.powerup.PowerUp
+import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.util.GdxObjectMap
 import com.fabiantarrach.breakinout.util.getOrPutIfAbscent
 import ktx.collections.GdxArray

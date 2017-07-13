@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.util.screen
 
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.fabiantarrach.breakinout.game_neu.component.MousePosition
+import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.util.GdxOrthographicCamera
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.GdxSpriteBatch

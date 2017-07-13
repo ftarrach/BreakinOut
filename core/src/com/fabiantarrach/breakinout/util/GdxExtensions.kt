@@ -42,5 +42,5 @@ fun GdxShapeRenderer.rect(rectangle: GdxRectangle, color: Color) {
 
 fun GdxShapeRenderer.circle(circle: GdxCircle, color: Color) {
 	this.color = color
-	circle(circle.x, circle.y, circle.radius)
+	circle(circle.x, circle.y, circle.radius, 12)
 }
