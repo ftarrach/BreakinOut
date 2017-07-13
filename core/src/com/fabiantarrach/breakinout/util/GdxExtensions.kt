@@ -1,5 +1,8 @@
 package com.fabiantarrach.breakinout.util
 
+import com.badlogic.gdx.graphics.Color
+import ktx.app.copy
+
 typealias GdxObjectMap<K, V> = com.badlogic.gdx.utils.ObjectMap<K, V>
 typealias GdxScreen = com.badlogic.gdx.Screen
 typealias GdxScreenAdapter = com.badlogic.gdx.ScreenAdapter
@@ -22,4 +25,22 @@ fun <K, V> GdxObjectMap<K, V>.getOrPutIfAbscent(key: K, value: V): V {
 	if (!containsKey(key))
 		put(key, value)
 	return get(key, value)
+}
+
+fun GdxColor.darker(): GdxColor {
+	val darkerColor = copy()
+	darkerColor.r *= 0.7f
+	darkerColor.g *= 0.7f
+	darkerColor.b *= 0.7f
+	return darkerColor
+}
+
+fun GdxShapeRenderer.rect(rectangle: GdxRectangle, color: Color) {
+	this.color = color
+	rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)
+}
+
+fun GdxShapeRenderer.circle(circle: GdxCircle, color: Color) {
+	this.color = color
+	circle(circle.x, circle.y, circle.radius)
 }

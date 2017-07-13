@@ -8,6 +8,7 @@ abstract class LogicSystem : GdxDisposable {
 
 	abstract fun update(delta: Timespan)
 
+	// TODO: this is a setter :(
 	fun useEntityDatabase(database: EntityDatabase) {
 		this.database = database
 	}

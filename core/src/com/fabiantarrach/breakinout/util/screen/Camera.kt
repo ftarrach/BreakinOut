@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.util.screen
 
 import com.badlogic.gdx.utils.viewport.FitViewport
-import com.fabiantarrach.breakinout.game.component.euclid.Position
+import com.fabiantarrach.breakinout.game_neu.component.MousePosition
 import com.fabiantarrach.breakinout.util.GdxOrthographicCamera
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.GdxSpriteBatch
@@ -28,9 +28,9 @@ class Camera(worldSize: Float) {
 		viewport.update(width, height)
 	}
 
-	fun unprojectMouse(screenPosition: GdxVector3, block: (Position) -> Unit) {
+	fun unprojectMouse(screenPosition: GdxVector3, block: (MousePosition) -> Unit) {
 		val gamePosition = camera.unproject(screenPosition)
-		val position = Position(gamePosition.x, gamePosition.y)
+		val position = MousePosition(gamePosition.x, gamePosition.y)
 		block(position)
 	}
 

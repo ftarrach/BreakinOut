@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.fabiantarrach.breakinout.game.component.numeric.Numerical
+import com.fabiantarrach.breakinout.util.Numerical
 
 class Timespan(millis: Float): Numerical(millis) {
 

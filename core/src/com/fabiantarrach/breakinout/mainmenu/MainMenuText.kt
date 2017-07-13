@@ -16,7 +16,7 @@ class MainMenuText {
 	}
 
 	fun draw(sb: SpriteBatch) {
-		layout.setText(font, "press left mouse button to start a new game")
+		layout.setText(font, "press left mouse button to start a neu game")
 //		val textWidth = layout.width
 //		val textHeight = layout.height
 //		(-

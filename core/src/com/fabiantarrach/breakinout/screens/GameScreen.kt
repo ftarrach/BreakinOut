@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.screens
 
-import com.fabiantarrach.breakinout.game.BreakinOutEngine
+import com.fabiantarrach.breakinout.game_neu.BreakinOutEngine
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.screen.FitScreen
 import com.fabiantarrach.breakinout.util.screen.ScreenState

@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.fabiantarrach.breakinout.game.entity.Entity
+import com.fabiantarrach.breakinout.util.Entity
 import com.fabiantarrach.breakinout.util.GdxDisposable
 
 abstract class Engine : GdxDisposable {
