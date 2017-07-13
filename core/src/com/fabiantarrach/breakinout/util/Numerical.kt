@@ -14,6 +14,8 @@ abstract class Numerical(protected val value: Float) {
 	protected operator fun times(other: Numerical) = value * other.value
 	protected operator fun div(other: Numerical) = value / other.value
 
+	fun scale(vector: GdxVector) = GdxVector(value * vector.x, value * vector.y)
+
 	// do i need this..?
 	protected operator fun compareTo(other: Numerical) = value.compareTo(other.value)
 

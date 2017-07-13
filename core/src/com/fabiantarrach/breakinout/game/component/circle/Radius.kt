@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game_neu.component.circle
+package com.fabiantarrach.breakinout.game.component.circle
 
 import com.fabiantarrach.breakinout.util.Numerical
 import com.fabiantarrach.breakinout.util.GdxCircle

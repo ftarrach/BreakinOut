@@ -1,6 +1,6 @@
-package com.fabiantarrach.breakinout.game_neu.component.rectangle
+package com.fabiantarrach.breakinout.game.component.rectangle
 
-import com.fabiantarrach.breakinout.game_neu.component.Y
+import com.fabiantarrach.breakinout.game.component.Y
 import com.fabiantarrach.breakinout.util.GdxRectangle
 
 class YAxis(y: Float, height: Float) {

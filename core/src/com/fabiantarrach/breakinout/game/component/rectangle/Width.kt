@@ -1,6 +1,6 @@
-package com.fabiantarrach.breakinout.game_neu.component.rectangle
+package com.fabiantarrach.breakinout.game.component.rectangle
 
-import com.fabiantarrach.breakinout.game_neu.component.Factor
+import com.fabiantarrach.breakinout.game.component.Factor
 import com.fabiantarrach.breakinout.util.Numerical
 import com.fabiantarrach.breakinout.util.GdxRectangle
 
