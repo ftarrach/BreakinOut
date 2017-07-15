@@ -7,6 +7,7 @@ import com.fabiantarrach.breakinout.util.Numerical
 
 class Y(value: Float) : Numerical(value) {
 	operator fun plus(width: Height) = Y(super.plus(width))
+	operator fun plus(y: Y) = Y(super.plus(y))
 	operator fun compareTo(other: Y) = super.compareTo(other)
 
 	fun update(circle: GdxCircle) {

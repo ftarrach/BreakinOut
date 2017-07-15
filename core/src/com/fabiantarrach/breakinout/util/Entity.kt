@@ -1,11 +1,13 @@
 package com.fabiantarrach.breakinout.util
 
 import com.fabiantarrach.breakinout.game.component.Lifepoints
+import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 abstract class Entity(life: Int = 1) {
 
 	private val lifepoints = Lifepoints(life)
+	protected abstract val shape: Shape
 
 	abstract fun update(delta: Timespan)
 	abstract fun render(renderer: GdxShapeRenderer)
@@ -16,5 +18,12 @@ abstract class Entity(life: Int = 1) {
 	fun die() = lifepoints.drainAll()
 	fun createColor(base: GdxColor) = lifepoints.createColor(base)
 
+	fun ifOverlaps(other: Entity, then: () -> Unit) {
+		shape.ifOverlaps(other.shape, then)
+	}
+
+	fun ifUnder(other: Entity, then: () -> Unit, ifNot: () -> Unit) {
+		shape.ifUnder(other.shape, then, ifNot)
+	}
 
 }

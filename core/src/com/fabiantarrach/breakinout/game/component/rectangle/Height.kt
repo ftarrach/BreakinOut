@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game.component.rectangle
 
-import com.fabiantarrach.breakinout.util.Numerical
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.Numerical
 
 class Height(value: Float) : Numerical(value) {
 
@@ -12,5 +12,9 @@ class Height(value: Float) : Numerical(value) {
 
 	fun update(rectangle: GdxRectangle) {
 		rectangle.height = value
+	}
+
+	fun third() = oneThird {
+		Height(it)
 	}
 }

@@ -12,7 +12,7 @@ class Level1(private val engine: Engine) {
 		engine.addEntity(
 				Ball(0f, 0f))
 		engine.addEntity(
-				Paddle(0f, -0.8f))
+				Paddle())
 		(-80..80 step 20)
 				.map { Brick(it / 100f, 0.85f, 3) }
 				.forEach { engine.addEntity(it) }

@@ -1,6 +1,19 @@
 package com.fabiantarrach.breakinout.game.component
 
-import com.fabiantarrach.breakinout.util.Vectorial
+import com.badlogic.gdx.Gdx
 
-// TODO
-class MousePosition(x: Float, y: Float): Vectorial(x, y)
+class MousePosition(x: VectorialElement, y: VectorialElement) : Vectorial(x, y) {
+
+	constructor(x: Float, y: Float): this(VectorialElement(x), VectorialElement(y))
+
+	constructor() : this(Gdx.input.x.toFloat(), Gdx.input.y.toFloat())
+
+	fun moveVelocity(): Velocity {
+		return keepX { x ->
+			Velocity(x, VectorialElement(0f))
+		}
+	}
+
+
+
+}
