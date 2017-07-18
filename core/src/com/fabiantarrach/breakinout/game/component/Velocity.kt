@@ -1,15 +1,17 @@
 package com.fabiantarrach.breakinout.game.component
 
-import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.math.Factor
+import com.fabiantarrach.breakinout.util.math.Vectorial
+import com.fabiantarrach.breakinout.util.math.X
+import com.fabiantarrach.breakinout.util.math.Y
+import java.util.*
 
-class Velocity(x: VectorialElement, y: VectorialElement) : Vectorial(x, y) {
+class Velocity(x: X, y: Y) : Vectorial(x, y) {
 
-	constructor(x: Float, y: Float) : this(VectorialElement(x), VectorialElement(y))
+	constructor(x: Float, y: Float) : this(X(x), Y(y))
 
-	fun normalize(time: Timespan) =
-			scale(time) { x, y ->
-				Velocity(x, y)
-			}
+	fun move(x: X) = this.x + x
+	fun move(y: Y) = this.y + y
 
 	operator fun plus(other: Velocity) =
 			super.plus(other) { x, y ->
@@ -21,29 +23,22 @@ class Velocity(x: VectorialElement, y: VectorialElement) : Vectorial(x, y) {
 				Velocity(x, y)
 			}
 
-	fun move(x: X) = this.x + x
-	fun move(y: Y) = this.y + y
-
-	operator fun times(factor: Timespan) =
-			scale(factor) { x, y ->
+	operator fun times(time: Factor) =
+			super.scale(time) { x, y ->
 				Velocity(x, y)
 			}
 
-	operator fun times(factor: Factor) =
-			scale(factor) { x, y ->
-				Velocity(x, y)
-			}
+	fun deflectFront() = Velocity(x, -y)
+	fun deflectSide() = Velocity(-x, y)
 
-	fun ifMovingDown(then: () -> Unit) {
-		y.ifNegative(then)
-	}
+	fun ifMovingDown(then: () -> Unit) = y.ifNegative(then)
 
-	fun invertHorizontal() = Velocity(x, y.invert())
-	fun invertVertical() = Velocity(x.invert(), y)
+	fun randomizeAngle(): Velocity = rotate(Angle(Random().nextFloat() * 360f))
 
-	fun randomizeAngle(): Velocity {
-		// TODO: create a velocity with the same length as this, but with a randomized angle
-		return this
+	private fun rotate(angle: Angle): Velocity {
+		return Velocity(
+				x.rotate(angle, y),
+				y.rotate(angle, x))
 	}
 
 }

@@ -1,8 +1,8 @@
 package com.fabiantarrach.breakinout.game.component.rectangle
 
 import com.fabiantarrach.breakinout.game.component.Velocity
-import com.fabiantarrach.breakinout.game.component.Y
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.math.Y
 
 class YAxis(private var y: Y,
             private var height: Height) {
@@ -25,4 +25,12 @@ class YAxis(private var y: Y,
 	}
 
 	fun third(): YAxis = YAxis(y, height.third())
+
+	fun ifNextToOrUnder(other: Y, then: () -> Unit, ifNot: () -> Unit) {
+		if (y + height > other) {
+			then()
+			return
+		}
+		ifNot()
+	}
 }

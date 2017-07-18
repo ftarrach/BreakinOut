@@ -1,9 +1,9 @@
 package com.fabiantarrach.breakinout.game.component.rectangle
 
-import com.fabiantarrach.breakinout.game.component.Factor
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.util.GdxRectangle
-import com.fabiantarrach.breakinout.util.Numerical
+import com.fabiantarrach.breakinout.util.math.Factor
+import com.fabiantarrach.breakinout.util.math.Numerical
 
 class Width(value: Float) : Numerical(value) {
 

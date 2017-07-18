@@ -1,9 +1,9 @@
 package com.fabiantarrach.breakinout.game.component.rectangle
 
-import com.fabiantarrach.breakinout.game.component.Factor
 import com.fabiantarrach.breakinout.game.component.Velocity
-import com.fabiantarrach.breakinout.game.component.X
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.math.Factor
+import com.fabiantarrach.breakinout.util.math.X
 
 class XAxis(private var x: X,
             private var width: Width) {
@@ -15,14 +15,12 @@ class XAxis(private var x: X,
 			then()
 	}
 
-	// TODO untested
 	fun shorter(factor: Factor) {
 		width = width.shorter(factor)
 		x += width.difference(width)
 				.halve()
 	}
 
-	// TODO untested
 	fun wider(factor: Factor) {
 		val newWidth = width.wider(factor)
 		x -= width.difference(newWidth)

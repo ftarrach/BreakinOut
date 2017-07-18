@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.game.component.circle
 
-import com.fabiantarrach.breakinout.game.component.Position
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
@@ -9,8 +8,8 @@ import com.fabiantarrach.breakinout.util.GdxIntersector
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.circle
 
-class Circle(x: Float, y: Float, radius: Float): Shape() {
-	private var position = Position(x, y)
+class Circle(x: Float, y: Float, radius: Float) : Shape() {
+	private var position = CirclePosition(x, y)
 	private val radius = Radius(radius)
 
 	override fun ifOverlaps(other: Shape, then: () -> Unit) {
@@ -19,9 +18,10 @@ class Circle(x: Float, y: Float, radius: Float): Shape() {
 	}
 
 	private fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) {
+		val gdxRectangle = rectangle.createGdx()
 		if (GdxIntersector.overlaps(
 				toGdxCircle(),
-				rectangle.createGdx()
+				gdxRectangle
 		)) then()
 	}
 
@@ -37,21 +37,30 @@ class Circle(x: Float, y: Float, radius: Float): Shape() {
 	private fun toGdxCircle() = position.createGdxCircle(radius)
 
 	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		// TODO: implement ifUnder
+		if (other is Rectangle)
+			ifUnderRectangle(other, then, ifNot)
+	}
+
+	private fun ifUnderRectangle(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) {
+		position.ifOver(rectangle, then, ifNot)
 	}
 
 	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
-//		if (vector.x - vector.radius < -1) left()
-//		if (vector.x + vector.radius > 1) right()
-//		if (vector.y + vector.radius > 1) top()
-//		if (vector.y + vector.radius < -1) bottom()
+		position.ifLeftOutside(radius) {
+			position = position.keepInside(radius)
+			left()
+		}
+		position.ifRightOutside(radius) {
+			position = position.keepInside(radius)
+			right()
+		}
+		position.ifTopOutside(radius) {
+			position = position.keepInside(radius)
+			top()
+		}
+		position.ifBottomOutside(radius) {
+			position = position.keepInside(radius)
+			bottom()
+		}
 	}
-
-//
-//	fun keepInsideGame() {
-//		if (vector.x - vector.radius < -1) vector.x = -1 + vector.radius
-//		if (vector.x + vector.radius > 1) vector.x = 1 - vector.radius
-//		if (vector.y + vector.radius > 1) vector.y = 1 - vector.radius
-//		if (vector.y + vector.radius < -1) vector.y = -1 + vector.radius
-//	}
 }

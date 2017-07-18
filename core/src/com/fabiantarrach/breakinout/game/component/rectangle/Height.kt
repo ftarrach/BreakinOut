@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game.component.rectangle
 
 import com.fabiantarrach.breakinout.util.GdxRectangle
-import com.fabiantarrach.breakinout.util.Numerical
+import com.fabiantarrach.breakinout.util.math.Numerical
 
 class Height(value: Float) : Numerical(value) {
 

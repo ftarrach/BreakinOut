@@ -1,9 +1,12 @@
-package com.fabiantarrach.breakinout.util
+package com.fabiantarrach.breakinout.util.math
 
-import com.fabiantarrach.breakinout.game.component.Vectorial
+import com.badlogic.gdx.math.MathUtils
+import com.fabiantarrach.breakinout.util.GdxVector
 
-// TODO: is protected because of GdxRectangle and GdxCircle
+// TODO: value is protected because of GdxRectangle and GdxCircle
 abstract class Numerical(protected val value: Float) {
+
+	protected constructor(numerical: Numerical): this(numerical.value)
 
 	protected operator fun times(vector: GdxVector): GdxVector {
 		val scaled = vector.cpy()
@@ -15,7 +18,10 @@ abstract class Numerical(protected val value: Float) {
 	protected operator fun minus(other: Numerical) = value - other.value
 	protected operator fun times(other: Numerical) = value * other.value
 	protected operator fun div(other: Numerical) = value / other.value
-	protected operator fun unaryMinus() = -value
+	protected fun invert() = -value
+
+	protected fun cos(): Float = MathUtils.cosDeg(value)
+	protected fun sin(): Float = MathUtils.sinDeg(value)
 
 	protected open fun <T: Numerical> oneThird(block: (Float) -> T) = block(value / 3)
 
@@ -35,4 +41,8 @@ abstract class Numerical(protected val value: Float) {
 			then()
 	}
 
+	@Deprecated("debug only")
+	override fun toString(): String {
+		return value.toString()
+	}
 }

@@ -1,12 +1,13 @@
 package com.fabiantarrach.breakinout.game.component.rectangle
 
-import com.fabiantarrach.breakinout.game.component.Factor
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.circle.Circle
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
+import com.fabiantarrach.breakinout.util.math.Factor
+import com.fabiantarrach.breakinout.util.math.Y
 import com.fabiantarrach.breakinout.util.rect
 
 class Rectangle(private var xAxis: XAxis,
@@ -24,6 +25,11 @@ class Rectangle(private var xAxis: XAxis,
 	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
 		if (other is Circle)
 			other.ifUnder(other, then, ifNot)
+	}
+
+	@Deprecated("method name to long")
+	fun ifNextToOrUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) {
+		yAxis.ifNextToOrUnder(y, then, ifNot)
 	}
 
 	fun createDrop(): Rectangle =
@@ -61,5 +67,9 @@ class Rectangle(private var xAxis: XAxis,
 
 	fun crub(velocity: Velocity): Velocity =
 			velocity - xAxis.crub()
+
+	fun ifOver(other: Y, then: () -> Unit, ifNot: () -> Unit) {
+		yAxis.ifNextToOrUnder(other, then, ifNot)
+	}
 
 }

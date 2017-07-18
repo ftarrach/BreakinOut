@@ -17,23 +17,28 @@ class BallPaddleCollision : LogicSystem() {
 				checkCollision(paddle, it)
 			}
 
-	private fun checkCollision(paddle: Paddle, ball: Ball) {
-		ball.ifMovingDown {
-			checkOverlap(paddle, ball)
-		}
-	}
+	private fun checkCollision(paddle: Paddle, ball: Ball) =
+			ball.ifMovingDown {
+				checkOverlap(paddle, ball)
+			}
 
 	private fun checkOverlap(paddle: Paddle, ball: Ball) =
 			ball.ifOverlaps(paddle) {
-				ball.ifUnder(paddle,
-						then = {
-//							ball.bounceOff(PositionDifference(0f, true))
-						},
-						ifNot = {
-//							ball.bounceOff(it)
-//							paddle.scrub(ball)
-						})
-				ball.bounceOff()
+				resolveOverlap(ball, paddle)
 			}
+
+	private fun resolveOverlap(ball: Ball, paddle: Paddle) {
+		println("resolve")
+		ball.ifUnder(paddle,
+				then = {
+					println("side")
+					ball.bounceOffSide()
+				},
+				ifNot = {
+					println("front")
+					ball.bounceOffFront()
+					paddle.scrub(ball)
+				})
+	}
 
 }

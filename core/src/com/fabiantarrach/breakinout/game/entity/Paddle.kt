@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.game.entity
 
-import com.fabiantarrach.breakinout.game.component.Factor
 import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
@@ -8,6 +7,7 @@ import com.fabiantarrach.breakinout.util.Entity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.math.Factor
 
 class Paddle : Entity() {
 
@@ -15,7 +15,7 @@ class Paddle : Entity() {
 	private var velocity = Velocity(0f, 0f)
 
 	override fun update(delta: Timespan) {
-		val normalizedVelocity = velocity.normalize(delta)
+		val normalizedVelocity = velocity * delta
 		shape.move(normalizedVelocity)
 	}
 
@@ -30,5 +30,9 @@ class Paddle : Entity() {
 
 	fun bigger() = shape.widen()
 	fun smaller() = shape.shorten()
+
+	fun scrub(ball: Ball) {
+		
+	}
 
 }

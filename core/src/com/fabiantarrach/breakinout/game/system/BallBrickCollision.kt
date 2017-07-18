@@ -30,7 +30,7 @@ class BallBrickCollision : LogicSystem() {
 		sideCollision = false
 	}
 
-	private fun bounce(ball: Ball) = ball.bounceOff()
+	private fun bounce(ball: Ball) = ball.bounceOffFront()
 //			ball.bounceOff(
 //					PositionDifference(0f, sideCollision))
 
@@ -48,7 +48,7 @@ class BallBrickCollision : LogicSystem() {
 //
 	private fun hitBrick(brick: Brick) =
 			brick.hit {
-				createPowerUp(brick)
+//				createPowerUp(brick)
 			}
 
 	private fun createPowerUp(brick: Brick) {
