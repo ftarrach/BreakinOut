@@ -30,7 +30,13 @@ class BallBrickCollision : LogicSystem() {
 		sideCollision = false
 	}
 
-	private fun bounce(ball: Ball) = ball.bounceOffFront()
+	private fun bounce(ball: Ball) {
+		if (sideCollision) {
+			ball.bounceOffSide()
+			return
+		}
+		ball.bounceOffFront()
+	}
 
 	private fun checkOverlap(ball: Ball, brick: Brick) =
 			ball.ifOverlaps(brick) {

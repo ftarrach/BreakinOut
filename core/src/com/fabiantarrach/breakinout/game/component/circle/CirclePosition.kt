@@ -50,5 +50,4 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 	}
 
 	fun ifOver(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) = rectangle.ifNextToOrUnder(y, then, ifNot)
-
 }

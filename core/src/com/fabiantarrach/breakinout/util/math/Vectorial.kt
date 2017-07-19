@@ -3,8 +3,6 @@ package com.fabiantarrach.breakinout.util.math
 import com.fabiantarrach.breakinout.game.component.Angle
 import com.fabiantarrach.breakinout.util.GdxVector
 
-// TODO: throw away the Vectorial element, just use number
-// TODO: members as abstract members, so the real type can decide what type they are
 abstract class Vectorial(protected val x: X,
                          protected val y: Y) {
 

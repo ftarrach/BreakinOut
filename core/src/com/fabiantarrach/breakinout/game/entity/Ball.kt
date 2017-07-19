@@ -28,12 +28,10 @@ class Ball(x: Float, y: Float) : Entity() {
 	fun bounceOffFront() {
 		// TODO: pass metadata of the collision etc
 		velocity = velocity.deflectFront()
-		println("new velocity: $velocity")
 	}
 
 	fun bounceOffSide() {
 		velocity = velocity.deflectSide()
-		println("new velocity: $velocity")
 	}
 
 	fun moveRandom() {
@@ -42,6 +40,10 @@ class Ball(x: Float, y: Float) : Entity() {
 
 	fun push(push: Velocity) {
 		velocity = velocity.push(push)
+	}
+
+	fun moveRight() {
+		velocity = Velocity(1f, 0f)
 	}
 
 }

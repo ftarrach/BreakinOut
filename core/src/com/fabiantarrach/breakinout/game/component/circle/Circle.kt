@@ -41,9 +41,8 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 			ifUnderRectangle(other, then, ifNot)
 	}
 
-	private fun ifUnderRectangle(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) {
-		position.ifOver(rectangle, then, ifNot)
-	}
+	private fun ifUnderRectangle(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
+			position.ifOver(rectangle, then, ifNot)
 
 	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		position.ifLeftOutside(radius) {
