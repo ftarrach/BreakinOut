@@ -44,13 +44,9 @@ class BallBrickCollision : LogicSystem() {
 	private fun resolveOperlap(ball: Ball, brick: Brick) =
 			ball.ifUnder(brick,
 					then = {
-						ball::bounceOffSide
+						println("${Gdx.graphics.frameId}: side hit")
 						sideCollision = true
-					}
-			) {
-				println("${Gdx.graphics.frameId}: front hit")
-				ball.bounceOffFront()
-			}
+					})
 
 	private fun hitBrick(brick: Brick) {
 		brick.hit {
