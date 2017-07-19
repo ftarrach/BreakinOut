@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.component
 
+import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.math.Factor
 import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X
@@ -13,15 +14,11 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 	fun move(x: X) = this.x + x
 	fun move(y: Y) = this.y + y
 
-	operator fun plus(other: Velocity) =
-			super.plus(other, ::Velocity)
+	operator fun plus(other: Velocity) = super.plus(other, ::Velocity)
+	operator fun minus(other: Velocity) = super.minus(other, ::Velocity)
+	operator fun times(time: Timespan) = super.scale(time, ::Velocity)
 
-	operator fun minus(other: Velocity) =
-			super.minus(other, ::Velocity)
-
-	@Deprecated("more concrete classes", replaceWith = ReplaceWith("concrete classes"))
-	operator fun times(time: Factor) =
-			super.scale(time, ::Velocity)
+	fun cease(friction: Friction) = super.scale(friction, ::Velocity)
 
 	fun deflectFront() = Velocity(x, -y)
 	fun deflectSide() = Velocity(-x, y)
@@ -38,5 +35,10 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 
 	private fun rotate(angle: Angle) =
 			super.rotate(angle, ::Velocity)
+
+	fun faster(): Velocity {
+		val factor = Factor(5f)
+		return super.scale(factor, ::Velocity)
+	}
 
 }

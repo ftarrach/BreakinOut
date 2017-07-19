@@ -8,7 +8,6 @@ import com.fabiantarrach.breakinout.util.Entity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
-import com.fabiantarrach.breakinout.util.math.Factor
 
 class Paddle : Entity() {
 
@@ -26,14 +25,16 @@ class Paddle : Entity() {
 
 	fun moveTo(mouse: MousePosition) {
 		val velocityToMouse = mouse.moveVelocity()
-		velocity = shape.crub(velocityToMouse) * Factor(5f)
+		val crubbed = shape.crub(velocityToMouse)
+		velocity = crubbed.faster()
 	}
 
 	fun bigger() = shape.widen()
 	fun smaller() = shape.shorten()
 
 	fun scrub(ball: Ball) {
-		val scrubVelocity = velocity * Friction(0.8f)
+		val friction = Friction(0.8f)
+		val scrubVelocity = velocity.cease(friction)
 		ball.push(scrubVelocity)
 	}
 

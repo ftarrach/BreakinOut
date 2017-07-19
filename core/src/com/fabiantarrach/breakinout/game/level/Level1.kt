@@ -12,8 +12,6 @@ class Level1(private val engine: Engine) {
 		engine.addEntity(Paddle())
 		val ball = Ball(0f, 0f)
 		engine.addEntity(ball)
-		engine.addEntity(Brick(0f, -0.5f, 3))
-		engine.addEntity(Brick(0f, -0.6f, 3))
 		(-80..80 step 20)
 				.map { Brick(it / 100f, 0.85f, 3) }
 				.forEach { engine.addEntity(it) }

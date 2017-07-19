@@ -3,9 +3,9 @@ package com.fabiantarrach.breakinout.game.entity.powerup
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
 import java.util.*
 
-class PowerUpFactory(private val rectangle: Rectangle) {
+class PowerUpFactory {
 
-	fun createRandom(): PowerUp {
+	fun createRandom(rectangle: Rectangle): PowerUp {
 		val random = Random()
 		when (random.nextInt(3)) {
 			0 -> return BiggerPaddle(rectangle)

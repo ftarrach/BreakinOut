@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.game.system
 
-import com.badlogic.gdx.Gdx
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
@@ -35,7 +34,6 @@ class BallBrickCollision : LogicSystem() {
 
 	private fun checkOverlap(ball: Ball, brick: Brick) =
 			ball.ifOverlaps(brick) {
-				println("${Gdx.graphics.frameId}: overlap")
 				overlapped = true
 				resolveOperlap(ball, brick)
 				hitBrick(brick)
@@ -44,7 +42,6 @@ class BallBrickCollision : LogicSystem() {
 	private fun resolveOperlap(ball: Ball, brick: Brick) =
 			ball.ifUnder(brick,
 					then = {
-						println("${Gdx.graphics.frameId}: side hit")
 						sideCollision = true
 					})
 
@@ -56,7 +53,6 @@ class BallBrickCollision : LogicSystem() {
 
 	private fun createPowerUp(brick: Brick) {
 		if (Math.random() < 0.2f)
-			database.add(
-					brick.createPowerUp())
+			brick.createPowerUp(database)
 	}
 }

@@ -14,7 +14,7 @@ abstract class Numerical(protected val value: Float) {
 
 	protected operator fun plus(other: Numerical) = value + other.value
 	protected operator fun minus(other: Numerical) = value - other.value
-	protected operator fun times(other: Numerical) = value * other.value
+	protected fun times(other: Numerical) = value * other.value
 	protected operator fun div(other: Numerical) = value / other.value
 	protected fun invert() = -value
 

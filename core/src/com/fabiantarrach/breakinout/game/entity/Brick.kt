@@ -6,22 +6,26 @@ import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.game.entity.powerup.PowerUpFactory
 import com.fabiantarrach.breakinout.util.Entity
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
-import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 
 class Brick(x: Float, y: Float, lifepoints: Int) : Entity(lifepoints) {
 
 	override val shape = Rectangle(x, y, 0.2f, 0.1f)
-
-	override fun update(delta: Timespan) {}
 
 	override fun render(renderer: GdxShapeRenderer) {
 		val color = createColor(Color.GRAY)
 		shape.render(renderer, color)
 	}
 
-	fun createPowerUp(): PowerUp {
+	fun createPowerUp(database: EntityDatabase) {
+		val powerUp = createRandomPowerUp()
+		database.add(powerUp)
+	}
+
+	private fun createRandomPowerUp(): PowerUp {
 		val rectangle = shape.createDrop()
-		return PowerUpFactory(rectangle).createRandom()
+		val powerUpFactory = PowerUpFactory()
+		return powerUpFactory.createRandom(rectangle)
 	}
 
 }

@@ -9,7 +9,7 @@ abstract class Entity(life: Int = 1) {
 	private val lifepoints = Lifepoints(life)
 	protected abstract val shape: Shape
 
-	abstract fun update(delta: Timespan)
+	open fun update(delta: Timespan) {}
 	abstract fun render(renderer: GdxShapeRenderer)
 
 	fun ifUnder(other: Entity, then: () -> Unit, ifNot: () -> Unit = {}) = shape.ifUnder(other.shape, then, ifNot)
