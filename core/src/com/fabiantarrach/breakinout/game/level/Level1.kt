@@ -10,24 +10,25 @@ class Level1(private val engine: Engine) {
 
 	fun build() {
 		engine.addEntity(Paddle())
-//		val ball = Ball(0f, 0f)
-//		engine.addEntity(ball)
+
+		engine.addEntity(Brick(0f,0f, 99))
 
 		val ball2 = Ball(-0.8f, 0f)
 		ball2.moveRight()
-
 		engine.addEntity(ball2)
-		engine.addEntity(Brick(0f,0f, 5))
+		
+		val ball3 = Ball(-0.8f, -0.8f)
+		ball3.moveRight()
+		engine.addEntity(ball3)
 
-		(-80..80 step 20)
-				.map { Brick(it / 100f, 0.85f, 3) }
-				.forEach { engine.addEntity(it) }
-		(-80..80 step 20)
-				.map { Brick(it / 100f, 0.75f, 2) }
-				.forEach { engine.addEntity(it) }
-		(-80..80 step 20)
-				.map { Brick(it / 100f, 0.65f, 1) }
-				.forEach { engine.addEntity(it) }
+		val ball4 = Ball(0f, -0.5f)
+		engine.addEntity(ball4)
+
+		val ball5 = Ball(-0.9f, -0.8f)
+		ball5.moveRight()
+		engine.addEntity(ball5)
+
+
 	}
 
 }

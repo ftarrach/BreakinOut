@@ -18,11 +18,10 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	}
 
 	private fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) {
+		val gdxCircle = toGdxCircle()
 		val gdxRectangle = rectangle.createGdx()
-		if (GdxIntersector.overlaps(
-				toGdxCircle(),
-				gdxRectangle
-		)) then()
+		if (GdxIntersector.overlaps(gdxCircle,gdxRectangle))
+			then()
 	}
 
 	fun render(brush: GdxShapeRenderer, color: GdxColor) {

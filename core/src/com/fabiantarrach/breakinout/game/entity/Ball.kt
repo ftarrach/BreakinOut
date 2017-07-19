@@ -46,4 +46,5 @@ class Ball(x: Float, y: Float) : Entity() {
 		velocity = Velocity(1f, 0f)
 	}
 
+
 }

@@ -12,7 +12,7 @@ abstract class Entity(life: Int = 1) {
 	open fun update(delta: Timespan) {}
 	abstract fun render(renderer: GdxShapeRenderer)
 
-	fun ifUnder(other: Entity, then: () -> Unit, ifNot: () -> Unit = {}) = shape.ifUnder(other.shape, then, ifNot)
+	fun ifUnder(other: Entity, then: () -> Unit, ifOver: () -> Unit = {}) = shape.ifUnder(other.shape, then, ifOver)
 
 	fun ifDead(then: () -> Unit) = lifepoints.ifDead(then)
 	fun ifAlive(then: () -> Unit) = lifepoints.ifAlive(then)

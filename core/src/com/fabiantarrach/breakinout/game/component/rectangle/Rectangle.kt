@@ -28,9 +28,9 @@ class Rectangle(private var xAxis: XAxis,
 	}
 
 	@Deprecated("method name to long")
-	fun ifNextToOrUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) {
-		yAxis.ifNextToOrUnder(y, then, ifNot)
-	}
+	fun ifSideOrUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifSideOrUnder(y, then, ifNot)
+
+	fun ifSideOf(y: Y, then: () -> Unit) = yAxis.ifSide(y, then)
 
 	fun createDrop(): Rectangle =
 			Rectangle(

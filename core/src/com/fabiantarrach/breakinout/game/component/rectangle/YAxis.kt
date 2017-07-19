@@ -26,11 +26,16 @@ class YAxis(private var y: Y,
 
 	fun third(): YAxis = YAxis(y, height.third())
 
-	fun ifNextToOrUnder(other: Y, then: () -> Unit, ifNot: () -> Unit) {
+	fun ifSideOrUnder(other: Y, then: () -> Unit, ifNot: () -> Unit) {
 		if (y + height > other) {
 			then()
 			return
 		}
 		ifNot()
+	}
+
+	fun ifSide(other: Y, then: () -> Unit) {
+		if (y < other && y + height > other)
+			then()
 	}
 }
