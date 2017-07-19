@@ -10,7 +10,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 class Ball(x: Float, y: Float) : Entity() {
 
 	override val shape = Circle(x, y, 0.025f)
-	private var velocity = Velocity(0f, -0.5f)
+	private var velocity = Velocity(0f, -1f)
 
 	override fun update(delta: Timespan) {
 		shape.move(velocity * delta)
@@ -36,6 +36,10 @@ class Ball(x: Float, y: Float) : Entity() {
 
 	fun moveRandom() {
 		velocity = velocity.randomizeAngle()
+	}
+
+	fun push(push: Velocity) {
+		velocity = velocity.push(push)
 	}
 
 }

@@ -7,12 +7,11 @@ class PowerUpFactory(private val rectangle: Rectangle) {
 
 	fun createRandom(): PowerUp {
 		val random = Random()
-		when (random.nextInt(1)) {
+		when (random.nextInt(3)) {
 			0 -> return BiggerPaddle(rectangle)
 			1 -> return SmallerPaddle(rectangle)
-//			2 -> return ExtraBall(x, y)
+			2 -> return ExtraBall(rectangle)
 		}
-// return ExtraBall(x, y)
 		throw RuntimeException("error during power up generation")
 	}
 

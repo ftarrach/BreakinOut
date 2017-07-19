@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.entity
 
+import com.fabiantarrach.breakinout.game.component.Friction
 import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
@@ -32,7 +33,8 @@ class Paddle : Entity() {
 	fun smaller() = shape.shorten()
 
 	fun scrub(ball: Ball) {
-		
+		val scrubVelocity = velocity * Friction(0.8f)
+		ball.push(scrubVelocity)
 	}
 
 }

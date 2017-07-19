@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.game.system
 
+import com.badlogic.gdx.Gdx
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
@@ -19,7 +20,7 @@ class BallBrickCollision : LogicSystem() {
 	private fun checkBrick(ball: Ball) {
 		reset()
 		database.each(Brick::class.java) {
-			checkCollision(ball, it)
+			checkOverlap(ball, it)
 		}
 		if (overlapped)
 			bounce(ball)
@@ -31,28 +32,34 @@ class BallBrickCollision : LogicSystem() {
 	}
 
 	private fun bounce(ball: Ball) = ball.bounceOffFront()
-//			ball.bounceOff(
-//					PositionDifference(0f, sideCollision))
 
-	private fun checkCollision(ball: Ball, brick: Brick) =
+	private fun checkOverlap(ball: Ball, brick: Brick) =
 			ball.ifOverlaps(brick) {
+				println("${Gdx.graphics.frameId}: overlap")
 				overlapped = true
-//				updateSideCollision(it)
+				resolveOperlap(ball, brick)
 				hitBrick(brick)
 			}
-//
-//	private fun updateSideCollision(it: PositionDifference) =
-//			it.ifSideCollision({
-//				sideCollision = true
-//			})
-//
-	private fun hitBrick(brick: Brick) =
-			brick.hit {
-//				createPowerUp(brick)
+
+	private fun resolveOperlap(ball: Ball, brick: Brick) =
+			ball.ifUnder(brick,
+					then = {
+						ball::bounceOffSide
+						sideCollision = true
+					}
+			) {
+				println("${Gdx.graphics.frameId}: front hit")
+				ball.bounceOffFront()
 			}
 
+	private fun hitBrick(brick: Brick) {
+		brick.hit {
+			createPowerUp(brick)
+		}
+	}
+
 	private fun createPowerUp(brick: Brick) {
-//		if (Math.random() < 0.2f)
+		if (Math.random() < 0.2f)
 			database.add(
 					brick.createPowerUp())
 	}

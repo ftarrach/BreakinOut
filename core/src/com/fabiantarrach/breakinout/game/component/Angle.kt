@@ -1,12 +1,12 @@
 package com.fabiantarrach.breakinout.game.component
 
+import com.badlogic.gdx.math.Vector2
+import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.math.Numerical
-import com.fabiantarrach.breakinout.util.math.X
-import com.fabiantarrach.breakinout.util.math.Y
 
-class Angle(value: Float) : Numerical(value) {
+class Angle(degrees: Float) : Numerical(degrees) {
 
-	fun rotateX(x: X) = RotatedX(X(times(x)))
-	fun rotateY(y: Y) = RotatedY(Y(times(y)))
+	fun rotate(vector: GdxVector): Vector2 =
+			vector.rotate(value).cpy()!!
 
 }

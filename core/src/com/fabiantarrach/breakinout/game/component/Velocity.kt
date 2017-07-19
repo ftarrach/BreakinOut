@@ -14,31 +14,29 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 	fun move(y: Y) = this.y + y
 
 	operator fun plus(other: Velocity) =
-			super.plus(other) { x, y ->
-				Velocity(x, y)
-			}
+			super.plus(other, ::Velocity)
 
 	operator fun minus(other: Velocity) =
-			super.minus(other) { x, y ->
-				Velocity(x, y)
-			}
+			super.minus(other, ::Velocity)
 
+	@Deprecated("more concrete classes", replaceWith = ReplaceWith("concrete classes"))
 	operator fun times(time: Factor) =
-			super.scale(time) { x, y ->
-				Velocity(x, y)
-			}
+			super.scale(time, ::Velocity)
 
 	fun deflectFront() = Velocity(x, -y)
 	fun deflectSide() = Velocity(-x, y)
 
 	fun ifMovingDown(then: () -> Unit) = y.ifNegative(then)
 
-	fun randomizeAngle(): Velocity = rotate(Angle(Random().nextFloat() * 360f))
-
-	private fun rotate(angle: Angle): Velocity {
-		return Velocity(
-				x.rotate(angle, y),
-				y.rotate(angle, x))
+	fun randomizeAngle(): Velocity {
+		val randomAngle = Random().nextInt(360).toFloat()
+		val angle = Angle(randomAngle)
+		return rotate(angle)
 	}
+
+	fun push(push: Velocity) = super.push(push, ::Velocity)
+
+	private fun rotate(angle: Angle) =
+			super.rotate(angle, ::Velocity)
 
 }

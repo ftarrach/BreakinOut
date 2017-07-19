@@ -68,8 +68,4 @@ class Rectangle(private var xAxis: XAxis,
 	fun crub(velocity: Velocity): Velocity =
 			velocity - xAxis.crub()
 
-	fun ifOver(other: Y, then: () -> Unit, ifNot: () -> Unit) {
-		yAxis.ifNextToOrUnder(other, then, ifNot)
-	}
-
 }

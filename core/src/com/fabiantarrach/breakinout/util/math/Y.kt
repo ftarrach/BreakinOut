@@ -1,10 +1,10 @@
 package com.fabiantarrach.breakinout.util.math
 
-import com.fabiantarrach.breakinout.game.component.Angle
 import com.fabiantarrach.breakinout.game.component.circle.Radius
 import com.fabiantarrach.breakinout.game.component.rectangle.Height
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.GdxVector
 
 class Y(value: Float) : Numerical(value) {
 	operator fun plus(radius: Radius) = Y(super.plus(radius))
@@ -24,10 +24,8 @@ class Y(value: Float) : Numerical(value) {
 		rectangle.y = value
 	}
 
-	fun rotate(angle: Angle, x: X): Y {
-		val rotatedX = angle.rotateX(x)
-		val rotatedY = angle.rotateY(this)
-		return rotatedY.resolve(rotatedX)
+	fun update(vector: GdxVector) {
+		vector.y = value
 	}
 
 	fun ifOutside(block: () -> Unit) {

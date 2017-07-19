@@ -1,11 +1,11 @@
 package com.fabiantarrach.breakinout.util.math
 
-import com.fabiantarrach.breakinout.game.component.Angle
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.circle.Radius
 import com.fabiantarrach.breakinout.game.component.rectangle.Width
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.GdxVector
 
 // TODO basically all methods are the same in Y. Common interface with generics?
 class X(value: Float) : Numerical(value) {
@@ -28,13 +28,11 @@ class X(value: Float) : Numerical(value) {
 		rectangle.x = value
 	}
 
-	fun crub() = createVectorial(Y(0f)) { x, y -> Velocity(x, y) }
-
-	fun rotate(angle: Angle, y: Y): X {
-		val rotatedX = angle.rotateX(this)
-		val rotatedY = angle.rotateY(y)
-		return rotatedX.resolve(rotatedY)
+	fun update(vector: GdxVector) {
+		vector.x = value
 	}
+
+	fun crub() = createVectorial(Y(0f)) { x, y -> Velocity(x, y) }
 
 	fun ifOutside(block: () -> Unit) {
 		if (this < X(-1f) || this > X(1f))
