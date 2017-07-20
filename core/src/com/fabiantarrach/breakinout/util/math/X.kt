@@ -7,8 +7,9 @@ import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxVector
 
-// TODO basically all methods are the same in Y. Common interface with generics?
+
 class X(value: Float) : Numerical(value) {
+
 	operator fun plus(radius: Radius) = X(super.plus(radius))
 	operator fun plus(width: Width) = X(super.plus(width))
 	operator fun plus(x: X) = X(super.plus(x))
@@ -31,6 +32,9 @@ class X(value: Float) : Numerical(value) {
 	fun update(vector: GdxVector) {
 		vector.x = value
 	}
+
+	public override fun ifNegative(then: () -> Unit) = super.ifNegative(then)
+	public override fun ifPositive(then: () -> Unit) = super.ifPositive(then)
 
 	fun crub() = createVectorial(Y(0f)) { x, y -> Velocity(x, y) }
 

@@ -11,8 +11,11 @@ class Ball(x: Float, y: Float) : Entity() {
 
 	override val shape = Circle(x, y, 0.025f)
 	private var velocity = Velocity(0f, -1f)
+	// TODO: 3 members. MoveableEntity class?
+	private var lastTimespan: Timespan = Timespan(0f)
 
 	override fun update(delta: Timespan) {
+		lastTimespan = delta
 		shape.move(velocity * delta)
 		shape.ifOutsideGame(
 				left = this::bounceOffSide,
@@ -22,6 +25,9 @@ class Ball(x: Float, y: Float) : Entity() {
 	}
 
 	override fun render(renderer: GdxShapeRenderer) = shape.render(renderer, GdxColor.RED)
+
+	fun ifOverlaps(paddle: Paddle, then: () -> Unit) = super.ifOverlaps(paddle, then)
+	fun ifOverlaps(paddle: Brick, then: () -> Unit) = super.ifOverlaps(paddle, then)
 
 	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)
 
@@ -42,9 +48,21 @@ class Ball(x: Float, y: Float) : Entity() {
 		velocity = velocity.push(push)
 	}
 
+	@Deprecated("debug only")
 	fun moveRight() {
-		velocity = Velocity(1f, 0f)
+		velocity = Velocity(1f, -Float.MIN_VALUE)
 	}
 
+	fun ifNextTo(brick: Brick, then: () -> Unit, ifNot: () -> Unit = {}) =
+			super.ifNextTo(brick, then, ifNot)
 
+	fun ifUnderFront(paddle: Paddle, then: () -> Unit, ifFront: () -> Unit) =
+			super.ifNextTo(paddle, then) {
+				super.ifUnder(paddle, then, ifFront)
+			}
+
+	fun slamX(other: Velocity) {
+		shape.move(other * lastTimespan)
+		velocity += other
+	}
 }

@@ -28,6 +28,8 @@ class Y(value: Float) : Numerical(value) {
 		vector.y = value
 	}
 
+	override public fun ifNegative(then: () -> Unit) = super.ifNegative(then)
+
 	fun ifOutside(block: () -> Unit) {
 		if (this < Y(-1f) || this > Y(1f))
 			block()

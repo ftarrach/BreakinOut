@@ -27,13 +27,15 @@ class BallPaddleCollision : LogicSystem() {
 				resolveOverlap(ball, paddle)
 			}
 
-	private fun resolveOverlap(ball: Ball, paddle: Paddle) {
-		ball.ifUnder(paddle,
-				then = ball::bounceOffSide,
-				ifOver = {
-					ball.bounceOffFront()
-					paddle.scrub(ball)
-				})
-	}
+	private fun resolveOverlap(ball: Ball, paddle: Paddle) =
+			ball.ifUnderFront(paddle,
+					then = {
+						ball.bounceOffSide()
+						paddle.bat(ball)
+					},
+					ifFront = {
+						ball.bounceOffFront()
+						paddle.scrub(ball)
+					})
 
 }

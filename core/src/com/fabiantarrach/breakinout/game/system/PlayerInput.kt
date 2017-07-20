@@ -10,7 +10,8 @@ class PlayerInput(private val camera: Camera) : LogicSystem() {
 	override fun update(delta: Timespan) {
 		val mouse = camera.mousePosition()
 		database.each(Paddle::class.java) {
-//			it.moveTo(mouse)
+			it.moveTo(mouse)
+////			it.moveTo(MousePosition(-0.5f, 0f))
 		}
 	}
 }

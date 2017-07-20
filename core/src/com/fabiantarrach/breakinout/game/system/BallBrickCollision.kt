@@ -46,16 +46,16 @@ class BallBrickCollision : LogicSystem() {
 			}
 
 	private fun resolveOperlap(ball: Ball, brick: Brick) =
-			ball.ifUnder(brick,
-					then = {
-						sideCollision = true
-					})
+			ball.ifNextTo(brick, then = this::fireSideCollision)
 
-	private fun hitBrick(brick: Brick) {
-		brick.hit {
-			createPowerUp(brick)
-		}
+	private fun fireSideCollision() {
+		sideCollision = true
 	}
+
+	private fun hitBrick(brick: Brick) =
+			brick.hit(died = {
+				createPowerUp(brick)
+			})
 
 	private fun createPowerUp(brick: Brick) {
 		if (Math.random() < 0.2f)

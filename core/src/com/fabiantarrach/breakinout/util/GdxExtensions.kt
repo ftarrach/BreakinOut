@@ -44,3 +44,11 @@ fun GdxShapeRenderer.circle(circle: GdxCircle, color: Color) {
 	this.color = color
 	circle(circle.x, circle.y, circle.radius, 12)
 }
+
+fun Boolean.ifTrue(then: () -> Unit, ifFalse: () -> Unit) {
+	if(this) {
+		then()
+		return
+	}
+	ifFalse()
+}

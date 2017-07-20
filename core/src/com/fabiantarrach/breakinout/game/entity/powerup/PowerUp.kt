@@ -7,7 +7,6 @@ import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 import com.fabiantarrach.breakinout.util.engine.Timespan
-import com.fabiantarrach.breakinout.util.rect
 
 abstract class PowerUp(rectangle: Rectangle) : Entity() {
 
@@ -17,7 +16,7 @@ abstract class PowerUp(rectangle: Rectangle) : Entity() {
 	abstract fun activate(database: EntityDatabase)
 
 	override fun render(renderer: GdxShapeRenderer) =
-			renderer.rect(shape.createGdx(), color)
+			shape.render(renderer, color)
 
 	override fun update(delta: Timespan) =
 			shape.move(Velocity(0f, -0.25f) * delta)

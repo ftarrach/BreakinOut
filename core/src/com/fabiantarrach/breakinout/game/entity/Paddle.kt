@@ -4,6 +4,7 @@ import com.fabiantarrach.breakinout.game.component.Friction
 import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
+import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.util.Entity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
@@ -29,6 +30,8 @@ class Paddle : Entity() {
 		velocity = crubbed.faster()
 	}
 
+	fun ifOverlaps(powerUp: PowerUp, then: () -> Unit) = super.ifOverlaps(powerUp, then)
+
 	fun bigger() = shape.widen()
 	fun smaller() = shape.shorten()
 
@@ -37,5 +40,7 @@ class Paddle : Entity() {
 		val scrubVelocity = velocity.cease(friction)
 		ball.push(scrubVelocity)
 	}
+
+	fun bat(ball: Ball) = ball.slamX(velocity)
 
 }

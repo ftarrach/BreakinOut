@@ -20,13 +20,13 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	private fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) {
 		val gdxCircle = toGdxCircle()
 		val gdxRectangle = rectangle.createGdx()
-		if (GdxIntersector.overlaps(gdxCircle,gdxRectangle))
+		if (GdxIntersector.overlaps(gdxCircle, gdxRectangle))
 			then()
 	}
 
-	fun render(brush: GdxShapeRenderer, color: GdxColor) {
+	override fun render(renderer: GdxShapeRenderer, color: GdxColor) {
 		val gdxCircle = toGdxCircle()
-		brush.circle(gdxCircle, color)
+		renderer.circle(gdxCircle, color)
 	}
 
 	fun move(velocity: Velocity) {
@@ -35,13 +35,30 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 
 	private fun toGdxCircle() = position.createGdxCircle(radius)
 
-	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Rectangle)
-			ifUnderRectangle(other, then, ifNot)
+	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Rectangle) {
+			position.ifNextTo(other, then, ifNot)
+			return
+		}
+		throw IllegalArgumentException("ifNextTo between Circle and ${other::javaClass} is not yet implemented")
 	}
 
-	private fun ifUnderRectangle(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
-			position.ifOver(rectangle, then, ifNot)
+	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Rectangle) {
+			position.ifUnder(other, then, ifNot)
+			return
+		}
+		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
+	}
+
+
+//	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+//		if (other is Rectangle)
+//			ifUnderRectangle(other, then, ifNot)
+//	}
+//
+//	private fun ifUnderRectangle(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
+//			position.ifOver(rectangle, then, ifNot)
 
 	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		position.ifLeftOutside(radius) {

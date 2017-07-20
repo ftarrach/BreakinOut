@@ -41,4 +41,16 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 		return super.scale(factor, ::Velocity)
 	}
 
+	fun slamX(other: Velocity): Velocity {
+		var newX = x
+		x.ifNegative {
+			newX = x - other.x
+		}
+		x.ifPositive {
+			newX = x + other.x
+		}
+		println("$x => $newX")
+		return Velocity(newX, y)
+	}
+
 }

@@ -31,6 +31,11 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 		return CirclePosition(newX, newY)
 	}
 
+//	fun topBorder(radius: Radius) = y.plus(radius)
+//	fun bottomBorder(radius: Radius) = y.minus(radius)
+//	fun leftBorder(radius: Radius) = x.plus(radius)
+//	fun rightBorder(radius: Radius) = x.minus(radius)
+
 	fun keepInside(radius: Radius): CirclePosition {
 		var newX = x
 		var newY = y
@@ -49,5 +54,11 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 		return CirclePosition(newX, newY)
 	}
 
-	fun ifOver(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) = rectangle.ifSideOrUnder(y, then, ifNot)
+	fun ifNextTo(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
+			rectangle.ifSideOf(y, then, ifNot)
+
+	fun ifUnder(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
+			rectangle.ifUnder(y, then, ifNot)
+
+//	fun ifOver(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) = rectangle.ifSideOrUnder(y, then, ifNot)
 }

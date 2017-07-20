@@ -38,8 +38,13 @@ abstract class Numerical(protected val value: Float) {
 
 	protected fun <T : Vectorial> createVectorial(other: Numerical, block: (Float, Float) -> T) = block(value, other.value)
 
-	fun ifNegative(then: () -> Unit) {
+	protected open fun ifNegative(then: () -> Unit) {
 		if (value < 0)
+			then()
+	}
+
+	protected open fun ifPositive(then: () -> Unit) {
+		if (value > 0)
 			then()
 	}
 

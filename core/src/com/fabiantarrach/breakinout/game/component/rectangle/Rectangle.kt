@@ -7,6 +7,7 @@ import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.math.Factor
+import com.fabiantarrach.breakinout.util.math.X
 import com.fabiantarrach.breakinout.util.math.Y
 import com.fabiantarrach.breakinout.util.rect
 
@@ -17,20 +18,33 @@ class Rectangle(private var xAxis: XAxis,
 			this(XAxis(x - width / 2, width),
 					YAxis(y - height / 2, height))
 
+	constructor(x: X, y: Y, width: Width, height: Height) :
+			this(XAxis(x, width),
+					YAxis(y, height))
+
 	override fun ifOverlaps(other: Shape, then: () -> Unit) {
 		if (other is Rectangle)
 			ifOverlaps(other, then)
 	}
 
-	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Circle)
-			other.ifUnder(other, then, ifNot)
+	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Circle) {
+			other.ifNextTo(this, then, ifNot)
+			return
+		}
+		throw IllegalArgumentException("ifNextTo between Rectangle and ${other::javaClass} is not yet implemented")
 	}
 
-	@Deprecated("method name to long")
-	fun ifSideOrUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifSideOrUnder(y, then, ifNot)
+	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Circle) {
+			other.ifUnder(this, then, ifNot)
+			return
+		}
+		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
+	}
 
-	fun ifSideOf(y: Y, then: () -> Unit) = yAxis.ifSide(y, then)
+	fun ifSideOf(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifSide(y, then, ifNot)
+	fun ifUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifUnder(y, then, ifNot)
 
 	fun createDrop(): Rectangle =
 			Rectangle(
@@ -55,7 +69,7 @@ class Rectangle(private var xAxis: XAxis,
 	fun shorten() = xAxis.shorter(Factor(0.9f))
 	fun widen() = xAxis.wider(Factor(1.1f))
 
-	fun render(renderer: GdxShapeRenderer, color: GdxColor) {
+	override fun render(renderer: GdxShapeRenderer, color: GdxColor) {
 		val rectangle = createGdx()
 		renderer.rect(rectangle, color)
 	}

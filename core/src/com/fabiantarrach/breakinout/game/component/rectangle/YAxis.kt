@@ -2,6 +2,7 @@ package com.fabiantarrach.breakinout.game.component.rectangle
 
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.ifTrue
 import com.fabiantarrach.breakinout.util.math.Y
 
 class YAxis(private var y: Y,
@@ -26,16 +27,23 @@ class YAxis(private var y: Y,
 
 	fun third(): YAxis = YAxis(y, height.third())
 
-	fun ifSideOrUnder(other: Y, then: () -> Unit, ifNot: () -> Unit) {
-		if (y + height > other) {
+	private fun ifElse(check: () -> Boolean, then: () -> Unit, orElse: () -> Unit) {
+		check().ifTrue(then, orElse)
+	}
+
+	fun ifUnder(other: Y, then: () -> Unit, ifNot: () -> Unit) {
+		if (y > other) {
 			then()
 			return
 		}
 		ifNot()
 	}
 
-	fun ifSide(other: Y, then: () -> Unit) {
-		if (y < other && y + height > other)
+	fun ifSide(other: Y, then: () -> Unit, ifNot: () -> Unit) {
+		if (y < other && y + height > other) {
 			then()
+			return
+		}
+		ifNot()
 	}
 }
