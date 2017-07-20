@@ -17,6 +17,7 @@ class X(value: Float) : Numerical(value) {
 	operator fun minus(radius: Radius) = X(super.minus(radius))
 	operator fun minus(x: X) = X(super.minus(x))
 	operator fun times(factor: Factor) = X(super.times(factor))
+	operator fun div(width: Width) = X(super.div(width))
 	operator fun unaryMinus() = X(super.invert())
 	operator fun compareTo(other: X) = super.compareTo(other)
 
@@ -42,5 +43,7 @@ class X(value: Float) : Numerical(value) {
 		if (this < X(-1f) || this > X(1f))
 			block()
 	}
+
+	fun double() = X(value * 2f)
 
 }

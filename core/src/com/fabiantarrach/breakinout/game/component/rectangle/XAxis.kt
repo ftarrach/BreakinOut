@@ -43,17 +43,22 @@ class XAxis(private var x: X,
 
 	fun createDrop(): XAxis {
 		val dropWidth = width.halve()
-		val dropX = x + width.difference(dropWidth)
-							 .halve()
+		val differenceToDropWidth = width.difference(dropWidth)
+		val dropX = x + differenceToDropWidth.halve()
 		return XAxis(dropX, dropWidth)
 	}
 
 	fun ifContains(other: X, then: () -> Unit, ifNot: () -> Unit) {
-		if (x < other && x + width > other) {
-			then()
-			return
-		}
+		if (x < other && x + width > other)
+			return then()
 		ifNot()
 	}
+
+	fun relativeTo(other: X): X {
+		val center = x + width.halve()
+		return (other - center) / width
+	}
+
+	fun relativeTo(other: XAxis): X = relativeTo(other.x)
 
 }

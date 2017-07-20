@@ -45,7 +45,7 @@ class Rectangle(private var xAxis: XAxis,
 
 	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) {
 		yAxis.ifContains(y,
-				then = {xAxis.ifContains(x, orElse, then) },
+				then = { xAxis.ifContains(x, orElse, then) },
 				orElse = orElse)
 	}
 
@@ -86,5 +86,15 @@ class Rectangle(private var xAxis: XAxis,
 
 	fun crub(velocity: Velocity): Velocity =
 			velocity - xAxis.crub()
+
+	fun relativeTo(x: X) = xAxis.relativeTo(x)
+
+	override fun relativeTo(shape: Shape): X {
+		if (shape is Circle)
+			return shape.relativeTo(this)
+		if (shape is Rectangle)
+			return xAxis.relativeTo(shape.xAxis)
+		return X(0f)
+	}
 
 }

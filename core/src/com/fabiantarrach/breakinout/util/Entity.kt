@@ -28,4 +28,7 @@ abstract class Entity(life: Int = 1) {
 	protected fun ifUnder(other: Entity, then: () -> Unit, ifNot: () -> Unit) =
 			shape.ifUnder(other.shape, then, ifNot)
 
+	protected fun positionRelativeTo(other: Entity) =
+			shape.relativeTo(other.shape)
+
 }

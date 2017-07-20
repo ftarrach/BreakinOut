@@ -7,6 +7,7 @@ import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxIntersector
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.circle
+import com.fabiantarrach.breakinout.util.math.X
 
 class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	private var position = CirclePosition(x, y)
@@ -31,6 +32,12 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 
 	fun move(velocity: Velocity) {
 		position = position.move(velocity)
+	}
+
+	override fun relativeTo(shape: Shape): X {
+		if (shape is Rectangle)
+			return position.relativeTo(shape)
+		return X(0f)
 	}
 
 	private fun toGdxCircle() = position.createGdxCircle(radius)

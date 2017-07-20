@@ -6,6 +6,7 @@ import com.fabiantarrach.breakinout.util.Entity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.math.Y
 
 class Ball(x: Float, y: Float) : Entity() {
 
@@ -29,13 +30,21 @@ class Ball(x: Float, y: Float) : Entity() {
 	fun ifOverlaps(paddle: Paddle, then: () -> Unit) = super.ifOverlaps(paddle, then)
 	fun ifOverlaps(paddle: Brick, then: () -> Unit) = super.ifOverlaps(paddle, then)
 
-	fun ifMovingDown(then: () -> Unit) {
-		velocity.ifMovingDown(then)
-	}
+	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)
 
 	fun bounceOffFront() {
-		// TODO: pass metadata of the collision etc
 		velocity = velocity.deflectFront()
+	}
+
+	fun bounceOffFront(paddle: Paddle) {
+		bounceOffFront()
+		paddle.scrub(this)
+		val relativeTo = positionRelativeTo(paddle)
+		var pushVelocity = Velocity(relativeTo.double(), Y(0f))
+		velocity.ifMovingRight {
+			pushVelocity = pushVelocity.invert()
+		}
+		velocity = velocity.push(pushVelocity)
 	}
 
 	fun bounceOffSide() {

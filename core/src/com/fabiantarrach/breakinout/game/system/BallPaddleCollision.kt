@@ -8,9 +8,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 class BallPaddleCollision : LogicSystem() {
 
 	override fun update(delta: Timespan) =
-			database.each(Paddle::class.java) {
-				checkPaddle(it)
-			}
+			database.each(Paddle::class.java, this::checkPaddle)
 
 	private fun checkPaddle(paddle: Paddle) =
 			database.each(Ball::class.java) {
@@ -34,8 +32,8 @@ class BallPaddleCollision : LogicSystem() {
 						paddle.bat(ball)
 					},
 					ifFront = {
-						ball.bounceOffFront()
-						paddle.scrub(ball)
+						ball.bounceOffFront(paddle)
+
 					})
 
 }

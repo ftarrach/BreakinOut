@@ -11,8 +11,14 @@ class Level1(private val engine: Engine) {
 	fun build() {
 		val paddle = Paddle()
 		engine.addEntity(paddle)
-		val ball = Ball(0f, 0f)
+
+		val ball = Ball(0f,0f)
 		engine.addEntity(ball)
+
+//		(-10..10 step 5)
+//				.map { it / 100f }
+//				.mapIndexed { index, it -> Ball(it, index / 10f) }
+//				.forEach(engine::addEntity)
 
 		(65..85 step 10)
 				.map { it / 100f }
