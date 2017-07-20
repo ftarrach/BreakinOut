@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.game.component
 
-import com.fabiantarrach.breakinout.util.AngleFactory
+import com.fabiantarrach.breakinout.game.meta.AngleFactory
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X

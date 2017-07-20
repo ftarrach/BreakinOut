@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.util
+package com.fabiantarrach.breakinout.game.meta
 
 import com.fabiantarrach.breakinout.game.component.Angle
 import java.util.*

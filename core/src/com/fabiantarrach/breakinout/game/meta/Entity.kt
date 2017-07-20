@@ -1,7 +1,9 @@
-package com.fabiantarrach.breakinout.util
+package com.fabiantarrach.breakinout.game.meta
 
 import com.fabiantarrach.breakinout.game.component.Lifepoints
 import com.fabiantarrach.breakinout.game.component.Shape
+import com.fabiantarrach.breakinout.util.GdxColor
+import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 abstract class Entity(life: Int = 1) {

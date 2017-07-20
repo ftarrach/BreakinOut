@@ -5,7 +5,7 @@ import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
 import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
-import com.fabiantarrach.breakinout.util.MovingEntity
+import com.fabiantarrach.breakinout.game.meta.MovingEntity
 
 class Paddle : MovingEntity() {
 
