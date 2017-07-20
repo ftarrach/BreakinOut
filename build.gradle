@@ -51,15 +51,18 @@ project(":core") {
     }
 }
 
-project(":tests") {
+project(":test") {
     apply plugin: "java"
 
     sourceSets.test.java.srcDirs = ["src/"]
 
     dependencies {
         compile project(":core")
+        compile "org.spockframework:spock-core:1.1-groovy-2.4"
 
         testCompile 'junit:junit:4.+'
+        testCompile "org.spockframework:spock-core:1.1-groovy-2.4"
+
         testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx:$gdxVersion"
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"

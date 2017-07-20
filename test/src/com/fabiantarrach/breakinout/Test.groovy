@@ -1,4 +1,10 @@
 package com.fabiantarrach.breakinout
 
-def x = 1
-assert x == 2
+import spock.lang.Specification
+
+class MyFirstSpec extends Specification {
+    def "let's try this!"() {
+        expect:
+        Math.max(1, 2) == 3
+    }
+}
