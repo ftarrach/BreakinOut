@@ -33,15 +33,12 @@ class XAxis(private var x: X,
 		width.update(gdxRectangle)
 	}
 
-	// TODO: very imperative. Can i make this better?
-	fun crub() = x.crub() + width.halve().crub()
-
 	fun move(velocity: Velocity): XAxis {
 		x = velocity.move(x)
 		return XAxis(x, width)
 	}
 
-	fun createDrop(): XAxis {
+	fun createDropAxis(): XAxis {
 		val dropWidth = width.halve()
 		val differenceToDropWidth = width.difference(dropWidth)
 		val dropX = x + differenceToDropWidth.halve()

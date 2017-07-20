@@ -25,44 +25,38 @@ class Rectangle(private var xAxis: XAxis,
 	override fun ifOverlaps(other: Shape, then: () -> Unit) {
 		if (other is Rectangle)
 			ifOverlaps(other, then)
+		if (other is Circle)
+			other.ifOverlaps(this, then)
 	}
 
+	fun ifOverlaps(other: Rectangle, then: () -> Unit) =
+			xAxis.ifOverlaps(other.xAxis) {
+				yAxis.ifOverlaps(other.yAxis, then)
+			}
+
 	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Circle) {
-			other.ifNextTo(this, then, ifNot)
-			return
-		}
+		if (other is Circle)
+			return other.ifNextTo(this, then, ifNot)
 		throw IllegalArgumentException("ifNextTo between Rectangle and ${other::javaClass} is not yet implemented")
 	}
 
-	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Circle) {
-			other.ifUnder(this, then, ifNot)
-			return
-		}
-		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
-	}
+	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) =
+			yAxis.ifContains(y,
+					then = { xAxis.ifContains(x, orElse, then) },
+					orElse = orElse)
 
-	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) {
-		yAxis.ifContains(y,
-				then = { xAxis.ifContains(x, orElse, then) },
-				orElse = orElse)
+	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+		if (other is Circle)
+			return other.ifUnder(this, then, ifNot)
+		throw IllegalArgumentException("ifUnder between Rectangle and ${other::javaClass} is not yet implemented")
 	}
 
 	fun ifUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifUnder(y, then, ifNot)
 
 	fun createDrop(): Rectangle =
 			Rectangle(
-					xAxis.createDrop(),
-					yAxis.third())
-
-	fun ifOverlaps(other: Rectangle, then: () -> Unit) =
-			xAxis.ifOverlaps(other.xAxis) {
-				overlapsY(other.yAxis, then)
-			}
-
-	private fun overlapsY(other: YAxis, then: () -> Unit) =
-			yAxis.ifOverlaps(other, then)
+					xAxis.createDropAxis(),
+					yAxis.thirdOf())
 
 	fun createGdx(): GdxRectangle {
 		val gdxRectangle = GdxRectangle()
@@ -84,17 +78,13 @@ class Rectangle(private var xAxis: XAxis,
 		yAxis = yAxis.move(velocity)
 	}
 
-	fun crub(velocity: Velocity): Velocity =
-			velocity - xAxis.crub()
-
-	fun relativeTo(x: X) = xAxis.relativeTo(x)
+	override fun relativeTo(x: X) = xAxis.relativeTo(x)
 
 	override fun relativeTo(shape: Shape): X {
 		if (shape is Circle)
 			return shape.relativeTo(this)
 		if (shape is Rectangle)
 			return xAxis.relativeTo(shape.xAxis)
-		return X(0f)
+		throw IllegalArgumentException("relativeTo between Rectangle and ${shape::javaClass} is not yet implemented")
 	}
-
 }

@@ -7,14 +7,12 @@ class Height(value: Float) : Numerical(value) {
 
 	init {
 		if (value < 0)
-			throw IllegalArgumentException("width cannot be smaller than 0")
+			throw IllegalArgumentException("height cannot be smaller than 0")
 	}
 
 	fun update(rectangle: GdxRectangle) {
 		rectangle.height = value
 	}
 
-	fun third() = oneThird {
-		Height(it)
-	}
+	fun third() = oneThird(::Height)
 }

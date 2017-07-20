@@ -29,9 +29,9 @@ fun <K, V> GdxObjectMap<K, V>.getOrPutIfAbscent(key: K, value: V): V {
 
 fun GdxColor.darker(): GdxColor {
 	val darkerColor = copy()
-	darkerColor.r *= 0.7f
-	darkerColor.g *= 0.7f
-	darkerColor.b *= 0.7f
+	darkerColor.r *= 0.9f
+	darkerColor.g *= 0.9f
+	darkerColor.b *= 0.9f
 	return darkerColor
 }
 
@@ -43,12 +43,4 @@ fun GdxShapeRenderer.rect(rectangle: GdxRectangle, color: Color) {
 fun GdxShapeRenderer.circle(circle: GdxCircle, color: Color) {
 	this.color = color
 	circle(circle.x, circle.y, circle.radius, 12)
-}
-
-fun Boolean.ifTrue(then: () -> Unit, ifFalse: () -> Unit) {
-	if(this) {
-		then()
-		return
-	}
-	ifFalse()
 }

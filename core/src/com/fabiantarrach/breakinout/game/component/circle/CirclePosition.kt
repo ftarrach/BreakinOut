@@ -7,6 +7,7 @@ import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X
 import com.fabiantarrach.breakinout.util.math.Y
 
+// TODO: automatic keepInside on move()?
 class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 
 	constructor(x: Float, y: Float) : this(X(x),
@@ -30,11 +31,6 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 		val newY = velocity.move(y)
 		return CirclePosition(newX, newY)
 	}
-
-//	fun topBorder(radius: Radius) = y.plus(radius)
-//	fun bottomBorder(radius: Radius) = y.minus(radius)
-//	fun leftBorder(radius: Radius) = x.plus(radius)
-//	fun rightBorder(radius: Radius) = x.minus(radius)
 
 	fun keepInside(radius: Radius): CirclePosition {
 		var newX = x
@@ -60,7 +56,14 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 	fun ifUnder(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
 			rectangle.ifUnder(y, then, ifNot)
 
-	fun relativeTo(other: Rectangle): X = other.relativeTo(x)
+	fun ifUnder(other: CirclePosition, then: () -> Unit, ifNot: () -> Unit) {
+		if (y < other.y)
+			return then()
+		ifNot()
+	}
 
-//	fun ifOver(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) = rectangle.ifSideOrUnder(y, then, ifNot)
+	fun relativeTo(other: Rectangle) = other.relativeTo(x)
+	fun relativeTo(other: X) = other - x
+	fun relativeTo(other: CirclePosition): X = other.x - x
+
 }

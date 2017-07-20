@@ -1,11 +1,10 @@
 package com.fabiantarrach.breakinout.game.component
 
+import com.fabiantarrach.breakinout.util.AngleFactory
 import com.fabiantarrach.breakinout.util.engine.Timespan
-import com.fabiantarrach.breakinout.util.math.Factor
 import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X
 import com.fabiantarrach.breakinout.util.math.Y
-import java.util.*
 
 class Velocity(x: X, y: Y) : Vectorial(x, y) {
 
@@ -27,32 +26,12 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 	fun ifMovingRight(then: () -> Unit) = x.ifNegative(then)
 
 	fun randomizeAngle(): Velocity {
-		val randomAngle = Random().nextInt(360).toFloat()
-		val angle = Angle(randomAngle)
-		return rotate(angle)
+		val angleFactory = AngleFactory()
+		val randomAngle = angleFactory.createRandomAngle()
+		return rotate(randomAngle, ::Velocity)
 	}
 
 	fun push(push: Velocity) = super.push(push, ::Velocity)
-
-	private fun rotate(angle: Angle) =
-			super.rotate(angle, ::Velocity)
-
-	fun faster(): Velocity {
-		val factor = Factor(5f)
-		return super.scale(factor, ::Velocity)
-	}
-
-	fun slamX(other: Velocity): Velocity {
-		var newX = x
-		x.ifNegative {
-			newX = x - other.x
-		}
-		x.ifPositive {
-			newX = x + other.x
-		}
-		println("$x => $newX")
-		return Velocity(newX, y)
-	}
 
 	fun invert() = Velocity(-x, -y)
 }

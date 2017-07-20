@@ -15,5 +15,6 @@ abstract class Shape {
 	abstract fun ifOverlaps(other: Shape, then: () -> Unit)
 
 	abstract fun relativeTo(shape: Shape): X
+	abstract fun relativeTo(x: X): X
 
 }

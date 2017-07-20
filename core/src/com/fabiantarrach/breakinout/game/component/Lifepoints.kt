@@ -30,10 +30,10 @@ class Lifepoints(private var lifepoints: Int) {
 		lifepoints = 0
 	}
 
-	fun createColor(base: GdxColor) = (1..lifepoints)
-			.fold(base) { color, _ ->
-				color.darker()
-//				color
-			}
+	fun createColor(base: GdxColor) =
+			(1..lifepoints)
+					.fold(base) { color, _ ->
+						color.darker()
+					}
 
 }

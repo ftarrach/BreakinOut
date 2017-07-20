@@ -11,23 +11,25 @@ class Paddle : MovingEntity() {
 
 	override val shape = Rectangle(0f, -0.8f, 0.2f, 0.05f)
 
-	override fun render(renderer: GdxShapeRenderer) {
-		shape.render(renderer, GdxColor.WHITE)
-	}
+	override fun render(renderer: GdxShapeRenderer) =
+			shape.render(renderer, GdxColor.WHITE)
 
-	fun moveTo(mouse: MousePosition) {
-		val velocityToMouse = mouse.moveVelocity()
-		val crubbed = shape.crub(velocityToMouse)
-		velocity = crubbed.faster()
-	}
+	override public fun moveTo(mouse: MousePosition) =
+			super.moveTo(mouse)
 
-	fun ifOverlaps(powerUp: PowerUp, then: () -> Unit) = super.ifOverlaps(powerUp, then)
+	fun ifOverlaps(powerUp: PowerUp, then: () -> Unit) =
+			super.ifOverlaps(powerUp, then)
 
-	fun bigger() = shape.widen()
-	fun smaller() = shape.shorten()
+	fun bigger() =
+			shape.widen()
 
-	fun bat(ball: Ball) = ball.slamX(velocity)
+	fun smaller() =
+			shape.shorten()
 
-	fun scrub(ball: Ball) = super.scrub(ball)
+	fun bat(other: Ball) =
+			super.bat(other)
+
+	fun scrub(ball: Ball) =
+			super.scrub(ball)
 
 }

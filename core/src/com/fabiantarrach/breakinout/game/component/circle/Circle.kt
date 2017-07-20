@@ -37,34 +37,29 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	override fun relativeTo(shape: Shape): X {
 		if (shape is Rectangle)
 			return position.relativeTo(shape)
-		return X(0f)
+		if (shape is Circle)
+			return position.relativeTo(shape.position)
+		throw IllegalArgumentException("relativeTo between Circle and ${shape::javaClass} is not yet implemented")
 	}
+
+	override fun relativeTo(x: X) = position.relativeTo(x)
 
 	private fun toGdxCircle() = position.createGdxCircle(radius)
 
 	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Rectangle) {
-			position.ifNextTo(other, then, ifNot)
-			return
-		}
+		if (other is Rectangle)
+			return position.ifNextTo(other, then, ifNot)
+		// TODO: next to circle?
 		throw IllegalArgumentException("ifNextTo between Circle and ${other::javaClass} is not yet implemented")
 	}
 
 	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Rectangle) {
-			position.ifUnder(other, then, ifNot)
-			return
-		}
+		if (other is Rectangle)
+			return position.ifUnder(other, then, ifNot)
+		if (other is Circle)
+			return position.ifUnder(other.position, then, ifNot)
 		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
 	}
-
-//	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-//		if (other is Rectangle)
-//			ifUnderRectangle(other, then, ifNot)
-//	}
-//
-//	private fun ifUnderRectangle(rectangle: Rectangle, then: () -> Unit, ifNot: () -> Unit) =
-//			position.ifOver(rectangle, then, ifNot)
 
 	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		position.ifLeftOutside(radius) {

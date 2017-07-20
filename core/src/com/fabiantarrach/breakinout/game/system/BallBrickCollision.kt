@@ -2,14 +2,14 @@ package com.fabiantarrach.breakinout.game.system
 
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Brick
+import com.fabiantarrach.breakinout.game.meta.Collision
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 class BallBrickCollision : LogicSystem() {
 
-	// TODO: wrap booleans
-	private var overlapped = false
-	private var sideCollision = false
+	// TODO: collision as a variable in checkBrick passed around and updated
+	private val collision = Collision()
 
 	override fun update(delta: Timespan) =
 			database.each(Ball::class.java) {
@@ -17,39 +17,29 @@ class BallBrickCollision : LogicSystem() {
 			}
 
 	private fun checkBrick(ball: Ball) {
-		reset()
+		collision.reset()
 		database.each(Brick::class.java) {
 			checkOverlap(ball, it)
 		}
-		if (overlapped)
+		collision.ifOccured {
 			bounce(ball)
-	}
-
-	private fun reset() {
-		overlapped = false
-		sideCollision = false
+		}
 	}
 
 	private fun bounce(ball: Ball) {
 		ball.revertLastMove()
-		if (sideCollision) {
-			ball.bounceOffSide()
-			return
-		}
-		println("front")
-		ball.bounceOffFront()
+		collision.ifSideCollision(
+				then = ball::bounceOffSide,
+				orElse = ball::bounceOffFront
+		)
 	}
 
 	private fun checkOverlap(ball: Ball, brick: Brick) =
 			ball.ifOverlaps(brick) {
-				overlapped = true
-				ball.ifNextTo(brick, then = this::fireSideCollision)
+				collision.occured()
+				ball.ifNextTo(brick, then = collision::markSide)
 				hitBrick(brick)
 			}
-
-	private fun fireSideCollision() {
-		sideCollision = true
-	}
 
 	private fun hitBrick(brick: Brick) =
 			brick.hit(died = {

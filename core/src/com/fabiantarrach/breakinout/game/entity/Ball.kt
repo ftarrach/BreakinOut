@@ -11,12 +11,9 @@ import com.fabiantarrach.breakinout.util.math.Y
 class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 
 	override val shape = Circle(x, y, 0.025f)
-	// TODO: 3 members. MoveableEntity class?
-	private var lastTimespan: Timespan = Timespan(0f)
 
 	override fun update(delta: Timespan) {
-		lastTimespan = delta
-		shape.move(velocity * delta)
+		super.update(delta)
 		shape.ifOutsideGame(
 				left = this::bounceOffSide,
 				right = this::bounceOffSide,
@@ -31,23 +28,18 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 	fun ifOverlaps(paddle: Paddle, then: () -> Unit) = super.ifOverlaps(paddle, then)
 	fun ifOverlaps(paddle: Brick, then: () -> Unit) = super.ifOverlaps(paddle, then)
 
-	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)
-
+	override public fun bounceOffFront() = super.bounceOffFront()
 	override public fun bounceOffSide() = super.bounceOffSide()
-
-	fun bounceOffFront() {
-		velocity = velocity.deflectFront()
-	}
 
 	fun bounceOffFront(paddle: Paddle) {
 		bounceOffFront()
 		paddle.scrub(this)
 		val relativeTo = positionRelativeTo(paddle)
 		var pushVelocity = Velocity(relativeTo.double(), Y(0f))
-		velocity.ifMovingRight {
+		ifMovingRight {
 			pushVelocity = pushVelocity.invert()
 		}
-		velocity = velocity.push(pushVelocity)
+		push(pushVelocity)
 	}
 
 	fun ifNextTo(brick: Brick, then: () -> Unit, ifNot: () -> Unit = {}) =
@@ -58,12 +50,7 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 				super.ifUnder(paddle, then, ifFront)
 			}
 
-	fun revertLastMove() {
-		shape.move(velocity.invert() * lastTimespan)
-	}
+	override public fun slamX(other: Velocity) = super.slamX(other)
+	override public fun revertLastMove() = super.revertLastMove()
 
-	fun slamX(other: Velocity) {
-		shape.move(other * lastTimespan)
-		velocity += other
-	}
 }
