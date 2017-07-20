@@ -79,7 +79,7 @@ class Rectangle(private var xAxis: XAxis,
 		renderer.rect(rectangle, color)
 	}
 
-	fun move(velocity: Velocity) {
+	override fun move(velocity: Velocity) {
 		xAxis = xAxis.move(velocity)
 		yAxis = yAxis.move(velocity)
 	}

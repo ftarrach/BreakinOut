@@ -6,11 +6,14 @@ import com.fabiantarrach.breakinout.util.math.X
 
 abstract class Shape {
 
-	abstract fun ifOverlaps(other: Shape, then: () -> Unit)
+	abstract fun move(velocity: Velocity)
+
 	abstract fun render(renderer: GdxShapeRenderer, color: GdxColor)
 
 	abstract fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit)
 	abstract fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit)
+	abstract fun ifOverlaps(other: Shape, then: () -> Unit)
+
 	abstract fun relativeTo(shape: Shape): X
 
 }

@@ -1,5 +1,6 @@
 package com.fabiantarrach.breakinout.screens
 
+import com.badlogic.gdx.Gdx
 import com.fabiantarrach.breakinout.game.BreakinOutEngine
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.screen.FitScreen
@@ -10,6 +11,7 @@ class GameScreen(screenState: ScreenState) : FitScreen(1f) {
 	private val engine = BreakinOutEngine(screenState, camera)
 
 	override fun show() {
+		Gdx.input.inputProcessor = null
 		engine.buildGame()
 	}
 

@@ -1,6 +1,7 @@
 package com.fabiantarrach.breakinout.game.component
 
 import com.fabiantarrach.breakinout.util.GdxColor
+import com.fabiantarrach.breakinout.util.darker
 
 class Lifepoints(private var lifepoints: Int) {
 
@@ -29,10 +30,10 @@ class Lifepoints(private var lifepoints: Int) {
 		lifepoints = 0
 	}
 
-	fun createColor(base: GdxColor) = (0..lifepoints)
+	fun createColor(base: GdxColor) = (1..lifepoints)
 			.fold(base) { color, _ ->
-//				color.darker()
-				color
+				color.darker()
+//				color
 			}
 
 }
