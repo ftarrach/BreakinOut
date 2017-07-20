@@ -16,6 +16,7 @@ abstract class Entity(life: Int = 1) {
 	fun ifAlive(then: () -> Unit) = lifepoints.ifAlive(then)
 	fun hit(died: () -> Unit) = lifepoints.hit(died)
 	fun die() = lifepoints.drainAll()
+
 	protected fun createColor(base: GdxColor) = lifepoints.createColor(base)
 
 	protected fun ifOverlaps(other: Entity, then: () -> Unit) =

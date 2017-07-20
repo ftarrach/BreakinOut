@@ -29,6 +29,7 @@ class Y(value: Float) : Numerical(value) {
 	}
 
 	override public fun ifNegative(then: () -> Unit) = super.ifNegative(then)
+	override public fun ifPositive(then: () -> Unit) = super.ifPositive(then)
 
 	fun ifOutside(block: () -> Unit) {
 		if (this < Y(-1f) || this > Y(1f))

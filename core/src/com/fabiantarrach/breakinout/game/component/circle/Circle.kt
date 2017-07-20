@@ -51,7 +51,6 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
 	}
 
-
 //	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
 //		if (other is Rectangle)
 //			ifUnderRectangle(other, then, ifNot)

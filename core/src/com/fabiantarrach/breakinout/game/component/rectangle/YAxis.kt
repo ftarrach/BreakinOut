@@ -39,11 +39,11 @@ class YAxis(private var y: Y,
 		ifNot()
 	}
 
-	fun ifSide(other: Y, then: () -> Unit, ifNot: () -> Unit) {
+	fun ifContains(other: Y, then: () -> Unit, orElse: () -> Unit) {
 		if (y < other && y + height > other) {
 			then()
 			return
 		}
-		ifNot()
+		orElse()
 	}
 }

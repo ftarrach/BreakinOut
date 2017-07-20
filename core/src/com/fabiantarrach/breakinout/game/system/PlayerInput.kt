@@ -11,7 +11,7 @@ class PlayerInput(private val camera: Camera) : LogicSystem() {
 		val mouse = camera.mousePosition()
 		database.each(Paddle::class.java) {
 			it.moveTo(mouse)
-////			it.moveTo(MousePosition(-0.5f, 0f))
+//			it.moveTo(MousePosition(-0.5f, 0f))
 		}
 	}
 }

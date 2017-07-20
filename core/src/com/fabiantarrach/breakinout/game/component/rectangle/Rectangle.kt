@@ -43,7 +43,12 @@ class Rectangle(private var xAxis: XAxis,
 		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
 	}
 
-	fun ifSideOf(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifSide(y, then, ifNot)
+	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) {
+		yAxis.ifContains(y,
+				then = {xAxis.ifContains(x, orElse, then) },
+				orElse = orElse)
+	}
+
 	fun ifUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifUnder(y, then, ifNot)
 
 	fun createDrop(): Rectangle =

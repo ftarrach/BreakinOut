@@ -24,6 +24,7 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 	fun deflectSide() = Velocity(-x, y)
 
 	fun ifMovingDown(then: () -> Unit) = y.ifNegative(then)
+	fun ifMovingUp(then: () -> Unit) = y.ifPositive(then)
 
 	fun randomizeAngle(): Velocity {
 		val randomAngle = Random().nextInt(360).toFloat()
@@ -53,4 +54,5 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 		return Velocity(newX, y)
 	}
 
+	fun invert() = Velocity(-x, -y)
 }

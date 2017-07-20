@@ -31,22 +31,21 @@ class BallBrickCollision : LogicSystem() {
 	}
 
 	private fun bounce(ball: Ball) {
+		ball.revertLastMove()
 		if (sideCollision) {
 			ball.bounceOffSide()
 			return
 		}
+		println("front")
 		ball.bounceOffFront()
 	}
 
 	private fun checkOverlap(ball: Ball, brick: Brick) =
 			ball.ifOverlaps(brick) {
 				overlapped = true
-				resolveOperlap(ball, brick)
+				ball.ifNextTo(brick, then = this::fireSideCollision)
 				hitBrick(brick)
 			}
-
-	private fun resolveOperlap(ball: Ball, brick: Brick) =
-			ball.ifNextTo(brick, then = this::fireSideCollision)
 
 	private fun fireSideCollision() {
 		sideCollision = true

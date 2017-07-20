@@ -29,7 +29,9 @@ class Ball(x: Float, y: Float) : Entity() {
 	fun ifOverlaps(paddle: Paddle, then: () -> Unit) = super.ifOverlaps(paddle, then)
 	fun ifOverlaps(paddle: Brick, then: () -> Unit) = super.ifOverlaps(paddle, then)
 
-	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)
+	fun ifMovingDown(then: () -> Unit) {
+		velocity.ifMovingDown(then)
+	}
 
 	fun bounceOffFront() {
 		// TODO: pass metadata of the collision etc
@@ -48,11 +50,6 @@ class Ball(x: Float, y: Float) : Entity() {
 		velocity = velocity.push(push)
 	}
 
-	@Deprecated("debug only")
-	fun moveRight() {
-		velocity = Velocity(1f, -Float.MIN_VALUE)
-	}
-
 	fun ifNextTo(brick: Brick, then: () -> Unit, ifNot: () -> Unit = {}) =
 			super.ifNextTo(brick, then, ifNot)
 
@@ -61,8 +58,27 @@ class Ball(x: Float, y: Float) : Entity() {
 				super.ifUnder(paddle, then, ifFront)
 			}
 
+	fun revertLastMove() {
+		shape.move(velocity.invert() * lastTimespan)
+	}
+
 	fun slamX(other: Velocity) {
 		shape.move(other * lastTimespan)
 		velocity += other
+	}
+
+	@Deprecated("debug only")
+	fun moveRight() {
+		velocity = Velocity(1f, -Float.MIN_VALUE)
+	}
+
+	@Deprecated("debug only")
+	fun moveLeft() {
+		velocity = Velocity(-1f, -Float.MIN_VALUE)
+	}
+
+	@Deprecated("debug only")
+	fun moveLeftDown() {
+		velocity = Velocity(-1f, -1f)
 	}
 }

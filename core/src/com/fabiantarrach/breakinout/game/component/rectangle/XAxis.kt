@@ -48,4 +48,12 @@ class XAxis(private var x: X,
 		return XAxis(dropX, dropWidth)
 	}
 
+	fun ifContains(other: X, then: () -> Unit, ifNot: () -> Unit) {
+		if (x < other && x + width > other) {
+			then()
+			return
+		}
+		ifNot()
+	}
+
 }
