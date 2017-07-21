@@ -52,4 +52,18 @@ abstract class Vectorial(protected val x: X,
 		return "$x $y"
 	}
 
+	override fun equals(other: Any?): Boolean {
+		if (this === other) return true
+		if (other?.javaClass != javaClass) return false
+		other as Vectorial
+		if (x != other.x || y != other.y) return false
+		return true
+	}
+
+	override fun hashCode(): Int {
+		var result = x.hashCode()
+		result = 31 * result + y.hashCode()
+		return result
+	}
+
 }

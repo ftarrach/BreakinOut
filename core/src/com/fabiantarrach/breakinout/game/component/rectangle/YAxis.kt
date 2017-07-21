@@ -31,8 +31,9 @@ class YAxis(private var y: Y,
 	}
 
 	fun ifUnder(other: Y, then: () -> Unit, ifNot: () -> Unit) =
-			(y > other)
-					.accept(then, ifNot)
+		(y > other)
+				.accept(then, ifNot)
+
 
 	fun ifContains(other: Y, then: () -> Unit, orElse: () -> Unit) =
 			(y < other && y + height > other)

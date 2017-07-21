@@ -32,7 +32,8 @@ class Rectangle(private var xAxis: XAxis,
 					then = { xAxis.ifContains(x, orElse, then) },
 					orElse = orElse)
 
-	fun ifUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifUnder(y, then, ifNot)
+	fun ifUnder(y: Y, then: () -> Unit, orElse: () -> Unit) =
+			yAxis.ifUnder(y, then, orElse)
 
 	fun createDrop(): Rectangle =
 			Rectangle(
