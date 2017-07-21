@@ -2,6 +2,8 @@ package com.fabiantarrach.breakinout.game.component.rectangle
 
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.util.GdxRectangle
+import com.fabiantarrach.breakinout.util.accept
+import com.fabiantarrach.breakinout.util.ifTrue
 import com.fabiantarrach.breakinout.util.math.Factor
 import com.fabiantarrach.breakinout.util.math.X
 
@@ -10,10 +12,8 @@ class XAxis(private var x: X,
 
 	constructor(x: Float, width: Float) : this(X(x), Width(width))
 
-	fun ifOverlaps(other: XAxis, then: () -> Unit) {
-		if (x < other.x + width && x + width > other.x)
-			then()
-	}
+	fun ifOverlaps(other: XAxis, then: () -> Unit) =
+			(x < other.x + width && x + width > other.x).ifTrue(then)
 
 	fun shorter(factor: Factor) {
 		width = width.shorter(factor)
@@ -45,11 +45,8 @@ class XAxis(private var x: X,
 		return XAxis(dropX, dropWidth)
 	}
 
-	fun ifContains(other: X, then: () -> Unit, ifNot: () -> Unit) {
-		if (x < other && x + width > other)
-			return then()
-		ifNot()
-	}
+	fun ifContains(other: X, then: () -> Unit, orElse: () -> Unit) =
+			(x < other && x + width > other).accept(then, orElse)
 
 	fun relativeTo(other: X): X {
 		val center = x + width.halve()

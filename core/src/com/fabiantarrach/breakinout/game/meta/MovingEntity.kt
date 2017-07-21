@@ -5,7 +5,8 @@ import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f), life: Int = 1) : Entity(life) {
+abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
+                            life: Int = 1) : Entity(life) {
 
 	private var lastTimespan: Timespan = Timespan(0f)
 
@@ -35,8 +36,7 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f), l
 		velocity = mouse.velocityTo(shape)
 	}
 
-	protected fun scrub(other: MovingEntity) {
-		val friction = Friction(0.8f)
+	protected fun scrub(other: MovingEntity, friction: Friction) {
 		val scrubVelocity = velocity.cease(friction)
 		other.push(scrubVelocity)
 	}

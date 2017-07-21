@@ -2,6 +2,7 @@ package com.fabiantarrach.breakinout.util.math
 
 import com.badlogic.gdx.math.MathUtils
 import com.fabiantarrach.breakinout.util.GdxVector
+import com.fabiantarrach.breakinout.util.ifTrue
 
 // TODO: value is protected because of GdxRectangle and GdxCircle
 abstract class Numerical(protected val value: Float) {
@@ -38,15 +39,13 @@ abstract class Numerical(protected val value: Float) {
 
 	protected fun <T : Vectorial> createVectorial(other: Numerical, block: (Float, Float) -> T) = block(value, other.value)
 
-	protected open fun ifNegative(then: () -> Unit) {
-		if (value < 0)
-			then()
-	}
+	protected open fun ifNegative(then: () -> Unit) =
+			(value < 0)
+					.ifTrue(then)
 
-	protected open fun ifPositive(then: () -> Unit) {
-		if (value > 0)
-			then()
-	}
+	protected open fun ifPositive(then: () -> Unit) =
+			(value > 0)
+					.ifTrue(then)
 
 	override fun toString(): String {
 		return "$value"

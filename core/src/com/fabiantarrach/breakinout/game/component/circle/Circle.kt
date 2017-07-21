@@ -13,12 +13,7 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	private var position = CirclePosition(x, y)
 	private val radius = Radius(radius)
 
-	override fun ifOverlaps(other: Shape, then: () -> Unit) {
-		if (other is Rectangle)
-			ifOverlaps(other, then)
-	}
-
-	private fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) {
+	fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) {
 		val gdxCircle = toGdxCircle()
 		val gdxRectangle = rectangle.createGdx()
 		if (GdxIntersector.overlaps(gdxCircle, gdxRectangle))
@@ -46,12 +41,8 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 
 	private fun toGdxCircle() = position.createGdxCircle(radius)
 
-	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Rectangle)
-			return position.ifNextTo(other, then, ifNot)
-		// TODO: next to circle?
-		throw IllegalArgumentException("ifNextTo between Circle and ${other::javaClass} is not yet implemented")
-	}
+	fun ifNextTo(other: Rectangle, then: () -> Unit, orElse: () -> Unit) =
+			position.ifNextTo(other, then, orElse)
 
 	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
 		if (other is Rectangle)

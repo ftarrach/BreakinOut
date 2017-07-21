@@ -8,7 +8,6 @@ class AngleFactory {
 		val randomNumberGenerator = Random()
 		val randomAngle = randomNumberGenerator.nextInt(360)
 		val randomFloatAngle = randomAngle.toFloat()
-		val angle = Angle(randomFloatAngle)
-		return angle
+		return Angle(randomFloatAngle)
 	}
 }

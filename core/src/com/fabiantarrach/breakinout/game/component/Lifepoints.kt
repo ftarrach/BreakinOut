@@ -2,6 +2,7 @@ package com.fabiantarrach.breakinout.game.component
 
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.darker
+import com.fabiantarrach.breakinout.util.ifTrue
 
 class Lifepoints(private var lifepoints: Int) {
 
@@ -10,23 +11,19 @@ class Lifepoints(private var lifepoints: Int) {
 			throw IllegalArgumentException("negative lifepoints are not allowed")
 	}
 
-	fun ifDead(then: () -> Unit) {
-		if (lifepoints <= 0)
-			then()
-	}
+	fun ifDead(then: () -> Unit) =
+			(lifepoints <= 0)
+					.ifTrue(then)
 
-	fun ifAlive(then: () -> Unit) {
-		if (lifepoints > 0)
-			then()
-	}
+	fun ifAlive(then: () -> Unit) =
+			(lifepoints > 0).
+					ifTrue(then)
 
-	fun hit(died: () -> Unit = {}) {
-		lifepoints--
-		if (lifepoints == 0)
-			died()
-	}
+	fun hit(died: () -> Unit = {}) =
+			(--lifepoints == 0)
+					.ifTrue(died)
 
-	fun drainAll() {
+	fun drain() {
 		lifepoints = 0
 	}
 

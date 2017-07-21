@@ -1,13 +1,11 @@
 package com.fabiantarrach.breakinout.game.meta
 
+import com.fabiantarrach.breakinout.util.accept
+import com.fabiantarrach.breakinout.util.ifTrue
+
 class Collision {
 	private var sideCollision = false
 	private var occured = false
-
-	fun reset() {
-		sideCollision = false
-		occured = false
-	}
 
 	fun occured() {
 		occured = true
@@ -18,14 +16,9 @@ class Collision {
 		sideCollision = true
 	}
 
-	fun ifOccured(then: () -> Unit) {
-		if (occured)
-			then()
-	}
+	fun ifOccured(then: () -> Unit) =
+			occured.ifTrue(then)
 
-	fun ifSideCollision(then: () -> Unit, orElse: () -> Unit) {
-		if (sideCollision)
-			return then()
-		orElse()
-	}
+	fun ifSideCollision(then: () -> Unit, orElse: () -> Unit) =
+			sideCollision.accept(then, orElse)
 }

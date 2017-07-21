@@ -6,6 +6,7 @@ import com.fabiantarrach.breakinout.game.component.rectangle.Width
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxVector
+import com.fabiantarrach.breakinout.util.ifTrue
 
 
 class X(value: Float) : Numerical(value) {
@@ -38,10 +39,9 @@ class X(value: Float) : Numerical(value) {
 
 	fun createHorizontalVelocity() = createVectorial(Y(0f), ::Velocity)
 
-	fun ifOutside(block: () -> Unit) {
-		if (this < X(-1f) || this > X(1f))
-			block()
-	}
+	fun ifOutside(block: () -> Unit) =
+			(this < X(-1f) || this > X(1f))
+					.ifTrue(block)
 
 	fun double() = X(value * 2f)
 

@@ -2,6 +2,8 @@ package com.fabiantarrach.breakinout.game.meta
 
 import com.fabiantarrach.breakinout.game.component.Lifepoints
 import com.fabiantarrach.breakinout.game.component.Shape
+import com.fabiantarrach.breakinout.game.meta.nextTo.NextTo
+import com.fabiantarrach.breakinout.game.meta.overlap.Collision
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
@@ -17,15 +19,17 @@ abstract class Entity(life: Int = 1) {
 	fun ifDead(then: () -> Unit) = lifepoints.ifDead(then)
 	fun ifAlive(then: () -> Unit) = lifepoints.ifAlive(then)
 	fun hit(died: () -> Unit) = lifepoints.hit(died)
-	fun die() = lifepoints.drainAll()
+	fun die() = lifepoints.drain()
 
 	protected fun createColor(base: GdxColor) = lifepoints.createColor(base)
 
 	protected fun ifOverlaps(other: Entity, then: () -> Unit) =
-			shape.ifOverlaps(other.shape, then)
+			Collision()
+					.process(shape, other.shape, then)
 
 	protected fun ifNextTo(other: Entity, then: () -> Unit, ifNot: () -> Unit) =
-			shape.ifNextTo(other.shape, then, ifNot)
+			NextTo()
+					.process(shape, other.shape, then, ifNot)
 
 	protected fun ifUnder(other: Entity, then: () -> Unit, ifNot: () -> Unit) =
 			shape.ifUnder(other.shape, then, ifNot)

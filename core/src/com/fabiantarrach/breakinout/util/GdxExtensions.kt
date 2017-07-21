@@ -2,6 +2,7 @@ package com.fabiantarrach.breakinout.util
 
 import com.badlogic.gdx.graphics.Color
 import ktx.app.copy
+import ktx.collections.isEmpty
 
 typealias GdxObjectMap<K, V> = com.badlogic.gdx.utils.ObjectMap<K, V>
 typealias GdxScreen = com.badlogic.gdx.Screen
@@ -43,4 +44,21 @@ fun GdxShapeRenderer.rect(rectangle: GdxRectangle, color: Color) {
 fun GdxShapeRenderer.circle(circle: GdxCircle, color: Color) {
 	this.color = color
 	circle(circle.x, circle.y, circle.radius, 12)
+}
+
+fun GdxArray<*>.ifEmpty(action: () -> Unit) {
+	isEmpty()
+			.ifTrue(action)
+}
+
+fun Boolean.ifTrue(action: () -> Unit) {
+	if (this)
+		action()
+}
+
+fun Boolean.accept(ifTrue: () -> Unit, orElse: () -> Unit) {
+	if (this)
+		ifTrue()
+	if (!this)
+		orElse()
 }

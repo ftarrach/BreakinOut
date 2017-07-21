@@ -2,9 +2,9 @@ package com.fabiantarrach.breakinout.game.entity
 
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.circle.Circle
+import com.fabiantarrach.breakinout.game.meta.MovingEntity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
-import com.fabiantarrach.breakinout.game.meta.MovingEntity
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.math.Y
 
@@ -46,9 +46,10 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 			super.ifNextTo(brick, then, ifNot)
 
 	fun ifUnderFront(paddle: Paddle, then: () -> Unit, ifFront: () -> Unit) =
-			super.ifNextTo(paddle, then) {
-				super.ifUnder(paddle, then, ifFront)
-			}
+			super.ifNextTo(paddle, then,
+					ifNot = {
+						super.ifUnder(paddle, then, ifFront)
+					})
 
 	override public fun slamX(other: Velocity) = super.slamX(other)
 	override public fun revertLastMove() = super.revertLastMove()

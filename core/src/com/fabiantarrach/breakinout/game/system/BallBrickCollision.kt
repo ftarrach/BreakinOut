@@ -5,11 +5,9 @@ import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.meta.Collision
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.math.Chance
 
 class BallBrickCollision : LogicSystem() {
-
-	// TODO: collision as a variable in checkBrick passed around and updated
-	private val collision = Collision()
 
 	override fun update(delta: Timespan) =
 			database.each(Ball::class.java) {
@@ -17,37 +15,36 @@ class BallBrickCollision : LogicSystem() {
 			}
 
 	private fun checkBrick(ball: Ball) {
-		collision.reset()
+		val collision = Collision()
 		database.each(Brick::class.java) {
-			checkOverlap(ball, it)
+			checkOverlap(ball, it, collision)
 		}
 		collision.ifOccured {
-			bounce(ball)
+			bounce(ball, collision)
 		}
 	}
 
-	private fun bounce(ball: Ball) {
+	private fun bounce(ball: Ball, collision: Collision) {
 		ball.revertLastMove()
 		collision.ifSideCollision(
 				then = ball::bounceOffSide,
-				orElse = ball::bounceOffFront
-		)
+				orElse = ball::bounceOffFront)
 	}
 
-	private fun checkOverlap(ball: Ball, brick: Brick) =
+	private fun checkOverlap(ball: Ball, brick: Brick, collision: Collision) =
 			ball.ifOverlaps(brick) {
 				collision.occured()
 				ball.ifNextTo(brick, then = collision::markSide)
-				hitBrick(brick)
+				hit(brick)
 			}
 
-	private fun hitBrick(brick: Brick) =
+	private fun hit(brick: Brick) =
 			brick.hit(died = {
 				createPowerUp(brick)
 			})
 
-	private fun createPowerUp(brick: Brick) {
-		if (Math.random() < 0.2f)
+	private fun createPowerUp(brick: Brick) =
+		Chance(0.33f).ifSuccess {
 			brick.createPowerUp(database)
-	}
+		}
 }

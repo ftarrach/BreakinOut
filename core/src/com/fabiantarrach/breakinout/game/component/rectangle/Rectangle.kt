@@ -22,23 +22,16 @@ class Rectangle(private var xAxis: XAxis,
 			this(XAxis(x, width),
 					YAxis(y, height))
 
-	override fun ifOverlaps(other: Shape, then: () -> Unit) {
-		if (other is Rectangle)
-			ifOverlaps(other, then)
-		if (other is Circle)
-			other.ifOverlaps(this, then)
-	}
-
 	fun ifOverlaps(other: Rectangle, then: () -> Unit) =
 			xAxis.ifOverlaps(other.xAxis) {
 				yAxis.ifOverlaps(other.yAxis, then)
 			}
 
-	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Circle)
-			return other.ifNextTo(this, then, ifNot)
-		throw IllegalArgumentException("ifNextTo between Rectangle and ${other::javaClass} is not yet implemented")
-	}
+//	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
+//		if (other is Circle)
+//			return other.ifNextTo(this, then, ifNot)
+//		throw IllegalArgumentException("ifNextTo between Rectangle and ${other::javaClass} is not yet implemented")
+//	}
 
 	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) =
 			yAxis.ifContains(y,
@@ -65,8 +58,8 @@ class Rectangle(private var xAxis: XAxis,
 		return gdxRectangle
 	}
 
-	fun shorten() = xAxis.shorter(Factor(0.9f))
-	fun widen() = xAxis.wider(Factor(1.1f))
+	fun shorten() = xAxis.shorter(Factor(0.75f))
+	fun widen() = xAxis.wider(Factor(1.25f))
 
 	override fun render(renderer: GdxShapeRenderer, color: GdxColor) {
 		val rectangle = createGdx()
