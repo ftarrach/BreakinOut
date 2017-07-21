@@ -1,9 +1,9 @@
 package com.fabiantarrach.breakinout.game.meta.overlap
 
 import com.fabiantarrach.breakinout.game.component.Shape
-import com.fabiantarrach.breakinout.game.meta.pipe.Pipe
+import com.fabiantarrach.breakinout.game.meta.chain.Chain
 
-class Collision : Pipe<Shape>() {
+class Collision : Chain<Shape>() {
 
 	override val elements =
 			listOf(

@@ -3,11 +3,11 @@ package com.fabiantarrach.breakinout.game.meta.overlap
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.component.circle.Circle
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
-import com.fabiantarrach.breakinout.game.meta.pipe.Resolver
+import com.fabiantarrach.breakinout.game.meta.chain.Handler
 
-class CircleRectangle : Resolver<Shape> {
+class CircleRectangle : Handler<Shape> {
 
-	override fun resolve(one: Shape, another: Shape, then: () -> Unit, orElse: () -> Unit, next: () -> Resolver<Shape>) {
+	override fun resolve(one: Shape, another: Shape, then: () -> Unit, orElse: () -> Unit, next: () -> Handler<Shape>) {
 		if (one is Rectangle && another is Circle)
 			return another.ifOverlaps(one, then)
 		if (one is Circle && another is Rectangle)

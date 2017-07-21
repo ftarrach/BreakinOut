@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game.meta.pipe
+package com.fabiantarrach.breakinout.game.meta.chain
 
 import com.fabiantarrach.breakinout.game.component.Shape
 
