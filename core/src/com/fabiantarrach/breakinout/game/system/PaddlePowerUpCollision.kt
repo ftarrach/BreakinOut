@@ -8,7 +8,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 class PaddlePowerUpCollision : LogicSystem() {
 
 	override fun update(delta: Timespan) =
-			database.each(Paddle::class.java) {
+			database.each(Paddle::class) {
 				checkPaddle(it)
 			}
 

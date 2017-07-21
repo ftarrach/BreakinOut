@@ -10,13 +10,13 @@ import com.fabiantarrach.breakinout.util.math.Chance
 class BallBrickCollision : LogicSystem() {
 
 	override fun update(delta: Timespan) =
-			database.each(Ball::class.java) {
+			database.each(Ball::class) {
 				checkBrick(it)
 			}
 
 	private fun checkBrick(ball: Ball) {
 		val collision = Collision()
-		database.each(Brick::class.java) {
+		database.each(Brick::class) {
 			checkOverlap(ball, it, collision)
 		}
 		collision.ifOccured {

@@ -9,7 +9,7 @@ class SmallerPaddle(rectangle: Rectangle) : PowerUp(rectangle) {
 	override val color: GdxColor = GdxColor.BLUE
 
 	override fun activate(database: EntityDatabase) {
-		database.each(Paddle::class.java) {
+		database.each(Paddle::class) {
 			it.smaller()
 		}
 	}

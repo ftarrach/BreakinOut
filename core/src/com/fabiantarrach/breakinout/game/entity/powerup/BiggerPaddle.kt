@@ -11,7 +11,7 @@ class BiggerPaddle(rectangle: Rectangle) : PowerUp(rectangle) {
 	override val color: GdxColor = Color.CYAN
 
 	override fun activate(database: EntityDatabase) =
-			database.each(Paddle::class.java) {
+			database.each(Paddle::class) {
 				it.bigger()
 			}
 

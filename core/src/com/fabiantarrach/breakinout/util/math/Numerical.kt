@@ -21,7 +21,6 @@ abstract class Numerical(protected val value: Float) {
 
 	// TODO: stupid method names. new class sin/cos holding value and just use the times(Numerical) method
 	protected fun timesCos(other: Numerical) = MathUtils.cosDeg(value) * other.value
-
 	protected fun timesSin(other: Numerical) = MathUtils.sinDeg(value) * other.value
 	protected fun atan(x: Numerical, y: Numerical): Float = MathUtils.atan2(y.value, x.value) * MathUtils.radiansToDegrees
 
