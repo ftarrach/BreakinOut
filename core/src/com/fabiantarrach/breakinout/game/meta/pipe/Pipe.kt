@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game.meta
+package com.fabiantarrach.breakinout.game.meta.pipe
 
 abstract class Pipe<E> {
 

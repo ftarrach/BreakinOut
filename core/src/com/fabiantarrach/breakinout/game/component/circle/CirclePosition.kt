@@ -3,7 +3,6 @@ package com.fabiantarrach.breakinout.game.component.circle
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
 import com.fabiantarrach.breakinout.util.GdxCircle
-import com.fabiantarrach.breakinout.util.accept
 import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X
 import com.fabiantarrach.breakinout.util.math.Y
@@ -56,10 +55,6 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 
 	fun ifUnder(rectangle: Rectangle, then: () -> Unit, orElse: () -> Unit) =
 			rectangle.ifUnder(y, then, orElse)
-
-	fun ifUnder(other: CirclePosition, then: () -> Unit, orElse: () -> Unit) =
-			(y < other.y)
-					.accept(then, orElse)
 
 	fun relativeTo(other: Rectangle) = other.relativeTo(x)
 	fun relativeTo(other: X) = other - x

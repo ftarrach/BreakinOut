@@ -3,8 +3,8 @@ package com.fabiantarrach.breakinout.game.component.circle
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
+import com.fabiantarrach.breakinout.game.meta.Intersection
 import com.fabiantarrach.breakinout.util.GdxColor
-import com.fabiantarrach.breakinout.util.GdxIntersector
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.circle
 import com.fabiantarrach.breakinout.util.math.X
@@ -13,12 +13,11 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	private var position = CirclePosition(x, y)
 	private val radius = Radius(radius)
 
-	fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) {
-		val gdxCircle = toGdxCircle()
-		val gdxRectangle = rectangle.createGdx()
-		if (GdxIntersector.overlaps(gdxCircle, gdxRectangle))
-			then()
-	}
+	fun ifOverlaps(rectangle: Rectangle, then: () -> Unit) =
+			Intersection(
+					toGdxCircle(),
+					rectangle.createGdx()
+			).ifOverlaps(then)
 
 	override fun render(renderer: GdxShapeRenderer, color: GdxColor) {
 		val gdxCircle = toGdxCircle()
@@ -44,13 +43,8 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	fun ifNextTo(other: Rectangle, then: () -> Unit, orElse: () -> Unit) =
 			position.ifNextTo(other, then, orElse)
 
-	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Rectangle)
-			return position.ifUnder(other, then, ifNot)
-		if (other is Circle)
-			return position.ifUnder(other.position, then, ifNot)
-		throw IllegalArgumentException("ifUnder between Circle and ${other::javaClass} is not yet implemented")
-	}
+	fun ifUnder(other: Rectangle, then: () -> Unit, orElse: () -> Unit) =
+			position.ifUnder(other, then, orElse)
 
 	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		position.ifLeftOutside(radius) {

@@ -27,22 +27,10 @@ class Rectangle(private var xAxis: XAxis,
 				yAxis.ifOverlaps(other.yAxis, then)
 			}
 
-//	override fun ifNextTo(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-//		if (other is Circle)
-//			return other.ifNextTo(this, then, ifNot)
-//		throw IllegalArgumentException("ifNextTo between Rectangle and ${other::javaClass} is not yet implemented")
-//	}
-
 	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) =
 			yAxis.ifContains(y,
 					then = { xAxis.ifContains(x, orElse, then) },
 					orElse = orElse)
-
-	override fun ifUnder(other: Shape, then: () -> Unit, ifNot: () -> Unit) {
-		if (other is Circle)
-			return other.ifUnder(this, then, ifNot)
-		throw IllegalArgumentException("ifUnder between Rectangle and ${other::javaClass} is not yet implemented")
-	}
 
 	fun ifUnder(y: Y, then: () -> Unit, ifNot: () -> Unit) = yAxis.ifUnder(y, then, ifNot)
 

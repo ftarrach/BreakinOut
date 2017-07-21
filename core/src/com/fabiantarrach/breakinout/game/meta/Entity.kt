@@ -4,6 +4,7 @@ import com.fabiantarrach.breakinout.game.component.Lifepoints
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.meta.nextTo.NextTo
 import com.fabiantarrach.breakinout.game.meta.overlap.Collision
+import com.fabiantarrach.breakinout.game.meta.under.Under
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
@@ -32,9 +33,10 @@ abstract class Entity(life: Int = 1) {
 					.process(shape, other.shape, then, ifNot)
 
 	protected fun ifUnder(other: Entity, then: () -> Unit, ifNot: () -> Unit) =
-			shape.ifUnder(other.shape, then, ifNot)
+			Under().process(shape, other.shape, then, ifNot)
 
 	protected fun positionRelativeTo(other: Entity) =
+	// TODO: refactor this complete. It's a mess right now
 			shape.relativeTo(other.shape)
 
 }

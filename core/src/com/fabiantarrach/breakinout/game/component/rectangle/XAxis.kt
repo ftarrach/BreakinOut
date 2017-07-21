@@ -46,7 +46,8 @@ class XAxis(private var x: X,
 	}
 
 	fun ifContains(other: X, then: () -> Unit, orElse: () -> Unit) =
-			(x < other && x + width > other).accept(then, orElse)
+			(x < other && x + width > other)
+					.accept(then, orElse)
 
 	fun relativeTo(other: X): X {
 		val center = x + width.halve()
