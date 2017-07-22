@@ -26,7 +26,7 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 	override fun render(renderer: GdxShapeRenderer) = shape.render(renderer, GdxColor.RED)
 
 	fun ifOverlaps(paddle: Paddle, then: () -> Unit) = super.ifOverlaps(paddle, then)
-	fun ifOverlaps(paddle: Brick, then: () -> Unit) = super.ifOverlaps(paddle, then)
+	fun ifOverlaps(brick: Brick, then: () -> Unit) = super.ifOverlaps(brick, then)
 
 	override public fun bounceOffFront() = super.bounceOffFront()
 	override public fun bounceOffSide() = super.bounceOffSide()

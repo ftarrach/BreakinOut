@@ -7,7 +7,6 @@ import com.fabiantarrach.breakinout.game.meta.chain.Handler
 
 class CircleRectangle : Handler<Shape> {
 	override fun resolve(one: Shape, another: Shape, then: () -> Unit, orElse: () -> Unit, next: () -> Handler<Shape>) {
-		// TODO: attention: this makes no sense. One time it is checked, whether the rectangle is under the circle and the other way around
 		if (one is Rectangle && another is Circle)
 			return another.ifUnder(one, then, orElse)
 		if (one is Circle && another is Rectangle)

@@ -9,25 +9,25 @@ import ktx.collections.GdxArray
 import ktx.collections.gdxArrayOf
 import kotlin.reflect.KClass
 
-// TODO: use an "Role-Enum" instead of classes. Saves a lot of lines and solves the Inheritance Problem
 class EntityDatabase {
 
+	// TODO: try to move this into an own class. Maybe inject in via the constructor
+	// to gain a game specific Map, e.x. for BreakOut: save all PowerUps under a
+	// common PowerUp key
 	private val entities = GdxObjectMap<KClass<out Entity>, GdxArray<Entity>>()
 
-	fun add(entity: Entity) =
-			entities.getOrPutIfAbscent(entity::class, gdxArrayOf())
+	fun add(entity: Entity) {
+		if (entity is PowerUp)
+			return entities.getOrPutIfAbscent(PowerUp::class, gdxArrayOf())
 					.add(entity)
+
+		entities.getOrPutIfAbscent(entity::class, gdxArrayOf())
+				.add(entity)
+	}
 
 	fun eachEntity(action: (Entity) -> Unit) =
 			entities.values()
 					.flatMap { it }
-					.forEach(action)
-
-	fun eachPowerUp(action: (PowerUp) -> Unit) =
-			entities.values()
-					.flatMap { it }
-					.map { it as? PowerUp }
-					.filterNotNull()
 					.forEach(action)
 
 	fun <A : Entity, B : Entity> cross(clazzA: KClass<A>, clazzB: KClass<B>, block: (A, B) -> Unit) =
@@ -36,10 +36,10 @@ class EntityDatabase {
 						block(it.first, it.second)
 					}
 
-	private fun <A : Entity, B : Entity> combine(clazzA: KClass<A>, clazzB: KClass<B>): List<Pair<A, B>> =
+	private fun <A : Entity, B : Entity> combine(clazzA: KClass<A>, clazzB: KClass<B>) =
 			select(clazzA).flatMap { oneItem ->
 				select(clazzB).map { otherItem ->
-					Pair(oneItem, otherItem) // TODO: 2 level indendation!
+					Pair(oneItem, otherItem) // TODO: this is a 2 level indendation!
 				}
 			}
 
@@ -52,6 +52,11 @@ class EntityDatabase {
 					.map { clazz.java.cast(it) }
 
 	fun remove(entity: Entity) {
+		if (entity is PowerUp) {
+			entities.get(PowerUp::class)
+					.removeValue(entity, true)
+			return
+		}
 		entities.get(entity::class)
 				.removeValue(entity, true)
 	}
