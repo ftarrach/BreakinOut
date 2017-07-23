@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout
 
-import com.fabiantarrach.breakinout.screens.MainMenu
+import com.fabiantarrach.breakinout.mainmenu.MainMenu
 import com.fabiantarrach.breakinout.util.KotlinGame
 
 class BreakinOut : KotlinGame() {

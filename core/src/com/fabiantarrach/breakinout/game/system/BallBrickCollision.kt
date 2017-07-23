@@ -24,12 +24,10 @@ class BallBrickCollision : LogicSystem() {
 		}
 	}
 
-	private fun bounce(ball: Ball, collision: Collision) {
-		ball.revertLastMove()
-		collision.ifSideCollision(
-				then = ball::bounceOffSide,
-				orElse = ball::bounceOffFront)
-	}
+	private fun bounce(ball: Ball, collision: Collision) =
+			collision.ifSideCollision(
+					then = ball::bounceOffSide,
+					orElse = ball::bounceOffFront)
 
 	private fun checkOverlap(ball: Ball, brick: Brick, collision: Collision) =
 			ball.ifOverlaps(brick) {
@@ -44,7 +42,8 @@ class BallBrickCollision : LogicSystem() {
 			})
 
 	private fun createPowerUp(brick: Brick) =
-		Chance(0.33f).ifSuccess {
-			brick.createPowerUp(database)
-		}
+			Chance(0.33f).ifSuccess {
+				val powerUp = brick.createPowerUp()
+				database.add(powerUp)
+			}
 }

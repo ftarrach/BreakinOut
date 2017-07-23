@@ -6,7 +6,7 @@ import java.util.*
 class Chance(private val successChance: Float) {
 
 	private val number = Random()
-						.nextFloat()
+			.nextFloat()
 
 	fun ifSuccess(action: () -> Unit) =
 			(number <= successChance)

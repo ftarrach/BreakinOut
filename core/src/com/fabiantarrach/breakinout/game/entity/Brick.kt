@@ -6,7 +6,6 @@ import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
 import com.fabiantarrach.breakinout.game.entity.powerup.PowerUpFactory
 import com.fabiantarrach.breakinout.game.meta.Entity
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
-import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 
 class Brick(x: Float, y: Float, lifepoints: Int) : Entity(lifepoints) {
 
@@ -17,15 +16,9 @@ class Brick(x: Float, y: Float, lifepoints: Int) : Entity(lifepoints) {
 		shape.render(renderer, color)
 	}
 
-	fun createPowerUp(database: EntityDatabase) {
-		val powerUp = createRandomPowerUp()
-		database.add(powerUp)
-	}
-
-	private fun createRandomPowerUp(): PowerUp {
+	fun createPowerUp(): PowerUp {
 		val rectangle = shape.createDrop()
 		val powerUpFactory = PowerUpFactory()
 		return powerUpFactory.createRandom(rectangle)
 	}
-
 }

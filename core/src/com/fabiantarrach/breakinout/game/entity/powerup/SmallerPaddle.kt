@@ -8,10 +8,9 @@ import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 class SmallerPaddle(rectangle: Rectangle) : PowerUp(rectangle) {
 	override val color: GdxColor = GdxColor.BLUE
 
-	override fun activate(database: EntityDatabase) {
-		database.each(Paddle::class) {
-			it.smaller()
-		}
-	}
+	override fun activate(database: EntityDatabase) =
+			database.each(Paddle::class) {
+				it.smaller()
+			}
 
 }

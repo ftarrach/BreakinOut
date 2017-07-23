@@ -36,7 +36,6 @@ abstract class Entity(life: Int = 1) {
 			Under().process(shape, other.shape, then, ifNot)
 
 	protected fun positionRelativeTo(other: Entity) =
-	// TODO: refactor this complete. It's a mess right now
 			shape.relativeTo(other.shape)
 
 }

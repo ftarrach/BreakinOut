@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.screens
+package com.fabiantarrach.breakinout.game
 
 import com.badlogic.gdx.Gdx
 import com.fabiantarrach.breakinout.game.BreakinOutEngine

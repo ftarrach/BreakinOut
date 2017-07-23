@@ -41,7 +41,7 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
 		other.push(scrubVelocity)
 	}
 
-	protected open fun revertLastMove() {
+	protected open fun undoLastMovement() {
 		val inverted = velocity.invert()
 		shape.move(inverted * lastTimespan)
 	}

@@ -1,9 +1,9 @@
-package com.fabiantarrach.breakinout.screens
+package com.fabiantarrach.breakinout.mainmenu
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.InputAdapter
 import com.badlogic.gdx.graphics.GL20
-import com.fabiantarrach.breakinout.mainmenu.MainMenuText
+import com.fabiantarrach.breakinout.game.GameScreen
 import com.fabiantarrach.breakinout.util.GdxSpriteBatch
 import com.fabiantarrach.breakinout.util.screen.FitScreen
 import com.fabiantarrach.breakinout.util.screen.ScreenState
@@ -11,10 +11,10 @@ import com.fabiantarrach.breakinout.util.screen.ScreenState
 class MainMenu(screenState: ScreenState) : FitScreen(256f) {
 
 	private val sb = GdxSpriteBatch()
-	private val text = MainMenuText()
+	private val text = CenteredText("press left mouse button to start a new game")
 
 	init {
-		Gdx.input.inputProcessor = object: InputAdapter() {
+		Gdx.input.inputProcessor = object : InputAdapter() {
 			override fun touchDown(screenX: Int, screenY: Int, pointer: Int, button: Int): Boolean {
 				screenState.showScreen(GameScreen(screenState))
 				return true
