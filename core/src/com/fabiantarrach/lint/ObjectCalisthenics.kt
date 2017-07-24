@@ -37,9 +37,10 @@ fun classSmaller50(dir: File) =
 			FileReader(file)
 					.readLines()
 					.dropWhile { !it.startsWith("class") && !it.startsWith("abstract") }
+					.filter(String::isNotBlank)
 					.takeIf { it.size > 50 }
 					?.let {
-						println("${it.size} lines in $file, 50 allowed")
+						println("${it.size} lines in $file, 50 allowed (${it.size - 50}) ")
 					}
 		}
 

@@ -38,7 +38,9 @@ abstract class Vectorial(protected val x: X,
 		val added = plus(other, block)
 		val addedVector = added.createGdxVector()
 		addedVector.setLength(length)
-		return block(X(addedVector.x), Y(addedVector.y))
+		val newX = X(addedVector.x)
+		val newY = Y(addedVector.y)
+		return block(newX, newY)
 	}
 
 	private fun createGdxVector(): GdxVector {
@@ -48,22 +50,15 @@ abstract class Vectorial(protected val x: X,
 		return vector
 	}
 
+	override fun equals(other: Any?): Boolean {
+		if (other != null && other is Vectorial && other.javaClass == this.javaClass)
+			return x == other.x && y == other.y
+		return false
+	}
+
+	override fun hashCode(): Int = 31 * x.hashCode() + y.hashCode()
+
 	override fun toString(): String {
 		return "$x $y"
 	}
-
-	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
-		if (other?.javaClass != javaClass) return false
-		other as Vectorial
-		if (x != other.x || y != other.y) return false
-		return true
-	}
-
-	override fun hashCode(): Int {
-		var result = x.hashCode()
-		result = 31 * result + y.hashCode()
-		return result
-	}
-
 }

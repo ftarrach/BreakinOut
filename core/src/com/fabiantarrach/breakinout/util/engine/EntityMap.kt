@@ -4,8 +4,9 @@ import com.fabiantarrach.breakinout.game.meta.Entity
 import com.fabiantarrach.breakinout.util.GdxArray
 import com.fabiantarrach.breakinout.util.GdxObjectMap
 import com.fabiantarrach.breakinout.util.getOrPutIfAbscent
-import com.fabiantarrach.breakinout.util.ifEmpty
+import com.fabiantarrach.breakinout.util.ifTrue
 import ktx.collections.gdxArrayOf
+import ktx.collections.isEmpty
 import kotlin.reflect.KClass
 
 class EntityMap {
@@ -53,6 +54,7 @@ class EntityMap {
 
 	fun ifNo(clazz: KClass<out Entity>, action: () -> Unit) =
 			entities.get(clazz)
-					.ifEmpty(action)
+					.isEmpty()
+					.ifTrue(action)
 
 }

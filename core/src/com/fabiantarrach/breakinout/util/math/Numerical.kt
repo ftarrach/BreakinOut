@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.util.math
 
-import com.badlogic.gdx.math.MathUtils
 import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.ifTrue
 
@@ -18,12 +17,6 @@ abstract class Numerical(protected val value: Float) {
 	protected fun times(other: Numerical) = value * other.value
 	protected operator fun div(other: Numerical) = value / other.value
 	protected fun invert() = -value
-
-	// TODO: stupid method names. new class sin/cos holding value and just use the times(Numerical) method
-	protected fun timesCos(other: Numerical) = MathUtils.cosDeg(value) * other.value
-
-	protected fun timesSin(other: Numerical) = MathUtils.sinDeg(value) * other.value
-	protected fun atan(x: Numerical, y: Numerical): Float = MathUtils.atan2(y.value, x.value) * MathUtils.radiansToDegrees
 
 	protected fun <T : Numerical> halve(block: (Float) -> T) = block(value / 2)
 	protected fun <T : Numerical> oneThird(block: (Float) -> T) = block(value / 3)
@@ -52,11 +45,9 @@ abstract class Numerical(protected val value: Float) {
 	}
 
 	override fun equals(other: Any?): Boolean {
-		if (this === other) return true
-		if (other?.javaClass != javaClass) return false
-		other as Numerical
-		if (value != other.value) return false
-		return true
+		if (other != null && other is Numerical && other.javaClass == this.javaClass)
+			return value == other.value
+		return false
 	}
 
 	override fun hashCode(): Int = value.hashCode()

@@ -2,7 +2,6 @@ package com.fabiantarrach.breakinout.util
 
 import com.badlogic.gdx.graphics.Color
 import ktx.app.copy
-import ktx.collections.isEmpty
 
 typealias GdxObjectMap<K, V> = com.badlogic.gdx.utils.ObjectMap<K, V>
 typealias GdxScreen = com.badlogic.gdx.Screen
@@ -28,14 +27,6 @@ fun <K, V> GdxObjectMap<K, V>.getOrPutIfAbscent(key: K, value: V): V {
 	return get(key, value)
 }
 
-fun GdxColor.darker(): GdxColor {
-	val darkerColor = copy()
-	darkerColor.r *= 0.9f
-	darkerColor.g *= 0.9f
-	darkerColor.b *= 0.9f
-	return darkerColor
-}
-
 fun GdxColor.lighter(): GdxColor {
 	val lighterColor = copy()
 	lighterColor.r *= 1.1f
@@ -52,15 +43,6 @@ fun GdxShapeRenderer.rect(rectangle: GdxRectangle, color: Color) {
 fun GdxShapeRenderer.circle(circle: GdxCircle, color: Color) {
 	this.color = color
 	circle(circle.x, circle.y, circle.radius, 12)
-}
-
-fun GdxArray<*>.ifEmpty(action: () -> Unit) {
-	isEmpty()
-			.ifTrue(action)
-}
-
-fun <V> GdxArray<V>.removeValue(value: V) {
-	removeValue(value, true)
 }
 
 fun Boolean.ifTrue(action: () -> Unit) {
