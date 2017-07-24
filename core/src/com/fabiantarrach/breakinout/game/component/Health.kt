@@ -32,4 +32,5 @@ class Health(private var points: Int) {
 					.fold(base) { color, _ ->
 						color.lighter()
 					}
+
 }

@@ -16,13 +16,11 @@ abstract class Engine : GdxDisposable {
 	fun addEntity(entity: Entity) =
 			entities.add(entity)
 
-	fun update(delta: Timespan) {
-		for (system in systems)
-			system.update(delta, entities)
-	}
+	fun update(delta: Timespan) =
+			systems.each {
+				it.update(delta, entities)
+			}
 
-	override fun dispose() {
-		for (system in systems)
-			system.dispose()
-	}
+	override fun dispose() =
+			systems.each(LogicSystem::dispose)
 }

@@ -5,7 +5,6 @@ import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.meta.Collision
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
-import com.fabiantarrach.breakinout.util.math.Chance
 
 class BallBrickCollision : LogicSystem() {
 
@@ -37,13 +36,8 @@ class BallBrickCollision : LogicSystem() {
 			}
 
 	private fun hit(brick: Brick) =
-			brick.hit(died = {
-				createPowerUp(brick)
+			brick.hit(onDrop = {
+				database.add(it)
 			})
 
-	private fun createPowerUp(brick: Brick) =
-			Chance(33).ifSuccess {
-				val powerUp = brick.createPowerUp()
-				database.add(powerUp)
-			}
 }

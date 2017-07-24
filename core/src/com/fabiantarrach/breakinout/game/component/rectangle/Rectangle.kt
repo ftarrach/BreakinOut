@@ -37,7 +37,7 @@ class Rectangle(private var xAxis: XAxis,
 
 	fun createDrop(): Rectangle =
 			Rectangle(
-					xAxis.createDropAxis(),
+					xAxis.centeredHalve(),
 					yAxis.thirdOf())
 
 	fun createGdx(): GdxRectangle {

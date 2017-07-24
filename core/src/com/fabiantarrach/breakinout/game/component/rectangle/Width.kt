@@ -23,7 +23,7 @@ class Width(value: Float) : Numerical(value) {
 		return Width(newValue)
 	}
 
-	fun difference(other: Width): Width {
+	fun differenceTo(other: Width): Width {
 		val difference = super.difference(other)
 		return Width(difference)
 	}

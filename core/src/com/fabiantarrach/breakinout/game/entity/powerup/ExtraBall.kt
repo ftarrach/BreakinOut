@@ -6,7 +6,7 @@ import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 
-class ExtraBall(rectangle: Rectangle) : PowerUp(rectangle) {
+class ExtraBall(rectangle: Rectangle) : Goodie(rectangle) {
 	override val color: GdxColor = Color.ORANGE
 
 	override fun activate(database: EntityDatabase) {

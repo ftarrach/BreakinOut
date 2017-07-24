@@ -7,7 +7,7 @@ import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 
-abstract class PowerUp(rectangle: Rectangle) :
+abstract class Goodie(rectangle: Rectangle) :
 		MovingEntity(
 				Velocity(0f, -0.25f)) {
 
@@ -18,5 +18,9 @@ abstract class PowerUp(rectangle: Rectangle) :
 
 	override fun render(renderer: GdxShapeRenderer) =
 			shape.render(renderer, color)
+
+	fun renderBlock(renderer: GdxShapeRenderer, shape: Rectangle) {
+		shape.render(renderer, color)
+	}
 
 }

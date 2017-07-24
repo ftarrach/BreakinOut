@@ -17,13 +17,13 @@ class XAxis(private var x: X,
 
 	fun shorter(factor: Factor) {
 		width = width.shorter(factor)
-		x += width.difference(width)
+		x += width.differenceTo(width)
 				.halve()
 	}
 
 	fun wider(factor: Factor) {
 		val newWidth = width.wider(factor)
-		x -= width.difference(newWidth)
+		x -= width.differenceTo(newWidth)
 				.halve()
 		width = newWidth
 	}
@@ -38,9 +38,9 @@ class XAxis(private var x: X,
 		return XAxis(x, width)
 	}
 
-	fun createDropAxis(): XAxis {
+	fun centeredHalve(): XAxis {
 		val dropWidth = width.halve()
-		val differenceToDropWidth = width.difference(dropWidth)
+		val differenceToDropWidth = width.differenceTo(dropWidth)
 		val dropX = x + differenceToDropWidth.halve()
 		return XAxis(dropX, dropWidth)
 	}

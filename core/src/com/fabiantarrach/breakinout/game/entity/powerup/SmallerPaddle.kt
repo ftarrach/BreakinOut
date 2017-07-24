@@ -5,7 +5,7 @@ import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.engine.EntityDatabase
 
-class SmallerPaddle(rectangle: Rectangle) : PowerUp(rectangle) {
+class SmallerPaddle(rectangle: Rectangle) : Goodie(rectangle) {
 	override val color: GdxColor = GdxColor.BLUE
 
 	override fun activate(database: EntityDatabase) =

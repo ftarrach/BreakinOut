@@ -6,7 +6,7 @@ import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
 abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
-                            life: Int = 1) : Entity(life) {
+                            life: Int = 1) : BaseEntity(life) {
 
 	private var lastTimespan: Timespan = Timespan(0f)
 

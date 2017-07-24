@@ -10,5 +10,8 @@ class SystemDatabase {
 		systems.add(system)
 	}
 
+	fun each(action: (LogicSystem) -> Unit) =
+		systems.forEach(action)
+
 	operator fun iterator() = systems.iterator()
 }

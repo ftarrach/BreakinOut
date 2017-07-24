@@ -3,13 +3,13 @@ package com.fabiantarrach.breakinout.util.math
 import com.fabiantarrach.breakinout.util.ifTrue
 import java.util.*
 
-class Chance(private val successChance: Int) {
+class Chance(private val percent: Int) {
 
 	private val number = Random()
 			.nextInt(100)
 
 	fun ifSuccess(action: () -> Unit) =
-			(number <= successChance)
+			(number <= percent)
 					.ifTrue(action)
 
 }

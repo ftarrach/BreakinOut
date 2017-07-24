@@ -3,7 +3,7 @@ package com.fabiantarrach.breakinout.game.entity
 import com.fabiantarrach.breakinout.game.component.Friction
 import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
-import com.fabiantarrach.breakinout.game.entity.powerup.PowerUp
+import com.fabiantarrach.breakinout.game.entity.powerup.Goodie
 import com.fabiantarrach.breakinout.game.meta.MovingEntity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
@@ -19,7 +19,7 @@ class Paddle : MovingEntity() {
 	override public fun moveTo(mouse: MousePosition) =
 			super.moveTo(mouse)
 
-	fun ifOverlaps(powerUp: PowerUp, then: () -> Unit) =
+	fun ifOverlaps(powerUp: Goodie, then: () -> Unit) =
 			super.ifOverlaps(powerUp, then)
 
 	fun bigger() =

@@ -59,6 +59,10 @@ fun GdxArray<*>.ifEmpty(action: () -> Unit) {
 			.ifTrue(action)
 }
 
+fun <V> GdxArray<V>.removeValue(value: V) {
+	removeValue(value, true)
+}
+
 fun Boolean.ifTrue(action: () -> Unit) {
 	if (this)
 		action()
