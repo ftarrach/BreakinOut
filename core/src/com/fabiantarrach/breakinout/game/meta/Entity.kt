@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.game.meta
 
-import com.fabiantarrach.breakinout.game.component.Lifepoints
+import com.fabiantarrach.breakinout.game.component.Health
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.meta.nextTo.NextTo
 import com.fabiantarrach.breakinout.game.meta.overlap.Collision
@@ -11,7 +11,7 @@ import com.fabiantarrach.breakinout.util.engine.Timespan
 
 abstract class Entity(life: Int = 1) {
 
-	private val lifepoints = Lifepoints(life)
+	private val lifepoints = Health(life)
 	protected abstract val shape: Shape
 
 	open fun update(delta: Timespan) {}
