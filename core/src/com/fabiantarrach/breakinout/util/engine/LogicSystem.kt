@@ -6,12 +6,12 @@ abstract class LogicSystem : GdxDisposable {
 
 	protected lateinit var database: EntityDatabase
 
-	abstract fun update(delta: Timespan)
-
-	// TODO: this is a setter :(
-	fun useEntityDatabase(database: EntityDatabase) {
+	fun update(delta: Timespan, database: EntityDatabase) {
 		this.database = database
+		update(delta)
 	}
+
+	abstract fun update(delta: Timespan)
 
 	override fun dispose() {}
 

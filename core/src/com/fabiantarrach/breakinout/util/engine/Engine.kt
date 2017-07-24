@@ -10,18 +10,15 @@ abstract class Engine : GdxDisposable {
 
 	abstract fun buildGame()
 
-	fun addSystem(system: LogicSystem) {
-		systems.addSystem(system)
-		system.useEntityDatabase(entities)
-	}
+	fun addSystem(system: LogicSystem) =
+			systems.addSystem(system)
 
-	fun addEntity(entity: Entity) {
-		entities.add(entity)
-	}
+	fun addEntity(entity: Entity) =
+			entities.add(entity)
 
 	fun update(delta: Timespan) {
 		for (system in systems)
-			system.update(delta)
+			system.update(delta, entities)
 	}
 
 	override fun dispose() {
