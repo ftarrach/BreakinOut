@@ -3,10 +3,10 @@ package com.fabiantarrach.breakinout.util.math
 import com.fabiantarrach.breakinout.util.ifTrue
 import java.util.*
 
-class Chance(private val successChance: Float) {
+class Chance(private val successChance: Int) {
 
 	private val number = Random()
-			.nextFloat()
+			.nextInt(100)
 
 	fun ifSuccess(action: () -> Unit) =
 			(number <= successChance)

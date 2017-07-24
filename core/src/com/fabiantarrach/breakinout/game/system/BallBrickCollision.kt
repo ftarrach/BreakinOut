@@ -42,7 +42,7 @@ class BallBrickCollision : LogicSystem() {
 			})
 
 	private fun createPowerUp(brick: Brick) =
-			Chance(0.33f).ifSuccess {
+			Chance(33).ifSuccess {
 				val powerUp = brick.createPowerUp()
 				database.add(powerUp)
 			}

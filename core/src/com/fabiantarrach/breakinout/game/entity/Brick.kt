@@ -7,12 +7,14 @@ import com.fabiantarrach.breakinout.game.entity.powerup.PowerUpFactory
 import com.fabiantarrach.breakinout.game.meta.Entity
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 
+// TODO: Random special bricks with a higher chance for a certain powerup
+// TODO: BrickFactory
 class Brick(x: Float, y: Float, lifepoints: Int) : Entity(lifepoints) {
 
 	override val shape = Rectangle(x, y, 0.2f, 0.1f)
 
 	override fun render(renderer: GdxShapeRenderer) {
-		val color = createColor(Color.GRAY)
+		val color = createColor(Color.DARK_GRAY)
 		shape.render(renderer, color)
 	}
 

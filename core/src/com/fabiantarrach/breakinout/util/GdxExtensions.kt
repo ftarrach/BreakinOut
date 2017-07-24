@@ -36,6 +36,14 @@ fun GdxColor.darker(): GdxColor {
 	return darkerColor
 }
 
+fun GdxColor.lighter(): GdxColor {
+	val lighterColor = copy()
+	lighterColor.r *= 1.1f
+	lighterColor.g *= 1.1f
+	lighterColor.b *= 1.1f
+	return lighterColor
+}
+
 fun GdxShapeRenderer.rect(rectangle: GdxRectangle, color: Color) {
 	this.color = color
 	rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height)

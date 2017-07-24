@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.util.math
 
-import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.circle.Radius
 import com.fabiantarrach.breakinout.game.component.rectangle.Width
 import com.fabiantarrach.breakinout.util.GdxCircle
@@ -20,7 +19,8 @@ class X(value: Float) : Numerical(value) {
 	operator fun times(factor: Factor) = X(super.times(factor))
 	operator fun div(width: Width) = X(super.div(width))
 	operator fun unaryMinus() = X(super.invert())
-	operator fun compareTo(other: X) = super.compareTo(other)  // TODO: this returns a int/boolean => primitve
+	// TODO: this returns a int/boolean => primitve
+	operator fun compareTo(other: X) = super.compareTo(other)
 
 	fun update(circle: GdxCircle) {
 		circle.x = value
@@ -36,8 +36,6 @@ class X(value: Float) : Numerical(value) {
 
 	public override fun ifNegative(then: () -> Unit) = super.ifNegative(then)
 	public override fun ifPositive(then: () -> Unit) = super.ifPositive(then)
-
-	fun createHorizontalVelocity() = createVectorial(Y(0f), ::Velocity)
 
 	fun ifOutside(block: () -> Unit) =
 			(this < X(-1f) || this > X(1f))

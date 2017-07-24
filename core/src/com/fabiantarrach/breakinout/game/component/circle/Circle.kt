@@ -31,8 +31,6 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 	override fun relativeTo(shape: Shape): X {
 		if (shape is Rectangle)
 			return position.relativeTo(shape)
-		if (shape is Circle)
-			return position.relativeTo(shape.position)
 		throw IllegalArgumentException("relativeTo between Circle and ${shape::javaClass} is not yet implemented")
 	}
 
