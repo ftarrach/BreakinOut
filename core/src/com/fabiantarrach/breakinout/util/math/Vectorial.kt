@@ -27,7 +27,7 @@ abstract class Vectorial(protected val x: X,
 	protected fun <T : Vectorial> rotate(angle: Angle, block: (X, Y) -> T): T {
 		val vector = createGdxVector()
 		val rotatedVector = angle.rotate(vector)
-		val newX = X(rotatedVector.x) // TODO: don't allow an angle smaller than a certain value, or the angle may be too small to go up and the player has to wait a long time
+		val newX = X(rotatedVector.x) // TODO: don't allow an angle smaller than a certain value, or the angle will be too small to move the entity up/down resulting in a bored player
 		val newY = Y(rotatedVector.y)
 		return block(newX, newY)
 	}
@@ -58,7 +58,4 @@ abstract class Vectorial(protected val x: X,
 
 	override fun hashCode(): Int = 31 * x.hashCode() + y.hashCode()
 
-	override fun toString(): String {
-		return "$x $y"
-	}
 }

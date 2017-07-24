@@ -36,11 +36,11 @@ fun classSmaller50(dir: File) =
 		directoryIterator(dir) { file ->
 			FileReader(file)
 					.readLines()
-					.dropWhile { !it.startsWith("class") && !it.startsWith("abstract") }
+					.filter { !it.startsWith("import") }
 					.filter(String::isNotBlank)
 					.takeIf { it.size > 50 }
 					?.let {
-						println("${it.size} lines in $file, 50 allowed (${it.size - 50}) ")
+						println("${it.size} lines in $file, 50 allowed (+${it.size - 50}) ")
 					}
 		}
 

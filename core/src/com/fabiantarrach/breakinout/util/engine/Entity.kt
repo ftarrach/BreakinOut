@@ -1,7 +1,6 @@
-package com.fabiantarrach.breakinout.game.meta
+package com.fabiantarrach.breakinout.util.engine
 
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
-import com.fabiantarrach.breakinout.util.engine.Timespan
 
 interface Entity {
 	fun update(delta: Timespan) {}

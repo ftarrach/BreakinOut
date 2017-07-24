@@ -1,6 +1,6 @@
 package com.fabiantarrach.breakinout.game.system
 
-import com.fabiantarrach.breakinout.game.meta.Entity
+import com.fabiantarrach.breakinout.util.engine.Entity
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.GdxShapeType
 import com.fabiantarrach.breakinout.util.engine.LogicSystem

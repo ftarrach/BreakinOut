@@ -22,14 +22,17 @@ class Rectangle(private var xAxis: XAxis,
 			this(XAxis(x, width),
 					YAxis(y, height))
 
-	fun ifOverlaps(other: Rectangle, then: () -> Unit) =
-			xAxis.ifOverlaps(other.xAxis) {
-				yAxis.ifOverlaps(other.yAxis, then)
-			}
+	fun ifOverlaps(other: Rectangle, then: () -> Unit) {
+		xAxis.ifOverlaps(other.xAxis) {
+			yAxis.ifOverlaps(other.yAxis, then)
+		}
+	}
 
 	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) =
 			yAxis.ifContains(y,
-					then = { xAxis.ifContains(x, orElse, then) },
+					then = {
+						xAxis.ifContains(x, orElse, then)
+					},
 					orElse = orElse)
 
 	fun ifUnder(y: Y, then: () -> Unit, orElse: () -> Unit) =
@@ -69,4 +72,5 @@ class Rectangle(private var xAxis: XAxis,
 			return xAxis.relativeTo(shape.xAxis)
 		throw IllegalArgumentException("relativeTo between Rectangle and ${shape::javaClass} is not yet implemented")
 	}
+
 }

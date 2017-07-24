@@ -6,6 +6,7 @@ import com.fabiantarrach.breakinout.game.meta.nextTo.NextTo
 import com.fabiantarrach.breakinout.game.meta.overlap.Collision
 import com.fabiantarrach.breakinout.game.meta.under.Under
 import com.fabiantarrach.breakinout.util.GdxColor
+import com.fabiantarrach.breakinout.util.engine.Entity
 
 abstract class BaseEntity(life: Int = 1): Entity {
 

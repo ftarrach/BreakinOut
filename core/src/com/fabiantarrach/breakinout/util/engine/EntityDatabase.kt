@@ -2,7 +2,6 @@ package com.fabiantarrach.breakinout.util.engine
 
 import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.game.entity.powerup.Goodie
-import com.fabiantarrach.breakinout.game.meta.Entity
 import kotlin.reflect.KClass
 
 class EntityDatabase {

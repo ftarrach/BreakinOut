@@ -11,7 +11,9 @@ class YAxis(private var y: Y,
 
 	fun ifOverlaps(other: YAxis, then: () -> Unit) =
 			y.ifUnder(other.y + other.height, then = {
-				(y + height).ifOver(other.y, then)
+				(y + height).ifOver(other.y, {
+					then()
+				})
 			})
 
 	fun update(rectangle: GdxRectangle) {
@@ -33,7 +35,10 @@ class YAxis(private var y: Y,
 			y.ifOver(other, then, ifNot)
 
 	fun ifContains(other: Y, then: () -> Unit, orElse: () -> Unit) =
-			y.ifUnder(other, then = {
-				(y + height).ifOver(other, then, orElse)
-			})
+			y.ifUnder(other,
+					then = {
+						(y + height).ifOver(other, then, orElse)
+					},
+					orElse = orElse)
+
 }

@@ -1,6 +1,5 @@
 package com.fabiantarrach.breakinout.util.engine
 
-import com.fabiantarrach.breakinout.game.meta.Entity
 import com.fabiantarrach.breakinout.util.GdxArray
 import com.fabiantarrach.breakinout.util.GdxObjectMap
 import com.fabiantarrach.breakinout.util.getOrPutIfAbscent
