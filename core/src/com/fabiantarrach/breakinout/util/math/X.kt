@@ -7,7 +7,6 @@ import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.ifTrue
 
-
 class X(value: Float) : Numerical(value) {
 
 	operator fun plus(radius: Radius) = X(super.plus(radius))

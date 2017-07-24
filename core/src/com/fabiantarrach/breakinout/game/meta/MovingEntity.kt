@@ -55,5 +55,4 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
 
 	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)
 	fun ifMovingRight(then: () -> Unit) = velocity.ifMovingRight(then)
-
 }

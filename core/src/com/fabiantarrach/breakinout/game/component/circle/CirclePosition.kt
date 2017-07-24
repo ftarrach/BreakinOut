@@ -2,6 +2,7 @@ package com.fabiantarrach.breakinout.game.component.circle
 
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
+import com.fabiantarrach.breakinout.game.meta.Direction
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X
@@ -32,21 +33,9 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 		return CirclePosition(newX, newY)
 	}
 
-	fun keepInside(radius: Radius): CirclePosition {
-		var newX = x
-		var newY = y
-		ifLeftOutside(radius) {
-			newX = x + radius
-		}
-		ifRightOutside(radius) {
-			newX = x - radius
-		}
-		ifTopOutside(radius) {
-			newY = y - radius
-		}
-		ifBottomOutside(radius) {
-			newY = y + radius
-		}
+	fun keepInside(radius: Radius, direction: Direction): CirclePosition {
+		val newX = direction.keepInside(x, radius)
+		val newY = direction.keepInside(y, radius)
 		return CirclePosition(newX, newY)
 	}
 
@@ -58,5 +47,4 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 
 	fun relativeTo(other: Rectangle) = other.relativeTo(x)
 	fun relativeTo(other: X) = other - x
-
 }

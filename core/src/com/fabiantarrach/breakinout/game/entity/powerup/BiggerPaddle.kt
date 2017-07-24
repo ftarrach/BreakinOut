@@ -13,6 +13,14 @@ class BiggerPaddle(rectangle: Rectangle) : Goodie(rectangle) {
 	override fun activate(database: EntityDatabase) =
 			database.each(Paddle::class) {
 				it.bigger()
+				Reset(it).start()
 			}
+
+	private class Reset(private val paddle: Paddle) : Thread() {
+		override fun run() {
+			Thread.sleep(5000)
+			paddle.smaller()
+		}
+	}
 
 }

@@ -9,7 +9,7 @@ import spock.lang.Specification
 class CenteredCircleSpec extends Specification {
 
     // a centered circle is a circle on the coordinates (0,0)
-    // in this specification he as a radius of 1
+    // in this specification it as a radius of 1
     def obj = new Circle(0, 0, 1)
 
     def "move a circle by passing a velocity vector"(int x, int y, CirclePosition newPosition) {
@@ -29,7 +29,6 @@ class CenteredCircleSpec extends Specification {
         -1 | 0  || new CirclePosition(x, y)
         -1 | 1  || new CirclePosition(x, y)
         -1 | -1 || new CirclePosition(x, y)
-
     }
 
     def "transform the circle to a GdxCircle for libgdx interop"() {
@@ -66,10 +65,11 @@ class CenteredCircleSpec extends Specification {
         -1         | -1         || false
     }
 
-    def """executes given clojure 'then' if circle is under the given rectangle 'orElse' otherwise
+    def """executes given closure 'then' if circle is under the given rectangle 'orElse' otherwise
             under is defined as:
                 - y value is smaller than the beginning of the yAxis of the rectangle
         """(float rectangleX, float rectangleY, boolean accept) {
+
         expect:
         def isUnder = null
         obj.ifUnder(new Rectangle(rectangleX, rectangleY, 1, 1), { isUnder = true }, { isUnder = false })

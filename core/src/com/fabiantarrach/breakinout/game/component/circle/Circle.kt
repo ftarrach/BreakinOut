@@ -3,6 +3,7 @@ package com.fabiantarrach.breakinout.game.component.circle
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
+import com.fabiantarrach.breakinout.game.meta.Direction
 import com.fabiantarrach.breakinout.game.meta.Intersection
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
@@ -46,19 +47,19 @@ class Circle(x: Float, y: Float, radius: Float) : Shape() {
 
 	fun ifOutsideGame(left: () -> Unit, right: () -> Unit, top: () -> Unit, bottom: () -> Unit) {
 		position.ifLeftOutside(radius) {
-			position = position.keepInside(radius)
+			position = position.keepInside(radius, Direction.LEFT)
 			left()
 		}
 		position.ifRightOutside(radius) {
-			position = position.keepInside(radius)
+			position = position.keepInside(radius, Direction.RIGHT)
 			right()
 		}
 		position.ifTopOutside(radius) {
-			position = position.keepInside(radius)
+			position = position.keepInside(radius, Direction.TOP)
 			top()
 		}
 		position.ifBottomOutside(radius) {
-			position = position.keepInside(radius)
+			position = position.keepInside(radius, Direction.BOTTOM)
 			bottom()
 		}
 	}
