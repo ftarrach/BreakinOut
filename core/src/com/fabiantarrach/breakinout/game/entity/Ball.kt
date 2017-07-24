@@ -28,15 +28,9 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 	fun ifOverlaps(paddle: Paddle, then: () -> Unit) = super.ifOverlaps(paddle, then)
 	fun ifOverlaps(brick: Brick, then: () -> Unit) = super.ifOverlaps(brick, then)
 
-	override public fun bounceOffFront() {
-		undoLastMovement()
-		super.bounceOffFront()
-	}
+	override public fun bounceOffFront() = super.bounceOffFront()
 
-	override public fun bounceOffSide() {
-		undoLastMovement()
-		super.bounceOffSide()
-	}
+	override public fun bounceOffSide() = super.bounceOffSide()
 
 	fun bounceOffFront(paddle: Paddle) {
 		bounceOffFront()

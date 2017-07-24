@@ -13,7 +13,10 @@ class XAxis(private var x: X,
 	constructor(x: Float, width: Float) : this(X(x), Width(width))
 
 	fun ifOverlaps(other: XAxis, then: () -> Unit) =
-			(x < other.x + width && x + width > other.x).ifTrue(then)
+			x.ifLeftOf(other.x + width,
+					then = {
+						(x + width).ifRightOf(other.x, then)
+					})
 
 	fun shorter(factor: Factor) {
 		width = width.shorter(factor)
@@ -46,8 +49,9 @@ class XAxis(private var x: X,
 	}
 
 	fun ifContains(other: X, then: () -> Unit, orElse: () -> Unit) =
-			(x < other && x + width > other)
-					.accept(then, orElse)
+			x.ifLeftOf(other, then = {
+				(x + width).ifRightOf(other, then, orElse)
+			})
 
 	fun relativeTo(other: X): X {
 		val center = x + width.halve()

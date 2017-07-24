@@ -5,7 +5,6 @@ import com.fabiantarrach.breakinout.game.component.rectangle.Height
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxVector
-import com.fabiantarrach.breakinout.util.ifTrue
 
 class Y(value: Float) : Numerical(value) {
 	operator fun plus(radius: Radius) = Y(super.plus(radius))
@@ -13,9 +12,14 @@ class Y(value: Float) : Numerical(value) {
 	operator fun plus(y: Y) = Y(super.plus(y))
 	operator fun minus(y: Y) = Y(super.minus(y))
 	operator fun minus(radius: Radius) = Y(super.minus(radius))
-	operator fun compareTo(other: Y) = super.compareTo(other) // TODO: this returns a int/boolean => primitve
 	operator fun times(factor: Factor) = Y(super.times(factor))
 	operator fun unaryMinus() = Y(super.invert())
+
+	fun ifOver(other: Y, then: () -> Unit, orElse: () -> Unit = {}) =
+			ifBigger(other, then, orElse)
+
+	fun ifUnder(other: Y, then: () -> Unit, orElse: () -> Unit = {}) =
+			ifSmaller(other, then, orElse)
 
 	fun update(circle: GdxCircle) {
 		circle.y = value
@@ -32,8 +36,8 @@ class Y(value: Float) : Numerical(value) {
 	override public fun ifNegative(then: () -> Unit) = super.ifNegative(then)
 	override public fun ifPositive(then: () -> Unit) = super.ifPositive(then)
 
-	fun ifOutside(block: () -> Unit) =
-			(this < Y(-1f) || this > Y(1f))
-					.ifTrue(block)
-
+	fun ifOutside(then: () -> Unit) =
+			ifUnder(Y(-1f), then, orElse = {
+				this.ifOver(Y(1f), then)
+			})
 }

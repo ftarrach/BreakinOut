@@ -8,7 +8,6 @@ import com.fabiantarrach.breakinout.util.math.Vectorial
 import com.fabiantarrach.breakinout.util.math.X
 import com.fabiantarrach.breakinout.util.math.Y
 
-// TODO: automatic keepInside on move()?
 class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 
 	constructor(x: Float, y: Float) : this(X(x),

@@ -17,10 +17,12 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
 	}
 
 	protected open fun bounceOffFront() {
+		undoLastMovement()
 		velocity = velocity.deflectFront()
 	}
 
 	protected open fun bounceOffSide() {
+		undoLastMovement()
 		velocity = velocity.deflectSide()
 	}
 

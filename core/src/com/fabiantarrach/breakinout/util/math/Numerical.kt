@@ -1,6 +1,7 @@
 package com.fabiantarrach.breakinout.util.math
 
 import com.fabiantarrach.breakinout.util.GdxVector
+import com.fabiantarrach.breakinout.util.accept
 import com.fabiantarrach.breakinout.util.ifTrue
 
 // TODO: value is protected because of GdxRectangle and GdxCircle
@@ -21,8 +22,13 @@ abstract class Numerical(protected val value: Float) {
 	protected fun <T : Numerical> halve(block: (Float) -> T) = block(value / 2)
 	protected fun <T : Numerical> oneThird(block: (Float) -> T) = block(value / 3)
 
-	// do i need this..?
-	protected operator fun compareTo(other: Numerical) = value.compareTo(other.value)
+	protected fun ifSmaller(other: Numerical, then: () -> Unit, orElse: () -> Unit = {}) =
+			(value < other.value)
+					.accept(then, orElse)
+
+	protected fun ifBigger(other: Numerical, then: () -> Unit, orElse: () -> Unit = {}) =
+			(value > other.value)
+					.accept(then, orElse)
 
 	protected fun difference(other: Numerical): Float {
 		if (value >= other.value)

@@ -6,7 +6,7 @@ import java.util.*
 class AngleFactory {
 	fun createRandomAngle(): Angle {
 		val randomNumberGenerator = Random()
-		val randomAngle = randomNumberGenerator.nextInt(360)
+		val randomAngle = randomNumberGenerator.nextInt(320)
 		val randomFloatAngle = randomAngle.toFloat()
 		return Angle(randomFloatAngle)
 	}

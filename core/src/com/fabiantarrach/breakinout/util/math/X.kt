@@ -5,7 +5,6 @@ import com.fabiantarrach.breakinout.game.component.rectangle.Width
 import com.fabiantarrach.breakinout.util.GdxCircle
 import com.fabiantarrach.breakinout.util.GdxRectangle
 import com.fabiantarrach.breakinout.util.GdxVector
-import com.fabiantarrach.breakinout.util.ifTrue
 
 class X(value: Float) : Numerical(value) {
 
@@ -19,7 +18,13 @@ class X(value: Float) : Numerical(value) {
 	operator fun div(width: Width) = X(super.div(width))
 	operator fun unaryMinus() = X(super.invert())
 	// TODO: this returns a int/boolean => primitve
-	operator fun compareTo(other: X) = super.compareTo(other)
+//	operator fun compareTo(other: X) = super.compareTo(other)
+
+	fun ifRightOf(other: X, then: () -> Unit, orElse: () -> Unit = {}) =
+			ifBigger(other, then, orElse)
+
+	fun ifLeftOf(other: X, then: () -> Unit, orElse: () -> Unit = {}) =
+			ifSmaller(other, then, orElse)
 
 	fun update(circle: GdxCircle) {
 		circle.x = value
@@ -36,9 +41,10 @@ class X(value: Float) : Numerical(value) {
 	public override fun ifNegative(then: () -> Unit) = super.ifNegative(then)
 	public override fun ifPositive(then: () -> Unit) = super.ifPositive(then)
 
-	fun ifOutside(block: () -> Unit) =
-			(this < X(-1f) || this > X(1f))
-					.ifTrue(block)
+	fun ifOutside(then: () -> Unit) =
+			ifLeftOf(X(-1f), then, orElse = {
+				this.ifRightOf(X(1f), then)
+			})
 
 	fun double() = X(value * 2f)
 
