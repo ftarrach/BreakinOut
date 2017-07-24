@@ -20,17 +20,18 @@ class EntityMap {
 					.flatMap { it }
 					.forEach(action)
 
-	fun <A : Entity, B : Entity> cross(clazzA: KClass<A>, clazzB: KClass<B>, block: (A, B) -> Unit) =
-			combine(clazzA, clazzB)
-					.forEach {
-						block(it.first, it.second)
-					}
+	fun <A : Entity, B : Entity> cross(clazzA: KClass<A>, clazzB: KClass<B>, action: (A, B) -> Unit) {
+		combine(clazzA, clazzB, action)
+	}
 
-	private fun <A : Entity, B : Entity> combine(clazzA: KClass<A>, clazzB: KClass<B>) =
+	private fun <A : Entity, B : Entity> combine(clazzA: KClass<A>, clazzB: KClass<B>, action: (A, B) -> Unit) =
 			select(clazzA).flatMap { oneItem ->
-				select(clazzB).map { otherItem ->
-					Pair(oneItem, otherItem) // TODO: this is a 2 level indendation!
-				}
+				combineB(clazzB, oneItem, action)
+			}
+
+	private fun <A : Entity, B : Entity> combineB(clazzB: KClass<B>, oneItem: A, block: (A, B) -> Unit) =
+			select(clazzB).map { otherItem ->
+				block(oneItem, otherItem)
 			}
 
 	private fun <T : Entity> select(clazz: KClass<T>) =

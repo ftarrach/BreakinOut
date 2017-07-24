@@ -14,9 +14,8 @@ class BonusBrick(x: Float, y: Float, goodieSupplier: (Rectangle) -> Goodie) : Br
 		goodie = goodieSupplier(drop)
 	}
 
-	override fun render(renderer: GdxShapeRenderer) {
-		goodie.renderBlock(renderer, shape)
-	}
+	override fun render(renderer: GdxShapeRenderer) =
+			goodie.renderBlock(renderer, shape)
 
 	override fun generatePowerUp(): Goodie? {
 		var newGoodie: Goodie? = null

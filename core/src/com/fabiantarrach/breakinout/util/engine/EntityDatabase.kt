@@ -20,8 +20,9 @@ class EntityDatabase {
 	fun eachEntity(action: (Entity) -> Unit) =
 			entities.forEach(action)
 
-	fun <A : Entity, B : Entity> cross(clazzA: KClass<A>, clazzB: KClass<B>, block: (A, B) -> Unit) =
-			entities.cross(clazzA, clazzB, block)
+	fun <A : Entity, B : Entity> cross(clazzA: KClass<A>, clazzB: KClass<B>, block: (A, B) -> Unit) {
+		entities.cross(clazzA, clazzB, block)
+	}
 
 	fun <T : Entity> each(clazz: KClass<T>, action: (T) -> Unit) =
 			entities.each(clazz, action)

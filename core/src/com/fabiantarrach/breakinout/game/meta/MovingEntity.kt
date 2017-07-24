@@ -11,8 +11,8 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
 	private var lastTimespan: Timespan = Timespan(0f)
 
 	override fun update(delta: Timespan) {
-		val normalizedVelocity = velocity * delta
-		shape.move(normalizedVelocity)
+		val frameVelocity = velocity * delta
+		shape.move(frameVelocity)
 		lastTimespan = delta
 	}
 
