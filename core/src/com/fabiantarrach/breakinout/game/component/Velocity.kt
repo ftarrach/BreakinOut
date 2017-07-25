@@ -34,4 +34,7 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 	fun push(push: Velocity) = super.push(push, ::Velocity)
 
 	fun invert() = Velocity(-x, -y)
+
+	fun slam(other: Velocity) =
+			Velocity(other.x, y)
 }

@@ -32,7 +32,7 @@ abstract class Vectorial(protected val x: X,
 		return block(newX, newY)
 	}
 
-	fun <T : Vectorial> push(other: Vectorial, block: (X, Y) -> T): T {
+	protected fun <T : Vectorial> push(other: Vectorial, block: (X, Y) -> T): T {
 		val vector = createGdxVector()
 		val length = vector.len()
 		val added = plus(other, block)
@@ -56,6 +56,13 @@ abstract class Vectorial(protected val x: X,
 		return false
 	}
 
-	override fun hashCode(): Int = 31 * x.hashCode() + y.hashCode()
+	override fun hashCode(): Int =
+			31 * x.hashCode() +
+					y.hashCode()
+
+	override fun toString(): String {
+		return "Vectorial(x=$x, y=$y)"
+	}
+
 
 }

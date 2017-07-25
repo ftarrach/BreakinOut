@@ -19,7 +19,7 @@ warn ( ) {
     echo "$*"
 }
 
-hit ( ) {
+decrease ( ) {
     echo
     echo "$*"
     echo
@@ -76,14 +76,14 @@ if [ -n "$JAVA_HOME" ] ; then
         JAVACMD="$JAVA_HOME/bin/java"
     fi
     if [ ! -x "$JAVACMD" ] ; then
-        hit "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
+        decrease "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME
 
 Please set the JAVA_HOME variable in your environment to match the
 location of your Java installation."
     fi
 else
     JAVACMD="java"
-    which java >/dev/null 2>&1 || hit "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
+    which java >/dev/null 2>&1 || decrease "ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
 
 Please set the JAVA_HOME variable in your environment to match the
 location of your Java installation."

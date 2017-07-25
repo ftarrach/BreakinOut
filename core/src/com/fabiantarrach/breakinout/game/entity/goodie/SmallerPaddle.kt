@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game.entity.powerup
+package com.fabiantarrach.breakinout.game.entity.goodie
 
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
 import com.fabiantarrach.breakinout.game.entity.Paddle

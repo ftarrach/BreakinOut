@@ -1,12 +1,12 @@
 package com.fabiantarrach.breakinout.util.engine
 
 import com.fabiantarrach.breakinout.game.entity.Brick
-import com.fabiantarrach.breakinout.game.entity.powerup.Goodie
+import com.fabiantarrach.breakinout.game.entity.goodie.Goodie
 import kotlin.reflect.KClass
 
 class EntityDatabase {
 
-	private val entities = EntityMap()
+	private val entities = EntityStorage()
 
 	fun add(entity: Entity) {
 		if (entity is Goodie)

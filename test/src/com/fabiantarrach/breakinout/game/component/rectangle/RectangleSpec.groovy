@@ -190,24 +190,6 @@ class RectangleSpec extends Specification {
         drop.yAxis.height.value.trunc(3) == 0.333f
     }
 
-    def """a rectangle can be made wider"""() {
-        when:
-        def before = obj.xAxis.width.value
-        obj.widen()
-
-        then:
-        obj.xAxis.width.value > before
-    }
-
-    def """a rectangle can be made shorter"""() {
-        when:
-        def before = obj.xAxis.width.value
-        obj.shorten()
-
-        then:
-        obj.xAxis.width.value < before
-    }
-
     def """a rectangle which is first widened and then shortened is equivalent to the base rectangle"""() {
         when:
         def baseWidth = obj.xAxis.width.value

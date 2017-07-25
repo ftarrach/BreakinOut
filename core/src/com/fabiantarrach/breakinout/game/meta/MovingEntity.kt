@@ -5,7 +5,7 @@ import com.fabiantarrach.breakinout.game.component.MousePosition
 import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
+abstract class MovingEntity(protected var velocity: Velocity = Velocity(0f, 0f),
                             life: Int = 1) : BaseEntity(life) {
 
 	private var lastTimespan: Timespan = Timespan(0f)
@@ -24,10 +24,6 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
 	protected open fun bounceOffSide() {
 		undoLastMovement()
 		velocity = velocity.deflectSide()
-	}
-
-	protected open fun moveRandom() {
-		velocity = velocity.randomizeAngle()
 	}
 
 	protected fun push(push: Velocity) {
@@ -52,7 +48,7 @@ abstract class MovingEntity(private var velocity: Velocity = Velocity(0f, 0f),
 
 	protected open fun slamX(other: Velocity) {
 		shape.move(other * lastTimespan)
-		velocity += other
+		velocity = velocity.slam(other)
 	}
 
 	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)

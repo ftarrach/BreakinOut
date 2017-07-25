@@ -23,7 +23,7 @@ class GameScreen(screenState: ScreenState) : FitScreen(1f) {
 
 	override fun hide() {}
 
-	override fun pause() {} // TODO: pause screenState if focus lost?
+	override fun pause() {}
 
-	override fun resume() {} // TODO: ... and resume it
+	override fun resume() {}
 }

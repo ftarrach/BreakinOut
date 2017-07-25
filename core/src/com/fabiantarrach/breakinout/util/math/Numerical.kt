@@ -4,7 +4,7 @@ import com.fabiantarrach.breakinout.util.GdxVector
 import com.fabiantarrach.breakinout.util.accept
 import com.fabiantarrach.breakinout.util.ifTrue
 
-// TODO: value is protected because of GdxRectangle and GdxCircle
+// value is protected because of GdxRectangle and GdxCircle interop
 abstract class Numerical(protected val value: Float) {
 
 	protected operator fun times(vector: GdxVector): GdxVector {

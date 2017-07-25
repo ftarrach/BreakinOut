@@ -1,7 +1,7 @@
 package com.fabiantarrach.breakinout.game.entity
 
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
-import com.fabiantarrach.breakinout.game.entity.powerup.Goodie
+import com.fabiantarrach.breakinout.game.entity.goodie.Goodie
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.math.Chance
 

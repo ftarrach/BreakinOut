@@ -1,11 +1,11 @@
 package com.fabiantarrach.breakinout.game.system
 
 import com.fabiantarrach.breakinout.game.entity.Paddle
-import com.fabiantarrach.breakinout.game.entity.powerup.Goodie
+import com.fabiantarrach.breakinout.game.entity.goodie.Goodie
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
 
-class PaddlePowerUpCollision : LogicSystem() {
+class PaddleGoodieCollision : LogicSystem() {
 
 	override fun update(delta: Timespan) =
 			database.cross(Paddle::class, Goodie::class, this::checkCollision)

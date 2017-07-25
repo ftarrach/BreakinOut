@@ -2,13 +2,13 @@ package com.fabiantarrach.breakinout.game.level
 
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
-import com.fabiantarrach.breakinout.game.meta.RandomBrickFactory
+import com.fabiantarrach.breakinout.game.meta.BrickFactory
 import com.fabiantarrach.breakinout.util.engine.Engine
 
 // TODO: make a second level and a "LevelManager"
 class Level1(private val engine: Engine) {
 
-	private val brickFactory = RandomBrickFactory()
+	private val brickFactory = BrickFactory()
 
 	fun build() {
 		val paddle = Paddle()

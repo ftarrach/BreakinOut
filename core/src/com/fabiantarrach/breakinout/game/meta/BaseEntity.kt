@@ -10,15 +10,15 @@ import com.fabiantarrach.breakinout.util.engine.Entity
 
 abstract class BaseEntity(life: Int = 1): Entity {
 
-	private val lifepoints = Health(life)
+	protected val life = Health(life)
 	protected abstract val shape: Shape
 
-	override fun ifDead(then: () -> Unit) = lifepoints.ifDead(then)
-	override fun ifAlive(then: () -> Unit) = lifepoints.ifAlive(then)
-	protected fun hit(ifDied: () -> Unit) = lifepoints.hit(ifDied)
-	override fun die() = lifepoints.drain()
+	override fun ifDead(then: () -> Unit) = life.ifDead(then)
+	override fun ifAlive(then: () -> Unit) = life.ifAlive(then)
+	protected fun decreaseLife(ifDied: () -> Unit) = life.decrease(ifDied)
+	override fun die() = life.drain()
 
-	protected fun createLifeColor(base: GdxColor) = lifepoints.createColor(base)
+	protected fun createLifeColor(base: GdxColor) = life.createColor(base)
 
 	protected fun ifOverlaps(other: BaseEntity, then: () -> Unit) =
 			Collision()

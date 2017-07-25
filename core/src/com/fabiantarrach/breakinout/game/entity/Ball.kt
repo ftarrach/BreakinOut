@@ -8,7 +8,7 @@ import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
 import com.fabiantarrach.breakinout.util.math.Y
 
-class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
+class Ball(x: Float, y: Float, velocity: Velocity = Velocity(0f, -1f)) : MovingEntity(velocity) {
 
 	override val shape = Circle(x, y, 0.025f)
 
@@ -20,8 +20,6 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 				top = this::bounceOffFront,
 				bottom = this::die)
 	}
-
-	override public fun moveRandom() = super.moveRandom()
 
 	override fun render(renderer: GdxShapeRenderer) = shape.render(renderer, GdxColor.RED)
 

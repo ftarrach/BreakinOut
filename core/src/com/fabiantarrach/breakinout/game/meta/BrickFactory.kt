@@ -4,7 +4,7 @@ import com.fabiantarrach.breakinout.game.entity.BonusBrick
 import com.fabiantarrach.breakinout.game.entity.Brick
 import com.fabiantarrach.breakinout.util.math.Chance
 
-class RandomBrickFactory {
+class BrickFactory {
 
 	private val goodieFactory = GoodieFactory()
 

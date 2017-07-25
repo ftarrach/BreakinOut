@@ -8,7 +8,7 @@ import ktx.collections.gdxArrayOf
 import ktx.collections.isEmpty
 import kotlin.reflect.KClass
 
-class EntityMap {
+class EntityStorage {
 	private val entities = GdxObjectMap<KClass<out Entity>, GdxArray<Entity>>()
 
 	fun put(clazz: KClass<out Entity>, entity: Entity) =
@@ -47,12 +47,12 @@ class EntityMap {
 	fun remove(entity: Entity) = removeFromType(entity, entity::class)
 
 	fun removeFromType(entity: Entity, clazz: KClass<out Entity>) {
-		entities.get(clazz)
+		entities.get(clazz, gdxArrayOf())
 				.removeValue(entity, true)
 	}
 
 	fun ifNo(clazz: KClass<out Entity>, action: () -> Unit) =
-			entities.get(clazz)
+			entities.get(clazz, gdxArrayOf())
 					.isEmpty()
 					.ifTrue(action)
 

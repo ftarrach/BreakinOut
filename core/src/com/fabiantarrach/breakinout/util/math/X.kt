@@ -17,8 +17,6 @@ class X(value: Float) : Numerical(value) {
 	operator fun times(factor: Factor) = X(super.times(factor))
 	operator fun div(width: Width) = X(super.div(width))
 	operator fun unaryMinus() = X(super.invert())
-	// TODO: this returns a int/boolean => primitve
-//	operator fun compareTo(other: X) = super.compareTo(other)
 
 	fun ifRightOf(other: X, then: () -> Unit, orElse: () -> Unit = {}) =
 			ifBigger(other, then, orElse)

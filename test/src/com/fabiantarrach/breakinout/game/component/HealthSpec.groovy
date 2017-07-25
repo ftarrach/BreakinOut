@@ -36,11 +36,11 @@ class HealthSpec extends Specification {
         return negativeHealth
     }
 
-    def "hit decrements 1 healthpoint and calls the given clojure if health is now equal or lower than zero"(int health, boolean deadAfterHit) {
+    def "hit decrements 1 healthpoint and calls the given closure if health is now equal or lower than zero"(int health, boolean deadAfterHit) {
         expect:
         def dead = false
         def obj = new Health(health)
-        obj.hit({ dead = true })
+        obj.decrease({ dead = true })
         obj.points == health - 1
         dead == deadAfterHit
 

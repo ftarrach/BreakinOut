@@ -46,4 +46,6 @@ class CirclePosition(x: X, y: Y) : Vectorial(x, y) {
 
 	fun relativeTo(other: Rectangle) = other.relativeTo(x)
 	fun relativeTo(other: X) = other - x
+
+
 }

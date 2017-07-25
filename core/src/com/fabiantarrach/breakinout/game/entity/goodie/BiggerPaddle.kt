@@ -1,4 +1,4 @@
-package com.fabiantarrach.breakinout.game.entity.powerup
+package com.fabiantarrach.breakinout.game.entity.goodie
 
 import com.badlogic.gdx.graphics.Color
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle

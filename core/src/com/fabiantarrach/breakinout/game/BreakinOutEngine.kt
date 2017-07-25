@@ -21,7 +21,7 @@ class BreakinOutEngine(private val screenState: ScreenState,
 		addSystem(
 				BallBrickCollision())
 		addSystem(
-				PaddlePowerUpCollision())
+				PaddleGoodieCollision())
 		addSystem(
 				RemoveDead())
 		addSystem(

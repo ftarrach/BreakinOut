@@ -12,13 +12,11 @@ class Width(value: Float) : Numerical(value) {
 	}
 
 	fun shorter(factor: Factor): Width {
-		// TODO: check if factor < 1, because that would be wider?
 		val newValue = super.times(factor)
 		return Width(newValue)
 	}
 
 	fun wider(factor: Factor): Width {
-		// TODO: check if factor > 1, because that would be wider?
 		val newValue = super.times(factor)
 		return Width(newValue)
 	}

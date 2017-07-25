@@ -6,10 +6,10 @@ import java.util.*
 class Chance(private val percent: Int) {
 
 	private val number = Random()
-			.nextInt(100)
+			.nextInt(99)
 
 	fun ifSuccess(action: () -> Unit) =
-			(number <= percent)
+			(number < percent)
 					.ifTrue(action)
 
 }
