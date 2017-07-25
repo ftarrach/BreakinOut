@@ -19,6 +19,7 @@ abstract class Numerical(protected val value: Float) {
 	protected operator fun div(other: Numerical) = value / other.value
 	protected fun invert() = -value
 
+	protected fun <T : Numerical> double(block: (Float) -> T) = block(value * 2)
 	protected fun <T : Numerical> halve(block: (Float) -> T) = block(value / 2)
 	protected fun <T : Numerical> oneThird(block: (Float) -> T) = block(value / 3)
 

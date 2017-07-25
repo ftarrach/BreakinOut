@@ -1,20 +1,25 @@
-package com.fabiantarrach.breakinout
+package com.fabiantarrach.breakinout.game.component.rectangle
 
 import com.fabiantarrach.breakinout.game.component.Velocity
-import com.fabiantarrach.breakinout.game.component.rectangle.Height
-import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
-import com.fabiantarrach.breakinout.game.component.rectangle.Width
+import com.fabiantarrach.breakinout.game.component.circle.Circle
 import com.fabiantarrach.breakinout.util.math.X
 import com.fabiantarrach.breakinout.util.math.Y
 import spock.lang.Specification
 
 class RectangleSpec extends Specification {
 
-    def obj = new Rectangle(
+    /** a cube around the center of the coordinate system, spanning 1 in every direction */
+    def centerCube = new Rectangle(
             new X(-1),
             new Y(-1),
             new Width(2),
             new Height(2))
+
+    def obj = new Rectangle(
+            new X(1),
+            new Y(1),
+            new Width(2),
+            new Height(1))
 
     def """the constructor creates a rectangle using the x and y values the center of it
             the x and y values of the rectangle refer to the lower left corner"""(float x, float y, float w, float h, Tuple2<Float, Float> expectedLowerLeft) {
@@ -43,7 +48,7 @@ class RectangleSpec extends Specification {
 
         expect:
         def result = false
-        obj.ifOverlaps(new Rectangle(x, y, w, h)) { result = true }
+        centerCube.ifOverlaps(new Rectangle(x, y, w, h)) { result = true }
         result == expected
 
         where:
@@ -75,7 +80,7 @@ class RectangleSpec extends Specification {
             - is not on the same x-axis, same value included"""(float x, float y, Boolean expected) {
         expect:
         def result = null
-        obj.ifNextTo(new X(x), new Y(y), { result = true }, { result = false })
+        centerCube.ifNextTo(new X(x), new Y(y), { result = true }, { result = false })
         result == expected
 
         where:
@@ -124,7 +129,7 @@ class RectangleSpec extends Specification {
     def "ifUnder() checks whether a given y-Value is under the Rectangle"(float y, boolean expected) {
         expect:
         def result = null
-        obj.ifUnder(new Y(y), { result = true }, { result = false })
+        centerCube.ifUnder(new Y(y), { result = true }, { result = false })
         result == expected
 
         where:
@@ -138,9 +143,9 @@ class RectangleSpec extends Specification {
 
     def "move a rectangle by passing a velocity vector"(int x, int y, Tuple2<Float, Float> expectedLowerLeft) {
         expect:
-        obj.move(new Velocity(x, y))
-        obj.xAxis.x.value == expectedLowerLeft.first
-        obj.yAxis.y.value == expectedLowerLeft.second
+        centerCube.move(new Velocity(x, y))
+        centerCube.xAxis.x.value == expectedLowerLeft.first
+        centerCube.yAxis.y.value == expectedLowerLeft.second
 
         where:
         x | y || expectedLowerLeft
@@ -150,4 +155,69 @@ class RectangleSpec extends Specification {
         1 | 1 || [0, 0]
         2 | 1 || [1, 0]
     }
+
+    def "calculate the relative x-position of a circle to a rectangle"(float x, float y, float expected) {
+        expect:
+        def relatixeX = obj.relativeTo(new Circle(x, y, 1))
+        relatixeX.value == expected
+
+        where:
+        x | y || expected
+        1 | 0 || -1.0    // outer left
+        2 | 0 || 0.0     // center
+        3 | 0 || 1.0     // outer right
+    }
+
+    def "create a GdxRectangle with same values"() {
+        when:
+        def gdxRectangle = obj.createGdx()
+
+        then:
+        gdxRectangle.x == obj.xAxis.x.value
+        gdxRectangle.y == obj.yAxis.y.value
+        gdxRectangle.width == obj.xAxis.width.value
+        gdxRectangle.height == obj.yAxis.height.value
+    }
+
+    def """create the Rectangle of the Goodie a block can drop
+            - the width is a halve of the block's width
+            - the height is a third of the block's height"""() {
+        when:
+        def drop = obj.createDrop()
+
+        then:
+        drop.xAxis.width.value == 1
+        drop.yAxis.height.value.trunc(3) == 0.333f
+    }
+
+    def """a rectangle can be made wider"""() {
+        when:
+        def before = obj.xAxis.width.value
+        obj.widen()
+
+        then:
+        obj.xAxis.width.value > before
+    }
+
+    def """a rectangle can be made shorter"""() {
+        when:
+        def before = obj.xAxis.width.value
+        obj.shorten()
+
+        then:
+        obj.xAxis.width.value < before
+    }
+
+    def """a rectangle which is first widened and then shortened is equivalent to the base rectangle"""() {
+        when:
+        def baseWidth = obj.xAxis.width.value
+        obj.widen()
+        obj.shorten()
+        obj.shorten()
+        obj.widen()
+
+        then:
+        obj.xAxis.width.value == baseWidth
+    }
+
 }

@@ -1,9 +1,11 @@
-package com.fabiantarrach.breakinout
+package com.fabiantarrach.breakinout.game.component.circle
 
 import com.fabiantarrach.breakinout.game.component.Velocity
-import com.fabiantarrach.breakinout.game.component.circle.Circle
-import com.fabiantarrach.breakinout.game.component.circle.CirclePosition
+import com.fabiantarrach.breakinout.game.component.rectangle.Height
 import com.fabiantarrach.breakinout.game.component.rectangle.Rectangle
+import com.fabiantarrach.breakinout.game.component.rectangle.Width
+import com.fabiantarrach.breakinout.util.math.X
+import com.fabiantarrach.breakinout.util.math.Y
 import spock.lang.Specification
 
 class CenteredCircleSpec extends Specification {
@@ -86,6 +88,42 @@ class CenteredCircleSpec extends Specification {
         -1         | 0          || false
         -1         | 1          || true
         -1         | -1         || false
+    }
+
+    def """ifOverlaps checks whether a given rectangle overlaps with the circle"""(float x, float y, boolean expected) {
+
+        expect:
+        def rectangle = new Rectangle(new X(y), new Y(y), new Width(1), new Height(1))
+        boolean overlaps = false
+        obj.ifOverlaps(rectangle) { overlaps = true }
+        expected == overlaps
+
+        where:
+        x  | y  || expected
+        0  | 0  || true
+        -1 | 0  || true
+        0  | -1 || true
+        -1 | -1 || true
+        1  | 1  || false
+        -2 | 1  || false
+        -2 | -2 || false
+        1  | -2 || false
+
+    }
+
+    def """the centered circle is not outside the game"""() {
+        when:
+        def left = false
+        def right = false
+        def top = false
+        def bottom = false
+        obj.ifOutsideGame({ left = true }, { right = true }, { top = true }, { bottom = true })
+
+        then:
+        left == false
+        right == false
+        top == false
+        bottom == false
     }
 
 }

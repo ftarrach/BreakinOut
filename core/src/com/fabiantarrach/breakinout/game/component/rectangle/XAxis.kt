@@ -57,9 +57,7 @@ class XAxis(private var x: X,
 
 	fun relativeTo(other: X): X {
 		val center = x + width.halve()
-		return (other - center) / width
+		val relative = (other - center) / width
+		return relative.double()
 	}
-
-	fun relativeTo(other: XAxis): X = relativeTo(other.x)
-
 }

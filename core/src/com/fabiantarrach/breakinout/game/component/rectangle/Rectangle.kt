@@ -22,11 +22,10 @@ class Rectangle(private var xAxis: XAxis,
 			this(XAxis(x, width),
 					YAxis(y, height))
 
-	fun ifOverlaps(other: Rectangle, then: () -> Unit) {
-		xAxis.ifOverlaps(other.xAxis) {
-			yAxis.ifOverlaps(other.yAxis, then)
-		}
-	}
+	fun ifOverlaps(other: Rectangle, then: () -> Unit) =
+			xAxis.ifOverlaps(other.xAxis) {
+				yAxis.ifOverlaps(other.yAxis, then)
+			}
 
 	fun ifNextTo(x: X, y: Y, then: () -> Unit, orElse: () -> Unit) =
 			yAxis.ifContains(y,
@@ -50,7 +49,7 @@ class Rectangle(private var xAxis: XAxis,
 		return gdxRectangle
 	}
 
-	fun shorten() = xAxis.shorter(Factor(0.75f))
+	fun shorten() = xAxis.shorter(Factor(1 / 1.25f))
 	fun widen() = xAxis.wider(Factor(1.25f))
 
 	override fun render(renderer: GdxShapeRenderer, color: GdxColor) {
@@ -68,8 +67,6 @@ class Rectangle(private var xAxis: XAxis,
 	override fun relativeTo(shape: Shape): X {
 		if (shape is Circle)
 			return shape.relativeTo(this)
-		if (shape is Rectangle)
-			return xAxis.relativeTo(shape.xAxis)
 		throw IllegalArgumentException("relativeTo between Rectangle and ${shape::javaClass} is not yet implemented")
 	}
 

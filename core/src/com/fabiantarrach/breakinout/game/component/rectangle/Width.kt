@@ -8,7 +8,7 @@ class Width(value: Float) : Numerical(value) {
 
 	init {
 		if (value < 0)
-			throw IllegalArgumentException("width cannot be smaller than 0")
+			throw IllegalArgumentException("Width cannot be smaller than 0")
 	}
 
 	fun shorter(factor: Factor): Width {

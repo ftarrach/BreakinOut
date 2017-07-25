@@ -35,9 +35,8 @@ class Ball(x: Float, y: Float) : MovingEntity(Velocity(0f, -1f)) {
 	fun bounceOffFront(paddle: Paddle) {
 		bounceOffFront()
 		paddle.scrub(this)
-		val relativeTo = positionRelativeTo(paddle)
-		val doubleRelative = relativeTo.double()
-		var pushVelocity = Velocity(doubleRelative, Y(0f))
+		val relative = positionRelativeTo(paddle)
+		var pushVelocity = Velocity(relative, Y(0f))
 		ifMovingRight {
 			pushVelocity = pushVelocity.invert()
 		}

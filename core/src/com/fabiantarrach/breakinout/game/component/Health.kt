@@ -8,7 +8,7 @@ class Health(private var points: Int) {
 
 	init {
 		if (points < 0)
-			throw IllegalArgumentException("negative points are not allowed")
+			throw IllegalArgumentException("negative health is not valid")
 	}
 
 	fun ifDead(then: () -> Unit) =
@@ -20,7 +20,7 @@ class Health(private var points: Int) {
 					ifTrue(then)
 
 	fun hit(died: () -> Unit = {}) =
-			(--points == 0)
+			(--points <= 0)
 					.ifTrue(died)
 
 	fun drain() {
