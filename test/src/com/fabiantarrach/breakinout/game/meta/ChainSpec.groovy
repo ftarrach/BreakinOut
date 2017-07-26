@@ -1,8 +1,8 @@
 package com.fabiantarrach.breakinout.game.meta
 
 import com.fabiantarrach.breakinout.game.meta.chain.Chain
-import com.fabiantarrach.breakinout.game.meta.chain.Handler
-import com.fabiantarrach.breakinout.game.meta.chain.NoHandler
+import com.fabiantarrach.breakinout.game.meta.chain.Link
+import com.fabiantarrach.breakinout.game.meta.chain.NoLinkFound
 import com.fabiantarrach.breakinout.game.meta.chain.ErrorLink
 import kotlin.jvm.JvmClassMappingKt
 import kotlin.jvm.functions.Function0
@@ -15,8 +15,8 @@ class ChainSpec extends Specification {
         given:
         def weakChain = new Chain() {
             @Override
-            protected List<Handler> getElements() {
-                return [new Handler() {
+            protected List<Link> getElements() {
+                return [new Link() {
                     @Override
                     void resolve(
                             final Object one,
@@ -33,15 +33,15 @@ class ChainSpec extends Specification {
         weakChain.process(new Object(), new Object(), {}, {})
 
         then:
-        notThrown(NoHandler)
+        notThrown(NoLinkFound)
     }
 
     def "a chain with an handler in the end throwing an exception"() {
         given:
         def strongChain = new Chain() {
             @Override
-            protected List<Handler> getElements() {
-                return [new Handler() {
+            protected List<Link> getElements() {
+                return [new Link() {
                     @Override
                     void resolve(
                             final Object one,
@@ -58,7 +58,7 @@ class ChainSpec extends Specification {
         strongChain.process(new Object(), new Object(), {}, {})
 
         then:
-        thrown(NoHandler)
+        thrown(NoLinkFound)
     }
 
 }
