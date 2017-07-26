@@ -2,22 +2,20 @@ package com.fabiantarrach.breakinout.game.meta.chain
 
 abstract class Chain<E> {
 
-	abstract protected val elements: List<Link<E>>
+	abstract protected val links: List<Link<E>>
 
 	fun process(one: E, another: E, then: () -> Unit, orElse: () -> Unit = {}) {
-		val iterator = elements.iterator()
-
-		iterator.next()
+		val iterator = links.iterator()
+		iterator.nextLink()
 				.resolve(one, another, then, orElse,
 				next = {
-					iterator.nextOrEmpty()
+					iterator.nextLink()
 				})
 	}
 
-	private fun Iterator<Link<E>>.nextOrEmpty(): Link<E> {
+	private fun Iterator<Link<E>>.nextLink(): Link<E> {
 		if (hasNext())
 			return next()
 		return ChainEnd()
 	}
-
 }

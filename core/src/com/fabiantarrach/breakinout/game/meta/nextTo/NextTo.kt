@@ -6,7 +6,7 @@ import com.fabiantarrach.breakinout.game.meta.chain.ErrorLink
 
 class NextTo : Chain<Shape>() {
 
-	override val elements =
+	override val links =
 			listOf(
 					CircleRectangle(),
 					ErrorLink(NextTo::class))

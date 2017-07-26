@@ -6,7 +6,7 @@ import com.fabiantarrach.breakinout.game.meta.chain.ErrorLink
 
 class Collision : Chain<Shape>() {
 
-	override val elements =
+	override val links =
 			listOf(
 					CircleRectangle(),
 					RectangleRectangle(),
