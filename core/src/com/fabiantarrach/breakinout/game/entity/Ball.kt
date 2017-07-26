@@ -6,7 +6,6 @@ import com.fabiantarrach.breakinout.game.meta.MovingEntity
 import com.fabiantarrach.breakinout.util.GdxColor
 import com.fabiantarrach.breakinout.util.GdxShapeRenderer
 import com.fabiantarrach.breakinout.util.engine.Timespan
-import com.fabiantarrach.breakinout.util.math.Y
 
 class Ball(x: Float, y: Float, velocity: Velocity = Velocity(0f, -1f)) : MovingEntity(velocity) {
 
@@ -30,17 +29,6 @@ class Ball(x: Float, y: Float, velocity: Velocity = Velocity(0f, -1f)) : MovingE
 
 	override public fun bounceOffSide() = super.bounceOffSide()
 
-	fun bounceOffFront(paddle: Paddle) {
-		bounceOffFront()
-		paddle.scrub(this)
-		val relative = positionRelativeTo(paddle)
-		var pushVelocity = Velocity(relative, Y(0f))
-		ifMovingRight {
-			pushVelocity = pushVelocity.invert()
-		}
-		push(pushVelocity)
-	}
-
 	fun ifNextTo(brick: Brick, then: () -> Unit, ifNot: () -> Unit = {}) =
 			super.ifNextTo(brick, then, ifNot)
 
@@ -51,5 +39,7 @@ class Ball(x: Float, y: Float, velocity: Velocity = Velocity(0f, -1f)) : MovingE
 					})
 
 	override public fun slamX(other: Velocity) = super.slamX(other)
+
+	override public fun push(push: Velocity) = super.push(push)
 
 }

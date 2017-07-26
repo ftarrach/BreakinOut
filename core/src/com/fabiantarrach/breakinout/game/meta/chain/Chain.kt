@@ -6,8 +6,18 @@ abstract class Chain<E> {
 
 	fun process(one: E, another: E, then: () -> Unit, orElse: () -> Unit = {}) {
 		val iterator = elements.iterator()
-		iterator.next().resolve(one, another, then, orElse,
-				next = iterator::next)
+
+		iterator.next()
+				.resolve(one, another, then, orElse,
+				next = {
+					iterator.nextOrEmpty()
+				})
+	}
+
+	private fun Iterator<Handler<E>>.nextOrEmpty(): Handler<E> {
+		if (hasNext())
+			return next()
+		return EndLink()
 	}
 
 }

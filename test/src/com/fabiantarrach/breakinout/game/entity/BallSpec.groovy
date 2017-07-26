@@ -34,4 +34,28 @@ class BallSpec extends Specification {
         0 | 0 | -2 | 0
         0 | 0 | -2 | -2
     }
+
+    def "check, whether the ball is next to or under the given paddle"(
+            float x, float y, boolean isUnderOrNextTo) {
+        given:
+        def paddle = new Paddle()
+
+        expect:
+        def result = null
+        new Ball(x, y, new Velocity(0f, 0f)).ifUnderFront(paddle, { result = true }, { result = false })
+        isUnderOrNextTo == result
+
+        where:
+        x   | y     || isUnderOrNextTo
+        0f  | 0f    || false
+        0f  | 1f    || false
+        1f  | 0f    || false
+        1f  | 1f    || false
+        0f  | -1f   || true
+        -1f | 0f    || false
+        -1f | -1f   || true
+        1f  | -0.8f || true
+        -1  | -0.8f || true
+    }
+
 }

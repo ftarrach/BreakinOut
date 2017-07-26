@@ -2,7 +2,7 @@ package com.fabiantarrach.breakinout.game.meta.overlap
 
 import com.fabiantarrach.breakinout.game.component.Shape
 import com.fabiantarrach.breakinout.game.meta.chain.Chain
-import com.fabiantarrach.breakinout.game.meta.chain.ThrowError
+import com.fabiantarrach.breakinout.game.meta.chain.ErrorLink
 
 class Collision : Chain<Shape>() {
 
@@ -10,5 +10,5 @@ class Collision : Chain<Shape>() {
 			listOf(
 					CircleRectangle(),
 					RectangleRectangle(),
-					ThrowError(Collision::class))
+					ErrorLink(Collision::class))
 }

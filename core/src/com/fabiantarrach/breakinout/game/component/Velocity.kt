@@ -23,6 +23,7 @@ class Velocity(x: X, y: Y) : Vectorial(x, y) {
 	fun deflectSide() = Velocity(-x, y)
 
 	fun ifMovingDown(then: () -> Unit) = y.ifNegative(then)
+	fun ifMovingLeft(then: () -> Unit) = x.ifPositive(then)
 	fun ifMovingRight(then: () -> Unit) = x.ifNegative(then)
 
 	fun randomizeAngle(): Velocity {

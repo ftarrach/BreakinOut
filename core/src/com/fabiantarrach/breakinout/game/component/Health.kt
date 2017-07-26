@@ -19,7 +19,7 @@ class Health(private var points: Int) {
 			(points > 0).
 					ifTrue(then)
 
-	fun decrease(died: () -> Unit = {}) =
+	fun decrease(died: () -> Unit) =
 			(--points <= 0)
 					.ifTrue(died)
 

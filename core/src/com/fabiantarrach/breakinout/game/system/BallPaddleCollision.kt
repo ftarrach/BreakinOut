@@ -1,9 +1,11 @@
 package com.fabiantarrach.breakinout.game.system
 
+import com.fabiantarrach.breakinout.game.component.Velocity
 import com.fabiantarrach.breakinout.game.entity.Ball
 import com.fabiantarrach.breakinout.game.entity.Paddle
 import com.fabiantarrach.breakinout.util.engine.LogicSystem
 import com.fabiantarrach.breakinout.util.engine.Timespan
+import com.fabiantarrach.breakinout.util.math.Y
 
 class BallPaddleCollision : LogicSystem() {
 
@@ -27,7 +29,14 @@ class BallPaddleCollision : LogicSystem() {
 						paddle.bat(ball)
 					},
 					ifFront = {
-						ball.bounceOffFront(paddle)
+						bounceOff(ball, paddle)
 					})
 
+	private fun bounceOff(ball: Ball, paddle: Paddle) {
+		ball.bounceOffFront()
+		paddle.scrub(ball)
+		paddle.push(ball)
+
+
+	}
 }

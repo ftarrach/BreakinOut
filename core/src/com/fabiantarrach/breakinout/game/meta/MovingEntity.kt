@@ -26,7 +26,7 @@ abstract class MovingEntity(protected var velocity: Velocity = Velocity(0f, 0f),
 		velocity = velocity.deflectSide()
 	}
 
-	protected fun push(push: Velocity) {
+	protected open fun push(push: Velocity) {
 		velocity = velocity.push(push)
 	}
 
@@ -52,5 +52,6 @@ abstract class MovingEntity(protected var velocity: Velocity = Velocity(0f, 0f),
 	}
 
 	fun ifMovingDown(then: () -> Unit) = velocity.ifMovingDown(then)
+	fun ifMovingLeft(then: () -> Unit) = velocity.ifMovingLeft(then)
 	fun ifMovingRight(then: () -> Unit) = velocity.ifMovingRight(then)
 }
